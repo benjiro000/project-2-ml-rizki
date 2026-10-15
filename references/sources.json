@@ -207,5 +207,16 @@
     "licence_url": null,
     "verification": "access_blocked",
     "used_for": "Scout run 1: possible green bean composition and origin dataset. Fetch failed with 'getaddrinfo ENOTFOUND' on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_pandas",
+    "title": "pandas",
+    "url": "https://github.com/pandas-dev/pandas",
+    "publisher_or_author": "PyData Development Team",
+    "type": "tool",
+    "licence": "BSD 3-Clause License",
+    "licence_url": "https://github.com/pandas-dev/pandas/blob/main/LICENSE",
+    "verification": "opened_and_read",
+    "used_for": "Python library (version 2.3.3, Anaconda) that src/profile_dataset.py uses to read each CSV and count rows, columns, missing values and rows per country. Licence first line read from the LICENSE file on 15 Oct 2026."
   }
 ]

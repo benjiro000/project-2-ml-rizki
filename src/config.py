@@ -24,4 +24,6 @@ PATHS = {
     "globe_data": os.path.join(PROJECT_ROOT, "globe", "data", "globe_data.json"),
     "globe_sources": os.path.join(PROJECT_ROOT, "globe", "data", "sources.json"),
     "prompts": os.path.join(PROJECT_ROOT, "prompts"),
+    "profiles": os.path.join(PROJECT_ROOT, "references", "profiles"),
+    "reviews": os.path.join(PROJECT_ROOT, "references", "reviews"),
 }
