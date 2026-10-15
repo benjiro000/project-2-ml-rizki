@@ -1,1 +1,134 @@
-[]
+[
+  {
+    "source_id": "src_12factor_agents",
+    "title": "12-Factor Agents: Principles for building reliable LLM applications",
+    "url": "https://github.com/humanlayer/12-factor-agents",
+    "publisher_or_author": "Dex (dexhorthy) and contributors, HumanLayer",
+    "type": "documentation",
+    "licence": "Code: Apache 2.0. Content and images: CC BY-SA 4.0 (as stated in the README)",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "verification": "opened_and_read",
+    "used_for": "The 12 design rules for the agent team. README, factors 1-12 and appendix 13 read from the uploaded zip on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_ironhack_p2_template",
+    "title": "Ironhack DSML Project 2 template: README.md (brief), RUBRIC.md, requirements.txt, notebooks 01-03",
+    "url": null,
+    "publisher_or_author": "Ironhack",
+    "type": "documentation",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "opened_and_read",
+    "used_for": "Project requirements, grading rubric and notebook structure. Uploaded files, read on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_humanlayer_docs_home",
+    "title": "HumanLayer documentation (home)",
+    "url": "https://humanlayer.dev/docs",
+    "publisher_or_author": "HumanLayer",
+    "type": "documentation",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "What HumanLayer's SDK and task app do. Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_humanlayer_first_task",
+    "title": "Quickstart - Running a HumanLayer Task",
+    "url": "https://docs.humanlayer.com/tutorials/first-session",
+    "publisher_or_author": "HumanLayer",
+    "type": "documentation",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Fields of the New Task form (directory, workflow, worktree). Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_humanlayer_workflows",
+    "title": "Run a workflow in HumanLayer",
+    "url": "https://docs.humanlayer.com/guide/skills-workflows",
+    "publisher_or_author": "HumanLayer",
+    "type": "documentation",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Which workflow to choose (Oneshot, RPI, PRD-Oriented, Freeform) and where approvals happen. Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_humanlayer_skills_ref",
+    "title": "Skills and workflows reference",
+    "url": "https://docs.humanlayer.com/reference/skills-workflows",
+    "publisher_or_author": "HumanLayer",
+    "type": "documentation",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Where task files live (.humanlayer/tasks) and how workspaces are configured. Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_hatchworks_n8n",
+    "title": "Multi Agent Solutions in n8n for Reliable AI Agent Orchestration",
+    "url": "https://hatchworks.com/blog/ai-agents/multi-agent-solutions-in-n8n/",
+    "publisher_or_author": "HatchWorks AI",
+    "type": "web_page",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "search_result_only",
+    "used_for": "The orchestrator pattern: a main agent calls other agents through n8n's AI Agent Tool node. Seen in a search result on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_cqi_rdoc_coffee_ratings",
+    "title": "coffee_ratings: Data from the Coffee Quality Institute's review pages in January 2018",
+    "url": "https://www.rdocumentation.org/packages/moderndive/versions/0.8.0/topics/coffee_ratings",
+    "publisher_or_author": "R documentation page for the moderndive package (data from the Coffee Quality Institute, as stated on the page)",
+    "type": "dataset",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "search_result_only",
+    "used_for": "Candidate dataset. Row count (about 1,340 reviews) and column list seen only in a search result on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_cqi_kaggle_volpatto",
+    "title": "Coffee Quality Database From CQI",
+    "url": "https://baselight.app/u/kaggle/dataset/volpatto_coffee_quality_database_from_cqi",
+    "publisher_or_author": "Kaggle user volpatto, mirrored on Baselight (data scraped from CQI in January 2018, as stated on the page)",
+    "type": "dataset",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "search_result_only",
+    "used_for": "Candidate dataset (Arabica, Robusta and merged files). Seen only in a search result on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_cqi_kaggle_may2023",
+    "title": "Coffee Quality Institute Arabica Reviews May2023",
+    "url": "https://baselight.app/u/kaggle/dataset/erwinhmtang_coffee_quality_institute_reviews_may2023",
+    "publisher_or_author": "Kaggle user erwinhmtang, mirrored on Baselight (data gathered from CQI in May 2023, as stated on the page)",
+    "type": "dataset",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "search_result_only",
+    "used_for": "Candidate dataset with green-analysis tables. Row count not seen. Seen only in a search result on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_usk_coffee_paper",
+    "title": "Edge AI-Based Detection for Defective Coffee Beans Using Deep Learning and Streamlit Framework",
+    "url": "https://doaj.org/article/f7958c4462804bed99b6eba713a6243b",
+    "publisher_or_author": "Muchtar et al., IEEE Access vol. 13 (2025), listed on DOAJ",
+    "type": "paper",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "search_result_only",
+    "used_for": "Describes the USK-Coffee image dataset (8,000 green bean images, 4 classes). Seen only in a search result on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_usk_coffee_dataset",
+    "title": "USK-Coffee green bean image dataset",
+    "url": "https://coffee.comvislab-usk.org/",
+    "publisher_or_author": "Muchtar et al. (authors of the IEEE Access paper)",
+    "type": "image_set",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "search_result_only",
+    "used_for": "Possible image dataset. Labelled by defect, not by country. Link seen only in a search result on 15 Oct 2026."
+  }
+]
