@@ -122,13 +122,90 @@
   },
   {
     "source_id": "src_usk_coffee_dataset",
-    "title": "USK-Coffee green bean image dataset",
+    "title": "USK-COFFEE DATASET: A multi-class dataset composed of the various green bean arabica",
     "url": "https://coffee.comvislab-usk.org/",
-    "publisher_or_author": "Muchtar et al. (authors of the IEEE Access paper)",
+    "publisher_or_author": "Febriana, A., Muchtar, K., Dawood, R., Lin, CY. (citation on the page: 2022 IEEE CyberneticsCom)",
     "type": "image_set",
     "licence": "unknown",
     "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 1 candidate ds_usk_coffee_images: 8,000 green arabica bean images, 2,000 per class (peaberry, longberry, premium, defect), access by Google Form, no licence stated (page says \"open for everyone\"). Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_cqi_github_jldbc",
+    "title": "coffee-quality-database (Building the Coffee Quality Institute Database)",
+    "url": "https://github.com/jldbc/coffee-quality-database",
+    "publisher_or_author": "GitHub user jldbc (data scraped from the Coffee Quality Institute in January 2018, as stated in the README)",
+    "type": "dataset",
+    "licence": "MIT license",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 1 candidate ds_cqi_jldbc_2018: 1,312 arabica + 28 robusta reviews with cupping scores, moisture, defects, colour, processing method, country, altitude. Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_mendeley_mir_defects",
+    "title": "Mid-infrared spectral dataset and machine learning tools for defect detection in green and roasted coffee",
+    "url": "https://data.mendeley.com/datasets/dtd2fggpyp/3",
+    "publisher_or_author": "Collazos-Escobar, G. A., Salas-Calderón, K. T., Barrios Rodriguez, Y., Bahamón-Monje, A. F., Gutierrez Guzman, N. (Mendeley Data, DOI 10.17632/dtd2fggpyp.3, version 3, 5 May 2026)",
+    "type": "dataset",
+    "licence": "CC BY 4.0",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 1: opened but not registered (no file list, sample count or variables on the landing page). ATR-FTIR spectra of defect-free and defective green and roasted beans. Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_cqi_kaggle_may2023_kaggle",
+    "title": "Coffee Quality Institute Arabica Reviews May2023",
+    "url": "https://www.kaggle.com/datasets/erwinhmtang/coffee-quality-institute-reviews-may2023",
+    "publisher_or_author": "unknown (Kaggle; the URL names the user erwinhmtang)",
+    "type": "dataset",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 1: opened, but only the page title came back (no licence, files or columns), so not registered. Opened on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_unmer_lightgbm_cqi",
+    "title": "Optimized LightGBM Model for Predicting Total Cup Points of Arabica Coffee using Sensory Cupping Data",
+    "url": "https://jurnal.unmer.ac.id/index.php/jtmi/article/view/16348",
+    "publisher_or_author": "unknown (journal hosted at jurnal.unmer.ac.id)",
+    "type": "paper",
+    "licence": "unknown",
+    "licence_url": null,
     "verification": "search_result_only",
-    "used_for": "Possible image dataset. Labelled by defect, not by country. Link seen only in a search result on 15 Oct 2026."
+    "used_for": "Scout run 1: gave the Kaggle URL of the CQI May 2023 dataset and the claim of 1,509 cupping records (unverified). Seen only in a search result on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_baselight_shutdown",
+    "title": "unknown (announcement page shown at the former Baselight dataset URL)",
+    "url": "https://baselight.ai/u/kaggle/dataset/erwinhmtang_coffee_quality_institute_reviews_may2023",
+    "publisher_or_author": "Finisterra team (Baselight)",
+    "type": "web_page",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 1: the baselight.app mirror of the CQI May 2023 dataset redirects here; the page says Baselight has shut down (announcement dated 7 July 2026). Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_mdpi_civet_nir",
+    "title": "unknown (Horticulturae 9(7), 778: near-infrared study of wild versus feeding civet coffee, as described in a search result)",
+    "url": "https://www2.mdpi.com/2311-7524/9/7/778",
+    "publisher_or_author": "MDPI, Horticulturae (authors unknown)",
+    "type": "paper",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "access_blocked",
+    "used_for": "Scout run 1: tried to read its Data Availability section for civet (luwak) bean data. Fetch failed with 'certificate has expired' on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_zenodo_nmr_green_coffee",
+    "title": "unknown (Zenodo record 4159415: 1D and 2D NMR spectra of 715 green coffee samples, as described in a search result)",
+    "url": "https://rdi.libraries.mit.edu/record/zenodo:4159415",
+    "publisher_or_author": "unknown (Zenodo record listed on MIT Libraries RDI)",
+    "type": "dataset",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "access_blocked",
+    "used_for": "Scout run 1: possible green bean composition and origin dataset. Fetch failed with 'getaddrinfo ENOTFOUND' on 15 Oct 2026."
   }
 ]
