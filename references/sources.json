@@ -317,5 +317,49 @@
     "licence_url": null,
     "verification": "summary_only",
     "used_for": "Scout run 2: green Liberica beans from Java (dimensions, colour, proximate, phenols, antioxidants). Record page read through an automatic summary on 15 Oct 2026; full text flagged not allowed, so not read."
+  },
+  {
+    "source_id": "src_numpy",
+    "title": "NumPy",
+    "url": "https://github.com/numpy/numpy",
+    "publisher_or_author": "NumPy Developers",
+    "type": "tool",
+    "licence": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+    "licence_url": "https://github.com/numpy/numpy/blob/main/LICENSE.txt",
+    "verification": "opened_and_read",
+    "used_for": "Python library (version 2.4.6, Anaconda). src/functions.py uses np.nan to set values to missing during cleaning; src/first_look.py uses it to build histogram bins. Licence copied from the License-Expression line of the installed package metadata; the main LICENSE.txt (BSD 3-Clause text, 'Copyright (c) 2005-2025, NumPy Developers') read from the installed package on 16 Oct 2026."
+  },
+  {
+    "source_id": "src_python_sqlite3",
+    "title": "sqlite3 — DB-API 2.0 interface for SQLite databases (Python standard library)",
+    "url": "https://docs.python.org/3/library/sqlite3.html",
+    "publisher_or_author": "Python Software Foundation",
+    "type": "tool",
+    "licence": "PSF License Version 2 (Python's licence; sqlite3 ships with Python)",
+    "licence_url": "https://docs.python.org/3/license.html",
+    "verification": "opened_and_read",
+    "used_for": "Part of Python's standard library (Python 3.13.14, Anaconda; SQLite 3.53.2). src/functions.py uses it to stack the arabica and robusta tables with SQL in an in-memory database. Licence heading 'PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2' read from the LICENSE.txt of the installed Python on 16 Oct 2026."
+  },
+  {
+    "source_id": "src_matplotlib",
+    "title": "Matplotlib",
+    "url": "https://github.com/matplotlib/matplotlib",
+    "publisher_or_author": "Matplotlib Development Team",
+    "type": "tool",
+    "licence": "License agreement for matplotlib versions 1.3.0 and later",
+    "licence_url": "https://github.com/matplotlib/matplotlib/blob/main/LICENSE/LICENSE",
+    "verification": "opened_and_read",
+    "used_for": "Python library (version 3.10.6, Anaconda) that src/first_look.py uses to draw the first-look bar charts, histograms and box plot. Licence title read from the LICENSE file of the installed package on 16 Oct 2026 (package metadata classifier: 'Python Software Foundation License')."
+  },
+  {
+    "source_id": "src_seaborn",
+    "title": "seaborn: statistical data visualization",
+    "url": "https://github.com/mwaskom/seaborn",
+    "publisher_or_author": "Michael L. Waskom",
+    "type": "tool",
+    "licence": "BSD 3-Clause License (the LICENSE.md holds the BSD 3-Clause text without naming it; package metadata classifier: 'BSD License')",
+    "licence_url": "https://github.com/mwaskom/seaborn/blob/master/LICENSE.md",
+    "verification": "opened_and_read",
+    "used_for": "Python library (version 0.13.2, Anaconda) that src/first_look.py uses to draw the flavour-fingerprint heatmap. LICENSE.md ('Copyright (c) 2012-2023, Michael L. Waskom') read from the installed package on 16 Oct 2026."
   }
 ]
