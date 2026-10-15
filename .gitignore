@@ -29,3 +29,10 @@ venv/
 Thumbs.db
 .vscode/
 .idea/
+
+# Secrets: this repo is a fork of a public repo, so keys never get committed.
+.env
+
+# Clean data is rebuilt from raw data by code, so it is not committed either.
+data/clean/*
+!data/clean/.gitkeep
