@@ -4,6 +4,8 @@ Gate 2 is the human decision on which columns are kept or dropped. Nothing here 
 
 Based on: the Reviewer run for ds_cqi_jldbc_2018 (references/reviews/ds_cqi_jldbc_2018.json), the four profiles in references/profiles/, and one read-only count on the local copies of arabica_data_cleaned.csv and robusta_data_cleaned.csv (marked "read-only count" below). No file was cleaned or changed.
 
+**Decided by Rizki on 16 Oct 2026.** The "Your decision" column below is filled in. Quakers is dropped (not a feature), the ten part scores are kept as profile columns only, and Robusta keeps only the strong column matches. The full decisions, including the value rules, the row rule and the expected counts, are in references/gate2_decisions.json.
+
 ## Summary
 
 - **Proposed target:** `Total.Cup.Points` (overall cupping score, number, 0.0 missing). Regression.
@@ -26,50 +28,50 @@ Share missing is from the profile (empty cells only; zeros and placeholders are 
 
 | # | Column | Meaning | Type | Share missing | Proposed role | Reason | Your decision (keep / drop) |
 |---|---|---|---|---|---|---|---|
-| 1 | Unnamed: 0 | row number (1 to 1312) | number | 0.0 | identifier | counts rows, says nothing about the bean | |
-| 2 | Species | Arabica or Robusta | text | 0.0 | drop | always "Arabica" in this file; becomes a feature only if the 28 robusta rows are added | |
-| 3 | Owner | owner of the sample (from the name) | text | 0.005 | personal data | examples include people's names | |
-| 4 | Country.of.Origin | country where the coffee grew | text | 0.001 | feature | origin, and the key that joins rows to the globe; 36 countries | |
-| 5 | Farm.Name | farm name (from the name) | text | 0.272 | personal data | some farm names are a person's name; 557 distinct values | |
-| 6 | Lot.Number | lot code of the sample (from the name) | text | 0.794 | identifier | a label, not a measurement; 79% empty | |
-| 7 | Mill | mill that processed the beans (from the name) | text | 0.236 | personal data | business names that may include a person's name; 447 distinct values; not a bean property | |
-| 8 | ICO.Number | International Coffee Organization reference number (from the name) | text | 0.113 | identifier | trade label, 840 distinct values; 67 rows are only zeros | |
-| 9 | Company | company behind the sample (from the name) | text | 0.159 | personal data | some company names are a person's name | |
-| 10 | Altitude | growing altitude as typed, e.g. "1600 - 1800 m" | text | 0.17 | drop | free text in m and ft; altitude_mean_meters is the number version | |
-| 11 | Region | region inside the country, e.g. "oromia" | text | 0.043 | drop | origin detail, but 343 spellings for 1,311 rows; too many categories for a small dataset | |
-| 12 | Producer | producer of the coffee (from the name) | text | 0.175 | personal data | examples include people's names | |
-| 13 | Number.of.Bags | number of bags in the lot (from the name) | number | 0.0 | drop | shipment size (trade), not a bean property | |
-| 14 | Bag.Weight | weight of one bag, e.g. "60 kg" | text | 0.0 | drop | shipment size, mixed units (kg, lbs, none) | |
-| 15 | In.Country.Partner | organisation that handled the sample in the country (from the name) | text | 0.0 | drop | an organisation, not a bean property | |
-| 16 | Harvest.Year | harvest year | text | 0.036 | drop | time, not a bean or origin measurement; messy text ("TEST", "2013/2014", "Mayo a Julio") | |
-| 17 | Grading.Date | date the sample was graded (from the name) | text | 0.0 | drop | certificate paperwork | |
-| 18 | Owner.1 | owner again, with original capitals (my guess: 99% of rows equal Owner in lower case) | text | 0.005 | personal data | people's names; also a near copy of Owner | |
-| 19 | Variety | coffee plant variety, e.g. Bourbon | text | 0.153 | feature | bean property; 29 values, 108 rows are "Other" | |
-| 20 | Processing.Method | how the cherries were processed, e.g. "Washed / Wet" | text | 0.116 | feature | bean property; 5 values. Also a possible classification target (Reviewer) | |
-| 21 | Aroma | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 22 | Flavor | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 23 | Aftertaste | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 24 | Acidity | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 25 | Body | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 26 | Balance | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 27 | Uniformity | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 28 | Clean.Cup | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 29 | Sweetness | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 30 | Cupper.Points | the taster's own overall score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | |
-| 31 | Total.Cup.Points | total cupping score, sum of the ten parts | number | 0.0 | target candidate | the quality score to predict; 1 row is 0.0 (empty score sheet) | |
-| 32 | Moisture | water content of the green beans as a fraction (0.12 = 12%) | number | 0.0 | feature | green-bean measurement; but 252 rows are 0.0, likely "not measured" | |
-| 33 | Category.One.Defects | count of category one green-bean defects (from the name) | number | 0.0 | feature | green-bean measurement | |
-| 34 | Quakers | count of "quaker" beans (from the name) | number | 0.001 | feature | bean quality count; the files do not say how or when it is counted | |
-| 35 | Color | colour of the green beans: Green, Bluish-Green, Blue-Green | text | 0.204 | feature | bean property; also a possible classification target (Reviewer) | |
-| 36 | Category.Two.Defects | count of category two green-bean defects (from the name) | number | 0.0 | feature | green-bean measurement | |
-| 37 | Expiration | date the certificate expires (examples are one year after Grading.Date) | text | 0.0 | drop | certificate paperwork | |
-| 38 | Certification.Body | organisation that issued the certificate | text | 0.0 | drop | an organisation, not a bean property | |
-| 39 | Certification.Address | address of the certifying organisation (from the name; hidden in profile) | text | 0.0 | personal data | may contain personal contact details | |
-| 40 | Certification.Contact | contact at the certifying organisation (from the name; hidden in profile) | text | 0.0 | personal data | may contain personal contact details | |
-| 41 | unit_of_measurement | unit of the Altitude text: m or ft | text | 0.0 | drop | only describes Altitude; 182 rows are ft | |
-| 42 | altitude_low_meters | lowest altitude of the range, in metres | number | 0.173 | drop | almost the same information as altitude_mean_meters | |
-| 43 | altitude_high_meters | highest altitude of the range, in metres | number | 0.173 | drop | almost the same information as altitude_mean_meters | |
-| 44 | altitude_mean_meters | middle of the altitude range, in metres | number | 0.173 | feature | origin measurement; has impossible values (1 m, 190,164 m) | |
+| 1 | Unnamed: 0 | row number (1 to 1312) | number | 0.0 | identifier | counts rows, says nothing about the bean | drop |
+| 2 | Species | Arabica or Robusta | text | 0.0 | drop | always "Arabica" in this file; becomes a feature only if the 28 robusta rows are added | drop |
+| 3 | Owner | owner of the sample (from the name) | text | 0.005 | personal data | examples include people's names | drop |
+| 4 | Country.of.Origin | country where the coffee grew | text | 0.001 | feature | origin, and the key that joins rows to the globe; 36 countries | keep |
+| 5 | Farm.Name | farm name (from the name) | text | 0.272 | personal data | some farm names are a person's name; 557 distinct values | drop |
+| 6 | Lot.Number | lot code of the sample (from the name) | text | 0.794 | identifier | a label, not a measurement; 79% empty | drop |
+| 7 | Mill | mill that processed the beans (from the name) | text | 0.236 | personal data | business names that may include a person's name; 447 distinct values; not a bean property | drop |
+| 8 | ICO.Number | International Coffee Organization reference number (from the name) | text | 0.113 | identifier | trade label, 840 distinct values; 67 rows are only zeros | drop |
+| 9 | Company | company behind the sample (from the name) | text | 0.159 | personal data | some company names are a person's name | drop |
+| 10 | Altitude | growing altitude as typed, e.g. "1600 - 1800 m" | text | 0.17 | drop | free text in m and ft; altitude_mean_meters is the number version | drop |
+| 11 | Region | region inside the country, e.g. "oromia" | text | 0.043 | drop | origin detail, but 343 spellings for 1,311 rows; too many categories for a small dataset | drop |
+| 12 | Producer | producer of the coffee (from the name) | text | 0.175 | personal data | examples include people's names | drop |
+| 13 | Number.of.Bags | number of bags in the lot (from the name) | number | 0.0 | drop | shipment size (trade), not a bean property | drop |
+| 14 | Bag.Weight | weight of one bag, e.g. "60 kg" | text | 0.0 | drop | shipment size, mixed units (kg, lbs, none) | drop |
+| 15 | In.Country.Partner | organisation that handled the sample in the country (from the name) | text | 0.0 | drop | an organisation, not a bean property | drop |
+| 16 | Harvest.Year | harvest year | text | 0.036 | drop | time, not a bean or origin measurement; messy text ("TEST", "2013/2014", "Mayo a Julio") | drop |
+| 17 | Grading.Date | date the sample was graded (from the name) | text | 0.0 | drop | certificate paperwork | drop |
+| 18 | Owner.1 | owner again, with original capitals (my guess: 99% of rows equal Owner in lower case) | text | 0.005 | personal data | people's names; also a near copy of Owner | drop |
+| 19 | Variety | coffee plant variety, e.g. Bourbon | text | 0.153 | feature | bean property; 29 values, 108 rows are "Other" | keep |
+| 20 | Processing.Method | how the cherries were processed, e.g. "Washed / Wet" | text | 0.116 | feature | bean property; 5 values. Also a possible classification target (Reviewer) | keep |
+| 21 | Aroma | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 22 | Flavor | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 23 | Aftertaste | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 24 | Acidity | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 25 | Body | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 26 | Balance | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 27 | Uniformity | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 28 | Clean.Cup | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 29 | Sweetness | cupping part score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 30 | Cupper.Points | the taster's own overall score, 0 to 10 (from the name) | number | 0.0 | leakage | part of Total.Cup.Points | keep as profile |
+| 31 | Total.Cup.Points | total cupping score, sum of the ten parts | number | 0.0 | target candidate | the quality score to predict; 1 row is 0.0 (empty score sheet) | keep (target) |
+| 32 | Moisture | water content of the green beans as a fraction (0.12 = 12%) | number | 0.0 | feature | green-bean measurement; but 252 rows are 0.0, likely "not measured" | keep |
+| 33 | Category.One.Defects | count of category one green-bean defects (from the name) | number | 0.0 | feature | green-bean measurement | keep |
+| 34 | Quakers | count of "quaker" beans (from the name) | number | 0.001 | feature | bean quality count; the files do not say how or when it is counted | drop |
+| 35 | Color | colour of the green beans: Green, Bluish-Green, Blue-Green | text | 0.204 | feature | bean property; also a possible classification target (Reviewer) | keep |
+| 36 | Category.Two.Defects | count of category two green-bean defects (from the name) | number | 0.0 | feature | green-bean measurement | keep |
+| 37 | Expiration | date the certificate expires (examples are one year after Grading.Date) | text | 0.0 | drop | certificate paperwork | drop |
+| 38 | Certification.Body | organisation that issued the certificate | text | 0.0 | drop | an organisation, not a bean property | drop |
+| 39 | Certification.Address | address of the certifying organisation (from the name; hidden in profile) | text | 0.0 | personal data | may contain personal contact details | drop |
+| 40 | Certification.Contact | contact at the certifying organisation (from the name; hidden in profile) | text | 0.0 | personal data | may contain personal contact details | drop |
+| 41 | unit_of_measurement | unit of the Altitude text: m or ft | text | 0.0 | drop | only describes Altitude; 182 rows are ft | drop |
+| 42 | altitude_low_meters | lowest altitude of the range, in metres | number | 0.173 | drop | almost the same information as altitude_mean_meters | drop |
+| 43 | altitude_high_meters | highest altitude of the range, in metres | number | 0.173 | drop | almost the same information as altitude_mean_meters | drop |
+| 44 | altitude_mean_meters | middle of the altitude range, in metres | number | 0.173 | feature | origin measurement; has impossible values (1 m, 190,164 m) | keep |
 
 ### Role counts
 

@@ -1,0 +1,140 @@
+{
+  "gate": 2,
+  "dataset_id": "ds_cqi_jldbc_2018",
+  "decided_by": "Rizki",
+  "date": "2026-10-16",
+  "based_on": [
+    "references/gate2_columns.md (column sheet)",
+    "references/reviews/ds_cqi_jldbc_2018.json (Reviewer run 1)",
+    "references/profiles/ (four file profiles)"
+  ],
+  "input_files": {
+    "arabica": {"file": "arabica_data_cleaned.csv", "expected_rows": 1311, "columns": 44},
+    "robusta": {"file": "robusta_data_cleaned.csv", "expected_rows": 28, "columns": 44}
+  },
+
+  "target": "Total.Cup.Points",
+
+  "features": [
+    "Country.of.Origin",
+    "Variety",
+    "Processing.Method",
+    "Color",
+    "Moisture",
+    "Category.One.Defects",
+    "Category.Two.Defects",
+    "altitude_mean_meters"
+  ],
+
+  "profile_columns": [
+    "Aroma",
+    "Flavor",
+    "Aftertaste",
+    "Acidity",
+    "Body",
+    "Balance",
+    "Uniformity",
+    "Clean.Cup",
+    "Sweetness",
+    "Cupper.Points"
+  ],
+  "profile_columns_note": "Kept in the clean table for the globe and exploration, but never used as features when predicting Total.Cup.Points: together they add up to the total (leakage).",
+
+  "added_columns": [
+    {"name": "species", "values": ["arabica", "robusta"], "rule": "literal value per input file; replaces the dropped Species column"}
+  ],
+
+  "robusta_column_matches": [
+    {"robusta_column": "Fragrance...Aroma", "arabica_column": "Aroma", "match": "guess, strong", "action": "rename to Aroma"},
+    {"robusta_column": "Uniform.Cup", "arabica_column": "Uniformity", "match": "guess, strong", "action": "rename to Uniformity"},
+    {"robusta_column": "Salt...Acid", "arabica_column": "Acidity", "match": "guess, medium", "action": "leave Acidity empty for robusta rows"},
+    {"robusta_column": "Mouthfeel", "arabica_column": "Body", "match": "guess, medium", "action": "leave Body empty for robusta rows"},
+    {"robusta_column": "Bitter...Sweet", "arabica_column": "Sweetness", "match": "guess, weak", "action": "leave Sweetness empty for robusta rows"}
+  ],
+  "robusta_column_matches_note": "All other kept columns have the same name in both files (gate2_columns.md, Table 2).",
+
+  "drop": {
+    "personal_data": [
+      "Owner",
+      "Owner.1",
+      "Producer",
+      "Farm.Name",
+      "Company",
+      "Mill",
+      "Certification.Address",
+      "Certification.Contact"
+    ],
+    "identifiers": [
+      "Unnamed: 0",
+      "Lot.Number",
+      "ICO.Number"
+    ],
+    "other": [
+      "Species",
+      "Altitude",
+      "Region",
+      "Number.of.Bags",
+      "Bag.Weight",
+      "In.Country.Partner",
+      "Harvest.Year",
+      "Grading.Date",
+      "Expiration",
+      "Certification.Body",
+      "unit_of_measurement",
+      "altitude_low_meters",
+      "altitude_high_meters",
+      "Quakers"
+    ],
+    "robusta_only": [
+      "Salt...Acid",
+      "Mouthfeel",
+      "Bitter...Sweet"
+    ]
+  },
+  "column_count_check": "44 Arabica columns = 1 target + 8 features + 10 profile + 8 personal data + 3 identifiers + 14 other. Output = 19 kept + species = 20 columns.",
+
+  "value_rules": [
+    {
+      "rule_id": "moisture_zero_to_missing",
+      "column": "Moisture",
+      "condition": "Moisture = 0.0",
+      "action": "set to missing",
+      "why": "0.0 most likely means 'not measured'; green beans always hold some water",
+      "expected_count": {"arabica": 252, "robusta": 12}
+    },
+    {
+      "rule_id": "altitude_above_3000_to_missing",
+      "column": "altitude_mean_meters",
+      "condition": "altitude_mean_meters > 3000",
+      "action": "set to missing",
+      "why": "values such as 11,000 m and 190,164 m are typing or unit errors, not real altitudes",
+      "expected_count": null,
+      "expected_count_note": "no expected count; report the real count"
+    },
+    {
+      "rule_id": "altitude_below_50_list_only",
+      "column": "altitude_mean_meters",
+      "condition": "altitude_mean_meters < 50",
+      "action": "change nothing; list each row with its country in the cleaning report",
+      "why": "values such as 1 m look wrong, but are left for a later decision",
+      "expected_count": null
+    }
+  ],
+
+  "row_rules": [
+    {
+      "rule_id": "drop_total_zero",
+      "column": "Total.Cup.Points",
+      "condition": "Total.Cup.Points = 0",
+      "action": "drop the row",
+      "why": "every score on that row is 0.0: an empty score sheet, not a real score",
+      "expected_count": 1,
+      "expected_file": "arabica_data_cleaned.csv"
+    }
+  ],
+
+  "scope": {
+    "models": "arabica rows only",
+    "robusta": "kept in the clean table for the globe and exploration, never used to train or test a model"
+  }
+}
