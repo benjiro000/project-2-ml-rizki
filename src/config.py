@@ -34,4 +34,6 @@ PATHS = {
     "gate2_decisions": os.path.join(PROJECT_ROOT, "references", "gate2_decisions.json"),
     "cleaning_plan": os.path.join(PROJECT_ROOT, "references", "cleaning_plan.json"),
     "cleaning_report": os.path.join(PROJECT_ROOT, "references", "cleaning_report.json"),
+    # First look: diagrams of the clean table, before any modelling.
+    "first_look_figures": os.path.join(PROJECT_ROOT, "references", "figures", "first_look"),
 }
