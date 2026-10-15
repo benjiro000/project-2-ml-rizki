@@ -36,3 +36,6 @@ Thumbs.db
 # Clean data is rebuilt from raw data by code, so it is not committed either.
 data/clean/*
 !data/clean/.gitkeep
+
+# Riptide artifacts (cloud-synced)
+.humanlayer/tasks/
