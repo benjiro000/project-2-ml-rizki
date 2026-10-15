@@ -229,5 +229,93 @@
     "licence_url": "https://github.com/jldbc/coffee-quality-database/blob/master/LICENSE",
     "verification": "opened_and_read",
     "used_for": "Reviewer run 1 for ds_cqi_jldbc_2018: the four CSV files were downloaded from raw.githubusercontent.com (approved at the datasets gate) and profiled by src/profile_dataset.py on 15 Oct 2026. File names were found with the GitHub API repository tree. There is no merged arabica + robusta file in the repo."
+  },
+  {
+    "source_id": "src_pmc_excelsa_postharvest",
+    "title": "Profile of Bioactive Compounds, Aromas, and Cup Quality of Excelsa Coffee (Coffea liberica var. dewevrei) Prepared from Diverse Postharvest Processes",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9410941/",
+    "publisher_or_author": "Dian Herawati, Michael Oscarius Loisanjaya, Radwa Husni Kamal, Dede Robiatul Adawiyah, Nuri Andarwulan (International Journal of Food Science, 2022, DOI 10.1155/2022/2365603)",
+    "type": "paper",
+    "licence": "This is an open access article distributed under the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 2: paper tables for Excelsa (C. liberica var. dewevrei) green and roasted beans from 6 postharvest treatments (Table 1 volatiles, Table 1S, Table 3 cupping). Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_mendeley_as7265x_green",
+    "title": "Reflectance intensity dataset of green coffee beans (four origins) measured with AS7265X sensor",
+    "url": "https://data.mendeley.com/datasets/bgpd7mnnjn/1",
+    "publisher_or_author": "Diang Sagita (contributor); National Research and Innovation Agency and IPB University (Mendeley Data, DOI 10.17632/bgpd7mnnjn.1, version 1, 6 April 2026)",
+    "type": "dataset",
+    "licence": "CC BY 4.0",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 2: registered as ds_mendeley_as7265x_green_indonesia (green Arabica and Robusta beans, 4 Indonesian origins, 18-band reflectance). Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_roboflow_packer_coffee_bean",
+    "title": "Coffee bean Computer Vision Model (as shown in a search result)",
+    "url": "https://universe.roboflow.com/packer/coffee-bean-tm9bq",
+    "publisher_or_author": "Roboflow Universe user Packer (as shown in a search result)",
+    "type": "image_set",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "access_blocked",
+    "used_for": "Scout run 2: tried to check its classes (a search summary mentioned arabica, excelsa, liberica, robusta) and whether beans are green. Fetch returned HTTP 403 Forbidden on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_ecu_mubarak_liberica",
+    "title": "Comparison of liberica and arabica coffee: Chlorogenic acid, caffeine, total phenolic and DPPH radical scavenging activity",
+    "url": "https://ro.ecu.edu.au/ecuworkspost2013/6495",
+    "publisher_or_author": "Aidilla Mubarak, Kevin D. Croft, Catherine P. Bondonno, Nurul Sakinah Din (Asian Journal of Agriculture and Biology, 7(1), 130-136, 2019)",
+    "type": "paper",
+    "licence": "This work is licensed under a Creative Commons Attribution 3.0 License.",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 2: paper table entry for green and roasted C. liberica vs C. arabica (chlorogenic acid, caffeine, total phenolics, DPPH). Landing page read through an automatic summary on 15 Oct 2026; full PDF not opened."
+  },
+  {
+    "source_id": "src_sbicafe_canephora_quality",
+    "title": "An interdisciplinary approach for evaluating beverage quality in Coffea canephora (as shown in a search result)",
+    "url": "https://sbicafe.ufv.br/items/7bfec290-0f5a-452c-8360-c1578cc44825",
+    "publisher_or_author": "unknown (SBICafe repository, Universidade Federal de Vicosa)",
+    "type": "paper",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "access_blocked",
+    "used_for": "Scout run 2: tried to check for genotype-level green-bean data on 107 C. canephora genotypes. Page returned an Anubis bot-protection 'Access Denied' notice on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_preprints_canephora_genotypes",
+    "title": "unknown (preprints.org manuscript 202501.0058 v1; a search summary describes C. canephora genotypes in an irrigated Savanna system with caffeine measured in raw beans)",
+    "url": "https://preprints.org/manuscript/202501.0058/v1",
+    "publisher_or_author": "unknown (Preprints.org)",
+    "type": "paper",
+    "licence": "unknown",
+    "licence_url": null,
+    "verification": "access_blocked",
+    "used_for": "Scout run 2: tried to check for per-genotype green-bean tables. Fetch returned HTTP 403 Forbidden on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_mendeley_nirs_java",
+    "title": "NIRS intact green coffee beans with CGA content, species and Geographical origins from Java, Indonesia",
+    "url": "https://data.mendeley.com/datasets/zg89423tkb/3",
+    "publisher_or_author": "Agus Arip Munawar, Kusumiyati Kusumiyati, Andasuryani Andasuryani, Adrizal Adrizal, Yusmanizar Yusmanizar (Mendeley Data, DOI 10.17632/zg89423tkb.3, version 3, 17 October 2023)",
+    "type": "dataset",
+    "licence": "CC BY 4.0",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 2: opened but not registered (no file list, field names, sample count or species names on the landing page). Read through an automatic summary on 15 Oct 2026."
+  },
+  {
+    "source_id": "src_ipb_liberica_java",
+    "title": "Karakteristik Fisikokimia, Metabolit Sekunder, dan Aktivitas Antioksidan Biji Kopi Liberika (Coffea liberica) dari Pulau Jawa",
+    "url": "https://repository.ipb.ac.id/handle/123456789/171080",
+    "publisher_or_author": "Gita Khaerunnisa, Made Gayatri Anggarkasih, M. Agung Zaim Adzkiya (IPB University, undergraduate final assignment, 2025)",
+    "type": "paper",
+    "licence": "unknown (no item licence; site footer: \"All rights reserved\", \"Copyright © 2020 Library of IPB University.\")",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Scout run 2: green Liberica beans from Java (dimensions, colour, proximate, phenols, antioxidants). Record page read through an automatic summary on 15 Oct 2026; full text flagged not allowed, so not read."
   }
 ]
