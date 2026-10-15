@@ -46,9 +46,62 @@
       }
       #legend { gap: 0.8rem 1.2rem; }
     }
+
+    /* References button: top-left corner of the stage. The layer buttons sit at mid-height, so this corner is free */
+    #refs-btn { position: absolute; left: 1rem; top: 1rem; z-index: 3; }
+
+    /* References panel: a native <dialog>, so the browser handles Escape, keyboard focus and the dark backdrop */
+    #refs-panel {
+      width: min(720px, 92vw); max-height: 85vh; overflow: auto; padding: 0;
+      background: #0b0d1c; color: #eee; border: 1px solid #5a4a3a; border-radius: 12px;
+      font-size: 15px; line-height: 1.55;
+    }
+    #refs-panel::backdrop { background: rgba(2, 3, 15, 0.75); }
+    .refs-inner { padding: 1.2rem 1.5rem 1.5rem; }
+    .refs-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .refs-head h2 { margin: 0; font-size: 1.4rem; }
+    .refs-notice { background: #1a1612; border-left: 3px solid #c88c46; border-radius: 6px; padding: 0.7rem 1rem; }
+    #refs-panel label { display: block; font-size: 14px; color: #d6cec4; margin-bottom: 0.3rem; }
+    #refs-search {
+      width: 100%; box-sizing: border-box; font: inherit; color: #eee;
+      background: #1a1612; border: 1px solid #5a4a3a; border-radius: 8px; padding: 8px 12px;
+    }
+    #refs-status { font-size: 14px; color: #d6cec4; }
+    #refs-status.refs-error { color: #ffb4a6; background: #2a1512; border-radius: 6px; padding: 0.7rem 1rem; }
+    #refs-list h3 { margin: 1.4rem 0 0.2rem; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #c88c46; }
+    .refs-item { padding: 0.7rem 0; border-top: 1px solid #2a2520; }
+    .refs-item p { margin: 0.15rem 0; }
+    .refs-title { font-weight: 600; }
+    .refs-item a { color: #f0c088; }
+    .refs-meta { font-size: 14px; color: #d6cec4; }
+    .refs-item .tag { margin-bottom: 0; }
+    .refs-foot { margin-top: 1.4rem; font-size: 14px; color: #d6cec4; }
+
+    /* Phones: like the layer buttons, the References button joins the normal page flow, in its own row at the top */
+    @media (max-width: 700px) {
+      #refs-btn { position: static; margin: 0.6rem 1rem 0; }
+    }
   </style>
 </head>
 <body>
+  <!-- References: the button opens a panel listing every source in the project ledger -->
+  <button id="refs-btn" class="toggle" aria-haspopup="dialog" aria-controls="refs-panel">References</button>
+  <dialog id="refs-panel" aria-labelledby="refs-title">
+    <div class="refs-inner">
+      <div class="refs-head">
+        <h2 id="refs-title">References</h2>
+        <button id="refs-close" class="toggle" aria-label="Close references">Close</button>
+      </div>
+      <!-- Plain text on purpose, so it is easy to edit as facts get sourced -->
+      <p class="refs-notice">Country descriptions, ports, routes and trade figures on this globe come from an earlier draft and are not yet individually sourced. The earlier footer named: International Coffee Organization, USDA Foreign Agricultural Service, Cecafé, VICOFA, Vietnam Customs, Uganda Coffee Development Authority, Alliance for Coffee Excellence and ITC. Which figure comes from which organisation has not been checked yet. Cup of Excellence hosts are based on the Alliance for Coffee Excellence's 2025 and 2026 auction calendars; the earlier history years are not yet sourced.</p>
+      <label for="refs-search">Search sources</label>
+      <input id="refs-search" type="text" placeholder="Title, publisher or what it was used for" autocomplete="off">
+      <p id="refs-status" aria-live="polite"></p>
+      <div id="refs-list"></div>
+      <p class="refs-foot">Licences are shown as written by each source. 'unknown' means we have not found one yet.</p>
+    </div>
+  </dialog>
+
   <div id="stage">
     <div id="toolbar">
       <span class="label">Layers</span>
@@ -566,6 +619,123 @@
 
     renderLegend();
     infoEl.innerHTML = introText();
+  </script>
+
+  <!-- A separate script, so the References panel still works if the globe library fails to load -->
+  <script>
+    // ---------------------------------------------------------------
+    // 7. REFERENCES PANEL
+    //    Reads data/sources.json, a copy of references/sources.json
+    //    made by src/copy_sources_to_globe.py. Every name starts with
+    //    "refs" so it cannot clash with the globe code above.
+    // ---------------------------------------------------------------
+    const refsPanel = document.getElementById('refs-panel');
+    const refsList = document.getElementById('refs-list');
+    const refsStatus = document.getElementById('refs-status');
+    const refsSearch = document.getElementById('refs-search');
+    let refsSources = null;  // stays null until the file has loaded
+
+    // Short, plain-language badges for the ledger's verification levels
+    const REFS_BADGES = {
+      opened_and_read:    { text: 'Read in full',        color: '#7ccf8a' },
+      summary_only:       { text: 'Read via summary',    color: '#e6c15a' },
+      search_result_only: { text: 'Seen in search only', color: '#bdb6ad' },
+      access_blocked:     { text: 'Access blocked',      color: '#e57a6a' }
+    };
+
+    // Make an element holding plain text. textContent never runs HTML, so a
+    // strange character in the ledger can't break or inject anything.
+    function refsEl(tag, className, text) {
+      const el = document.createElement(tag);
+      if (className) el.className = className;
+      if (text) el.textContent = text;
+      return el;
+    }
+
+    // A link that opens in a new tab. Only http(s) addresses become links.
+    function refsLink(text, url, className) {
+      if (!url || !url.startsWith('http')) return refsEl('span', className, text);
+      const a = refsEl('a', className, text);
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';  // the new tab can't control this page
+      return a;
+    }
+
+    // One source: title, publisher, verification badge with licence, used for
+    function refsEntry(s) {
+      const item = refsEl('div', 'refs-item');
+
+      const title = refsEl('p');
+      title.append(refsLink(s.title, s.url, 'refs-title'));
+
+      const publisher = refsEl('p', 'refs-meta', s.publisher_or_author);
+
+      const licence = refsEl('p', 'refs-meta');
+      const badge = REFS_BADGES[s.verification] || { text: s.verification, color: '#bdb6ad' };
+      const tag = refsEl('span', 'tag', badge.text);
+      tag.style.background = badge.color;
+      licence.append(tag, 'Licence: ', refsLink(s.licence, s.licence_url));
+
+      const usedFor = refsEl('p', null, 'Used for: ' + s.used_for);
+
+      item.append(title, publisher, licence, usedFor);
+      return item;
+    }
+
+    // Rebuild the list from the search box: filter, then group by type
+    function refsRender() {
+      const query = refsSearch.value.trim().toLowerCase();
+      const shown = refsSources.filter(s =>
+        [s.title, s.publisher_or_author, s.used_for].join(' ').toLowerCase().includes(query));
+
+      refsStatus.textContent = shown.length
+        ? `Showing ${shown.length} of ${refsSources.length} sources.`
+        : 'No sources match your search.';
+
+      // Group by type, in the order the types first appear in the ledger
+      const groups = {};
+      shown.forEach(s => {
+        if (!groups[s.type]) groups[s.type] = [];
+        groups[s.type].push(s);
+      });
+
+      refsList.replaceChildren();  // empty the list before rebuilding it
+      Object.keys(groups).forEach(type => {
+        refsList.append(refsEl('h3', null, `${type.replace(/_/g, ' ')} (${groups[type].length})`));
+        groups[type].forEach(s => refsList.append(refsEntry(s)));
+      });
+    }
+
+    function refsLoad() {
+      refsStatus.className = '';
+      refsStatus.textContent = 'Loading sources…';
+      fetch('data/sources.json')
+        .then(r => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);  // e.g. 404 if the copy script was never run
+          return r.json();
+        })
+        .then(data => {
+          refsSources = data;
+          refsRender();
+        })
+        .catch(() => {
+          // Browsers block fetch() for pages opened straight from disk (file://)
+          refsStatus.className = 'refs-error';
+          refsStatus.textContent = 'The source list could not be loaded. This page must be served locally: ' +
+            'from the project root run "python3 -m http.server 8000" and open ' +
+            'http://localhost:8000/globe/coffee_globe.html';
+        });
+    }
+
+    document.getElementById('refs-btn').addEventListener('click', () => {
+      refsPanel.showModal();  // modal: Escape closes it and Tab stays inside the panel
+      if (!refsSources) refsLoad();  // load once; if it failed, try again on the next open
+    });
+    document.getElementById('refs-close').addEventListener('click', () => refsPanel.close());
+    // A click on the dark backdrop (outside the panel's content) also closes it
+    refsPanel.addEventListener('click', e => { if (e.target === refsPanel) refsPanel.close(); });
+    refsSearch.addEventListener('input', () => { if (refsSources) refsRender(); });
   </script>
 </body>
 </html>
