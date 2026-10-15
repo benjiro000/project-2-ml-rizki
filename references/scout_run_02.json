@@ -1,0 +1,165 @@
+{
+  "run": {
+    "run_id": "scout_run_02",
+    "agent": "01_scout",
+    "date": "2026-10-15",
+    "mode": "manual run: WebSearch in place of search_web, WebFetch in place of open_page",
+    "goal": "a) Green-bean data for Coffea liberica and Coffea excelsa (C. liberica var. dewevrei): composition, size, density, origin or quality, row-level first. b) More green-bean Robusta (C. canephora) data with a species or variety column. c) If budget remains: the real row count of the May 2023 CQI update from a page that states it, and whether it repeats the Jan 2018 rows.",
+    "budget": "15 web steps (each search and each opened page = 1). Used 15 of 15.",
+    "verification_note": "WebSearch returns an automatic summary of results and WebFetch returns an automatic summary of each page, so every page opened in this run is recorded as summary_only, never opened_and_read.",
+    "steps": [
+      "1 search: liberica / excelsa green bean datasets on Mendeley, Zenodo, figshare (goal a)",
+      "2 open: pmc.ncbi.nlm.nih.gov/articles/PMC9410941 (Excelsa postharvest paper)",
+      "3 search: green bean datasets with arabica / robusta / liberica / excelsa labels (goals a, b)",
+      "4 open: data.mendeley.com/datasets/bgpd7mnnjn/1 (AS7265X reflectance, arabica and robusta)",
+      "5 open: universe.roboflow.com/packer/coffee-bean-tm9bq -> HTTP 403 Forbidden",
+      "6 search: liberica green bean caffeine, chlorogenic acid, trigonelline, sucrose (goal a)",
+      "7 open: ro.ecu.edu.au/ecuworkspost2013/6495 (liberica vs arabica, green and roasted)",
+      "8 search: Coffea canephora / conilon green bean datasets with clones or genotypes (goal b)",
+      "9 open: sbicafe.ufv.br item 7bfec290 (107 canephora genotypes) -> Access Denied by bot protection (Anubis)",
+      "10 open: preprints.org/manuscript/202501.0058/v1 (canephora genotypes) -> HTTP 403 Forbidden",
+      "11 search: robusta green bean datasets on Mendeley / Zenodo with variety or origin (goal b)",
+      "12 open: data.mendeley.com/datasets/zg89423tkb/3 (NIRS green beans, Java)",
+      "13 search: CQI May 2023 dataset row count (goal c)",
+      "14 search: 'CQI May 2023' Kaggle dataset rows (goal c)",
+      "15 open: repository.ipb.ac.id/handle/123456789/171080 (liberica green beans from Java, thesis)"
+    ]
+  },
+
+  "candidates": [
+    {
+      "intent": "register_dataset",
+      "dataset": {
+        "dataset_id": "ds_mendeley_as7265x_green_indonesia",
+        "source_id": "src_mendeley_as7265x_green",
+        "title": "Reflectance intensity dataset of green coffee beans (four origins) measured with AS7265X sensor",
+        "kind": "tabular",
+        "access": "Mendeley Data 'Download All' button on https://data.mendeley.com/datasets/bgpd7mnnjn/1 (DOI 10.17632/bgpd7mnnjn.1)",
+        "licence": "CC BY 4.0",
+        "rows": null,
+        "rows_note": "Sample count not stated on the landing page; the Files section came back empty.",
+        "fields_seen": ["label (AF = Arabica Flores, AG = Arabica Gayo, RD = Robusta Dampit, RT = Robusta Temanggung)", "reflectance intensity per channel, 18 bands from 410 to 940 nm, arbitrary units (column names not shown)"],
+        "countries_covered": ["Indonesia"],
+        "species": "both",
+        "green_bean_measures": ["reflectance intensity, 18 spectral bands 410-940 nm (AS7265X sensor)", "fluorescence: 12 further spectral datasets made by alternating violet and white LEDs (six visible wavelengths)", "species and origin label"],
+        "processing_info": [],
+        "has_luwak_or_fermentation_detail": "false",
+        "target_candidates": ["label (species + origin, 4 classes)"],
+        "derived_from": null,
+        "borderline": false,
+        "red_flags": ["rows_unknown", "file_list_not_shown", "column_names_not_seen", "two_robusta_origins_only", "no_composition_or_quality_values"],
+        "why_relevant": "Green Arabica and Robusta beans from four named Indonesian origins, with a label that encodes species and origin, under CC BY 4.0. It answers goal b (Robusta with a species column), but the data are sensor readings only, with no chemistry, size or quality values, and the sample count is unknown."
+      }
+    }
+  ],
+
+  "paper_tables": [
+    {
+      "source_id": "src_pmc_excelsa_postharvest",
+      "paper_title": "Profile of Bioactive Compounds, Aromas, and Cup Quality of Excelsa Coffee (Coffea liberica var. dewevrei) Prepared from Diverse Postharvest Processes",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9410941/",
+      "table_number": "Table 1",
+      "measures": "Relative concentration (ug/kg beans) of 18 volatile compound classes in GREEN and roasted Excelsa coffee powder, against a 3-heptanone internal standard",
+      "coverage": "1 species/variety (C. liberica var. dewevrei, Wonosalam, East Java); 6 postharvest treatments (Natural 1, 2, 3, Wine, Honey, Semiwashed) per bean state; averages of 2 replications",
+      "note": "Data Availability: \"All data obtained or analyzed from this study are included in this published article.\" Licence: Creative Commons Attribution License (version not stated on the page)."
+    },
+    {
+      "source_id": "src_pmc_excelsa_postharvest",
+      "paper_title": "Profile of Bioactive Compounds, Aromas, and Cup Quality of Excelsa Coffee (Coffea liberica var. dewevrei) Prepared from Diverse Postharvest Processes",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9410941/",
+      "table_number": "Table 1S (supplementary file 2365603.f1.docx)",
+      "measures": "Individual volatile compounds and their classes in green and roasted beans (59 compounds in 12 classes for green beans, 85 in 18 classes for roasted, as stated on the page)",
+      "coverage": "1 species/variety; same 6 treatments as Table 1 (per-treatment layout not seen)",
+      "note": "Supplementary file listed on the page; not downloaded."
+    },
+    {
+      "source_id": "src_pmc_excelsa_postharvest",
+      "paper_title": "Profile of Bioactive Compounds, Aromas, and Cup Quality of Excelsa Coffee (Coffea liberica var. dewevrei) Prepared from Diverse Postharvest Processes",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9410941/",
+      "table_number": "Table 3",
+      "measures": "Cupping scores (mean +/- SD) for 10 attributes plus total score, measured on the roasted brew",
+      "coverage": "1 species/variety; 6 samples (same treatments as Table 1); 3 replications",
+      "note": "The search summary says the paper reports green-bean caffeoylquinic acids and alkaloids by processing method, but the page summary listed no table for them (Table 2 is aroma descriptors for roasted beans). Where those values sit was not verified."
+    },
+    {
+      "source_id": "src_ecu_mubarak_liberica",
+      "paper_title": "Comparison of liberica and arabica coffee: Chlorogenic acid, caffeine, total phenolic and DPPH radical scavenging activity",
+      "url": "https://ro.ecu.edu.au/ecuworkspost2013/6495",
+      "table_number": "unknown (the landing page lists no tables; the full-text PDF was not opened)",
+      "measures": "Chlorogenic acid, caffeine, total phenolics and DPPH radical scavenging in green and roasted C. liberica and C. arabica, plus C. liberica at several roast levels",
+      "coverage": "2 species; number of samples not stated; bean origin not stated",
+      "note": "Asian Journal of Agriculture and Biology 7(1) 130-136, 2019. \"This work is licensed under a Creative Commons Attribution 3.0 License.\""
+    }
+  ],
+
+  "opened_not_registered": [
+    {
+      "source_id": "src_mendeley_nirs_java",
+      "title": "NIRS intact green coffee beans with CGA content, species and Geographical origins from Java, Indonesia",
+      "url": "https://data.mendeley.com/datasets/zg89423tkb/3",
+      "reason": "Licence (CC BY 4.0) and access ('Download All', .txt and .unsb files) are shown, but there is no file list, no field names, no sample count, and the species are not named, so rule (b) is not met. NIR spectra 1000-2500 nm of intact green beans from Java, and the title says it has CGA content, species and origin. If the species include robusta or liberica it fits goals a or b, but that is not confirmed."
+    },
+    {
+      "source_id": "src_ipb_liberica_java",
+      "title": "Karakteristik Fisikokimia, Metabolit Sekunder, dan Aktivitas Antioksidan Biji Kopi Liberika (Coffea liberica) dari Pulau Jawa",
+      "url": "https://repository.ipb.ac.id/handle/123456789/171080",
+      "reason": "Undergraduate final assignment (IPB University, 2025) on green Liberica beans from Java: bean dimensions, colour, proximate content, total phenols, flavonoids, antioxidant activity (DPPH, CUPRAC, FRAP), compared by location. Not a dataset. The full text and appendix (Lampiran) are flagged isAllowed=n, so table numbers and sample counts are unknown. Only 'All rights reserved' in the site footer; no item licence."
+    }
+  ],
+
+  "seen_not_opened": [
+    {"url": "https://agris.fao.org/search/fr/records/64747388425ec3c088f3408d", "goal": "a", "note": "Malaysian 2013 study: size, mass, density, colour, proximate composition, sucrose and chlorogenic acid of liberica green beans over 8 months of ambient storage."},
+    {"url": "https://etd.repository.ugm.ac.id/penelitian/detail/242477", "goal": "a", "note": "UGM thesis: liberica from Jambi, Riau, Banyuwangi, Probolinggo; dimensions, bulk density, colour, weight, caffeine, chlorogenic acid."},
+    {"url": "https://animorepository.dlsu.edu.ph/etdb_bio/152", "goal": "a", "note": "De La Salle University thesis (2025): C. liberica var. liberica vs var. dewevrei; morphology, chlorogenic acid and caffeine in ROASTED beans."},
+    {"url": "https://ospro.usk.ac.id/article/scopus/105004179226", "goal": "a", "note": "Returned for the liberica / excelsa search; content not described in the search summary."},
+    {"url": "https://www.alphavisa.com/asic/2023/documents/eposters/S1/S1_Wenny_Sunarharum.pdf", "goal": "a", "note": "ASIC 2023 e-poster; content not described in the search summary."},
+    {"url": "https://iris.unito.it/bitstream/2318/1554562/1/PHYTOCHEM-D-15-00449%20ACCCEPTED%20REVISION.pdf", "goal": "a", "note": "Phytochemistry manuscript returned for the liberica / excelsa search; content not described in the search summary."},
+    {"url": "https://ovcre.uplb.edu.ph/journals-uplb/index.php/PJABE/article/view/1105", "goal": "a", "note": "Philippine agricultural engineering journal article returned for the species-classification search; content not described."},
+    {"url": "https://data.mendeley.com/datasets/t2r6rszp5c/1", "goal": "a, b", "note": "Mendeley dataset returned for the species-classification search; title and content not described."},
+    {"url": "https://agritrop.cirad.fr/526749", "goal": "a", "note": "CIRAD record returned for the liberica composition search; content not clearly described in the search summary."},
+    {"url": "https://www.mdpi.com/2504-3900/89/1/27/xml", "goal": "a", "note": "MDPI Proceedings paper returned for the liberica composition search; content not described."},
+    {"url": "https://biblioteca.incaper.es.gov.br/digital/handle/123456789/4047", "goal": "b", "note": "Incaper study of 101 Conilon hybrid progenies and 6 parental clones. No dataset link seen."},
+    {"url": "https://biblioteca.incaper.es.gov.br/digital/bitstream/item/5004/1/coffea.pdf", "goal": "b", "note": "Incaper PDF returned for the canephora search; content not described."},
+    {"url": "https://ensaioseciencia.pgsscogna.com.br/ensaioeciencia/article/view/14356", "goal": "b", "note": "Western Amazonia (Rondonia) C. canephora clones; the search summary says its download data are listed as not yet available."},
+    {"url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1110834/1/Bolpd345.pdf", "goal": "b", "note": "Embrapa bulletin returned for the canephora search; content not described."},
+    {"url": "https://research.upn.edu.pe/en/publications/determinaci%C3%B3n-del-origen-geogr%C3%A1fico-de-dos-variedades-de-caf%C3%A9-med/", "goal": "b", "note": "Peruvian NIR study classifying green beans by variety and geographic location (LACCEI 2021 conference paper). Not a deposited dataset."},
+    {"url": "https://data.mendeley.com/datasets/nz2fr76trm/4", "goal": "b", "note": "Colombian FT-NIR / FTIR coffee spectra; the search summary says it does not address variety or origin."},
+    {"url": "https://baselight.app/u/kaggle/dataset/erwinhmtang_coffee_quality_institute_reviews_may2023", "goal": "c", "note": "Search summary: five CSV files (full table, certificate, cupping score, green analysis, sample information); the listing text also says the files include data from January 2018. No row count shown. Baselight shut down (seen in run 1), so this was not reopened."},
+    {"url": "https://shdl.mmu.edu.my/14421/", "goal": "c", "note": "2025 paper that used manually collected CQI data to predict total cup score. A citing paper, not the dataset page."},
+    {"url": "https://tesi.luiss.it/35286/", "goal": "c", "note": "LUISS thesis on coffee quality analysis with machine learning; returned for the 'CQI May 2023' search. Citing work, not the dataset page."},
+    {"url": "https://www.mdpi.com/2306-5710/10/1/10", "goal": "c", "note": "MDPI Beverages paper returned for the CQI May 2023 search; content not described. Citing work, not the dataset page."}
+  ],
+
+  "could_not_open": [
+    "universe.roboflow.com/packer/coffee-bean-tm9bq (image set said to have arabica / excelsa / liberica / robusta classes): HTTP 403 Forbidden. Stopped on this item.",
+    "sbicafe.ufv.br item 7bfec290 (107 C. canephora genotypes, 30 traits incl. caffeine): Access Denied by Anubis bot protection. Stopped on this item.",
+    "preprints.org/manuscript/202501.0058/v1 (C. canephora genotypes, caffeine in raw beans): HTTP 403 Forbidden. Stopped on this item."
+  ],
+
+  "goal_c_cqi_may_2023": {
+    "row_count": null,
+    "contains_jan_2018_rows": "unknown",
+    "note": "No page in this run states the row count of the May 2023 update. The only figure seen is 1,509 cupping records, from a citing paper (run 1, not accepted here). A search summary says the Baselight listing text mentions data from January 2018, which would suggest an overlap, but that is search_result_only and the mirror has shut down. The Kaggle page returned only its title in run 1, so it was not retried."
+  },
+
+  "done_for_now": {
+    "intent": "done_for_now",
+    "summary": "15 of 15 steps used. Registered 1 dataset: Mendeley AS7265X reflectance of green Arabica and Robusta beans from four Indonesian origins (CC BY 4.0, rows unknown). No row-level liberica or excelsa dataset was found. Liberica / excelsa data exist only as paper tables (Excelsa postharvest paper on PMC; Mubarak et al. liberica vs arabica) and in an IPB thesis with restricted full text. Three pages were blocked (Roboflow 403, SBICafe bot protection, preprints.org 403). The CQI May 2023 row count is still unverified.",
+    "outputs": ["ds_mendeley_as7265x_green_indonesia"],
+    "goals_empty": [
+      "a: no row-level (downloadable) green-bean dataset for C. liberica or C. excelsa found; only paper tables and theses",
+      "c: no page states the May 2023 CQI row count; overlap with Jan 2018 unverified"
+    ],
+    "open_questions": [
+      "Human gate: is a sensor-only dataset (no chemistry or quality values, rows unknown) worth sending to the Reviewer for the Robusta goal?",
+      "Should the liberica / excelsa layer of the globe use values typed in from paper tables (with citations) since no row-level dataset was found?"
+    ],
+    "next_searches": [
+      "Open the file list or API record of Mendeley zg89423tkb to see if its species include robusta or liberica",
+      "Open the AGRIS record of the Malaysian liberica storage study (size, mass, density, composition)",
+      "Open the UGM liberica thesis record (Jambi, Riau, Banyuwangi, Probolinggo)",
+      "Open the Mubarak et al. full-text PDF to read its table numbers and sample counts",
+      "Search Malaysian and Philippine repositories (MARDI, PhilRice / UPLB) for 'kopi liberika' or 'kapeng barako' green bean data"
+    ]
+  }
+}
