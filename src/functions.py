@@ -143,6 +143,18 @@ def above_to_missing(df, column, limit):
     return df, counts
 
 
+def mask_to_missing(df, column, mask):
+    """Replace the values where mask is True with missing. Return the table and the counts.
+
+    Why a mask: rules such as "between 0 and 0.05" or "Arabica only" are
+    easy to read when the condition is written out where the rule is run.
+    """
+    df = df.copy()
+    counts = count_per_species(df, mask)
+    df.loc[mask, column] = np.nan
+    return df, counts
+
+
 def rows_below(df, column, limit, show_columns):
     """List the rows where a column is below a limit, without changing them."""
     return df.loc[df[column] < limit, show_columns]

@@ -43,6 +43,24 @@
       "note": "per species: {'arabica': 252, 'robusta': 12}"
     },
     {
+      "step": "moisture_low_to_missing",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 38,
+      "note": "per species: {'arabica': 38, 'robusta': 0}; no expected Robusta count, reported only"
+    },
+    {
+      "step": "moisture_above_014_report_only",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 0,
+      "note": "per species: {'arabica': 24, 'robusta': 0}; reported only, none changed"
+    },
+    {
       "step": "altitude_above_3000_to_missing",
       "rows_before": 1339,
       "rows_after": 1339,
@@ -59,6 +77,24 @@
       "columns_after": 20,
       "values_changed": 0,
       "note": "18 rows listed, none changed"
+    },
+    {
+      "step": "altitude_below_50_arabica_to_missing",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 17,
+      "note": "per species: {'arabica': 17, 'robusta': 0}; the Robusta value (Ecuador, 40 m) is kept"
+    },
+    {
+      "step": "altitude_near_2500_report_only",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 0,
+      "note": "4 rows listed, none changed"
     },
     {
       "step": "drop_total_zero",
@@ -102,6 +138,53 @@
     {
       "rule": "altitude_below_50_list_only",
       "real": 18,
+      "expected": null,
+      "note": "listed only, no value changed by this rule; the Arabica rows are set to missing by altitude_below_50_arabica_to_missing"
+    },
+    {
+      "rule": "altitude_below_50_arabica_to_missing",
+      "real": {
+        "arabica": 17,
+        "robusta": 0
+      },
+      "expected": {
+        "arabica": 17,
+        "robusta": 0
+      }
+    },
+    {
+      "rule": "moisture_low_to_missing",
+      "real": {
+        "arabica": 38,
+        "robusta": 0
+      },
+      "expected": {
+        "arabica": 38
+      },
+      "countries": {
+        "United States (Hawaii)": 10,
+        "Ethiopia": 9,
+        "Colombia": 5,
+        "Brazil": 4,
+        "Guatemala": 4,
+        "Thailand": 3,
+        "Indonesia": 1,
+        "El Salvador": 1,
+        "Mexico": 1
+      }
+    },
+    {
+      "rule": "moisture_above_014_report_only",
+      "real": {
+        "arabica": 24,
+        "robusta": 0
+      },
+      "expected": null,
+      "note": "reported only, no value changed"
+    },
+    {
+      "rule": "altitude_near_2500_report_only",
+      "real": 4,
       "expected": null,
       "note": "listed only, no value changed"
     },
@@ -205,6 +288,80 @@
       "species": "robusta",
       "Country.of.Origin": "Ecuador",
       "altitude_mean_meters": 40.0
+    }
+  ],
+  "high_moisture_top10": [
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Thailand",
+      "Moisture": 0.28
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Colombia",
+      "Moisture": 0.22
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Colombia",
+      "Moisture": 0.21
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Ethiopia",
+      "Moisture": 0.2
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Ethiopia",
+      "Moisture": 0.2
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Thailand",
+      "Moisture": 0.2
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Nicaragua",
+      "Moisture": 0.18
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Colombia",
+      "Moisture": 0.18
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "China",
+      "Moisture": 0.17
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Guatemala",
+      "Moisture": 0.17
+    }
+  ],
+  "altitude_near_2500_rows": [
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Malawi",
+      "altitude_mean_meters": 2500.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Colombia",
+      "altitude_mean_meters": 2527.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Colombia",
+      "altitude_mean_meters": 2560.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Colombia",
+      "altitude_mean_meters": 2560.0
     }
   ],
   "robusta_empty_columns": {
@@ -324,6 +481,24 @@
       "result": "pass"
     },
     {
+      "check": "Moisture above 0 and at most 0.05 set to missing, arabica",
+      "real": 38,
+      "expected": 38,
+      "result": "pass"
+    },
+    {
+      "check": "arabica altitude under 50 m set to missing",
+      "real": {
+        "arabica": 17,
+        "robusta": 0
+      },
+      "expected": {
+        "arabica": 17,
+        "robusta": 0
+      },
+      "result": "pass"
+    },
+    {
       "check": "rows with Total.Cup.Points 0 dropped",
       "real": 1,
       "expected": 1,
@@ -361,6 +536,36 @@
     },
     {
       "check": "altitude above 3000 m left",
+      "real": 0,
+      "expected": 0,
+      "result": "pass"
+    },
+    {
+      "check": "rows in the clean table",
+      "real": 1338,
+      "expected": 1338,
+      "result": "pass"
+    },
+    {
+      "check": "columns in the clean table",
+      "real": 20,
+      "expected": 20,
+      "result": "pass"
+    },
+    {
+      "check": "non-empty Moisture values, arabica",
+      "real": 1020,
+      "expected": 1020,
+      "result": "pass"
+    },
+    {
+      "check": "Moisture above 0 and at most 0.05 left",
+      "real": 0,
+      "expected": 0,
+      "result": "pass"
+    },
+    {
+      "check": "arabica altitude under 50 m left",
       "real": 0,
       "expected": 0,
       "result": "pass"

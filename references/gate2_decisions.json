@@ -117,6 +117,51 @@
       "condition": "altitude_mean_meters < 50",
       "action": "change nothing; list each row with its country in the cleaning report",
       "why": "values such as 1 m look wrong, but are left for a later decision",
+      "expected_count": null,
+      "later_decision": "cleaning v2: the Arabica rows in this list become missing (rule altitude_below_50_arabica_to_missing); the list itself is still written to the report"
+    },
+    {
+      "rule_id": "altitude_below_50_arabica_to_missing",
+      "added_in": "cleaning v2",
+      "column": "altitude_mean_meters",
+      "species": "arabica",
+      "condition": "altitude_mean_meters < 50, Arabica rows only",
+      "limits": {"below": 50},
+      "action": "set to missing",
+      "why": "Arabica is not grown at 1 to 13 m; the typed Altitude text ('1.2', '12oo') points to parsing errors. The one Robusta value (Ecuador, 40 m) is plausible for Robusta and is left as it is",
+      "expected_count": {"arabica": 17, "robusta": 0}
+    },
+    {
+      "rule_id": "moisture_low_to_missing",
+      "added_in": "cleaning v2",
+      "column": "Moisture",
+      "condition": "Moisture > 0 and Moisture <= 0.05, both species",
+      "limits": {"above": 0, "at_most": 0.05},
+      "action": "set to missing",
+      "why": "Moisture is stored as a fraction (0.11 = 11 %). Green coffee is normally about 0.10 to 0.12; the 0.01 to 0.05 group is mostly Hawaii and Ethiopia, which points to how it was reported, not to the beans",
+      "expected_count": {"arabica": 38},
+      "expected_count_note": "no expected Robusta count; report the real count",
+      "expected_non_empty_after": {"arabica": 1020}
+    },
+    {
+      "rule_id": "moisture_above_014_report_only",
+      "added_in": "cleaning v2",
+      "column": "Moisture",
+      "condition": "Moisture > 0.14",
+      "limits": {"above": 0.14},
+      "action": "change nothing; report the count and the 10 highest values with their country",
+      "why": "above 14 % is wetter than normal green coffee, but may be real; left for a later decision",
+      "expected_count": null
+    },
+    {
+      "rule_id": "altitude_near_2500_report_only",
+      "added_in": "cleaning v2",
+      "column": "altitude_mean_meters",
+      "species": "arabica",
+      "condition": "altitude_mean_meters >= 2400 and <= 3000, Arabica rows only",
+      "limits": {"at_least": 2400, "at_most": 3000},
+      "action": "change nothing; list each row with its country and value",
+      "why": "the altitude histogram shows a small bump near 2500 m, apart from the rest; worth checking, but these altitudes are possible",
       "expected_count": null
     }
   ],
