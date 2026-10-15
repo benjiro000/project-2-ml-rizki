@@ -1,0 +1,108 @@
+{
+  "intent": "review_dataset",
+  "dataset_id": "ds_cqi_jldbc_2018",
+  "verdict": "needs_human",
+  "based_on": [
+    "Scout record ds_cqi_jldbc_2018 (scout_run_01)",
+    "profile ds_cqi_jldbc_2018__arabica_data_cleaned",
+    "profile ds_cqi_jldbc_2018__robusta_data_cleaned",
+    "profile ds_cqi_jldbc_2018__arabica_ratings_raw",
+    "profile ds_cqi_jldbc_2018__robusta_ratings_raw"
+  ],
+  "checks": [
+    {
+      "check": "green_bean_focus",
+      "result": "yes",
+      "evidence": "arabica_data_cleaned has Moisture, Category.One.Defects, Category.Two.Defects, Quakers, Color, Variety, Processing.Method, Country.of.Origin, altitude_mean_meters and the quality scores Aroma to Total.Cup.Points; trade-type columns (Number.of.Bags, Bag.Weight, ICO.Number) are a minority"
+    },
+    {
+      "check": "country_column",
+      "result": "yes",
+      "evidence": "Country.of.Origin: 36 countries in arabica_data_cleaned (1 row without country); top rows: Mexico 236, Colombia 183, Guatemala 181, Brazil 132, Taiwan 75, United States (Hawaii) 73, Honduras 53, Costa Rica 51, Ethiopia 44, Tanzania, United Republic Of 40, Thailand 32, Uganda 26, Nicaragua 26, Kenya 25, El Salvador 21. robusta_data_cleaned: 5 countries: India 13, Uganda 10, United States 2, Ecuador 2, Vietnam 1"
+    },
+    {
+      "check": "enough_rows",
+      "result": "no",
+      "evidence": "arabica_data_cleaned 1311 rows, robusta_data_cleaned 28 rows (1339 together); raw files 1312 and 28 rows. Below 3000."
+    },
+    {
+      "check": "supervised_target",
+      "result": "yes",
+      "evidence": "Total.Cup.Points (float64, 0.0 missing, 178 distinct) for regression; Processing.Method (5 distinct, 0.116 missing) and Color (3 distinct, 0.204 missing) for classification. None is more than 40% missing in arabica_data_cleaned; in robusta_data_cleaned Processing.Method is 0.643 missing."
+    },
+    {
+      "check": "unsupervised_fit",
+      "result": "yes",
+      "evidence": "18 numeric measurement columns in arabica_data_cleaned: Aroma, Flavor, Aftertaste, Acidity, Body, Balance, Uniformity, Clean.Cup, Sweetness, Cupper.Points, Total.Cup.Points, Moisture, Category.One.Defects, Quakers, Category.Two.Defects, altitude_low_meters, altitude_high_meters, altitude_mean_meters"
+    },
+    {
+      "check": "missing_values",
+      "result": "yes",
+      "evidence": "Over 30% empty: arabica_data_cleaned Lot.Number 0.794; robusta_data_cleaned Lot.Number 0.786, ICO.Number 0.393, Variety 0.893, Processing.Method 0.643; raw files also have view_certificate_1, view_certificate_2, Cupping Protocol and Descriptors, View Green Analysis Details, Request a Sample, NA.2, NA.3 at 1.0 and Notes at 0.996"
+    },
+    {
+      "check": "leakage_risk",
+      "result": "yes",
+      "evidence": "Total.Cup.Points with its parts Aroma, Flavor, Aftertaste, Acidity, Body, Balance, Uniformity, Clean.Cup, Sweetness, Cupper.Points: the first example values of the ten parts (8.67, 8.83, 8.67, 8.75, 8.5, 8.42, 10.0, 10.0, 10.0, 8.75) add up to 90.59, the first Total.Cup.Points example is 90.58. Also altitude_mean_meters with altitude_low_meters and altitude_high_meters, and quality_score with Total Cup Points in the raw files (both first examples 90.58)"
+    },
+    {
+      "check": "processing_info",
+      "result": "yes",
+      "evidence": "Processing.Method: 5 distinct values in arabica_data_cleaned, examples 'Washed / Wet', 'Natural / Dry', 'Pulped natural / honey'; the other 2 values are not in the profile, so fermentation or luwak values are unknown"
+    },
+    {
+      "check": "licence_known",
+      "result": "yes",
+      "evidence": "Scout record licence field: \"MIT license\""
+    },
+    {
+      "check": "globe_fit",
+      "result": "yes",
+      "evidence": "Averages per country: Total.Cup.Points, Moisture, altitude_mean_meters, Category.One.Defects, Category.Two.Defects; most common per country: Processing.Method, Variety, Color. Under 10 rows: robusta Vietnam 1, Ecuador 2, United States 2. Arabica: the profile lists only the top 15 countries (smallest El Salvador 21); the other 21 countries share 112 rows (1310 with a country minus 1198 in the top 15), which of them are under 10 is unknown"
+    }
+  ],
+  "candidate_targets": [
+    {"column": "Total.Cup.Points", "kind": "regression", "note": "0.0 missing; do not use its ten part scores as inputs (leakage)"},
+    {"column": "Processing.Method", "kind": "classification", "note": "5 classes, 0.116 missing in arabica_data_cleaned"},
+    {"column": "Color", "kind": "classification", "note": "3 classes, 0.204 missing in arabica_data_cleaned"}
+  ],
+  "useful_columns": [
+    {"column": "Country.of.Origin", "why": "origin, and the key for the globe (36 countries)"},
+    {"column": "Region", "why": "origin detail, 0.043 missing, but 343 distinct values"},
+    {"column": "altitude_mean_meters", "why": "numeric altitude in metres, 0.173 missing"},
+    {"column": "Variety", "why": "bean variety, 29 values, 0.153 missing"},
+    {"column": "Processing.Method", "why": "processing, 5 values, 0.116 missing"},
+    {"column": "Species", "why": "Arabica or Robusta, needed if the two files are combined"},
+    {"column": "Moisture", "why": "physical green-bean measure, 0.0 missing"},
+    {"column": "Category.One.Defects", "why": "green-bean defects, 0.0 missing"},
+    {"column": "Category.Two.Defects", "why": "green-bean defects, 0.0 missing"},
+    {"column": "Quakers", "why": "bean quality count listed next to the defect columns, 0.001 missing (meaning not stated in the profile)"},
+    {"column": "Color", "why": "green-bean colour, 3 values, 0.204 missing"},
+    {"column": "Aroma, Flavor, Aftertaste, Acidity, Body, Balance, Uniformity, Clean.Cup, Sweetness, Cupper.Points", "why": "quality part scores, 0.0 missing; inputs for clustering, but not inputs when Total.Cup.Points is the target"},
+    {"column": "Total.Cup.Points", "why": "overall quality score, main regression target"},
+    {"column": "Harvest.Year", "why": "time of harvest, 0.036 missing, stored as text with 46 distinct values"}
+  ],
+  "unusable_columns": [
+    {"column": "Unnamed: 0", "why": "row number, not a measurement"},
+    {"column": "Owner, Owner.1, Farm.Name, Mill, Company, Producer", "why": "names of people and businesses with hundreds of distinct values; not bean properties"},
+    {"column": "Lot.Number", "why": "0.794 missing, an identifier"},
+    {"column": "ICO.Number", "why": "trade identifier, 840 distinct values"},
+    {"column": "Number.of.Bags, Bag.Weight", "why": "shipment size (trade), not a bean property"},
+    {"column": "In.Country.Partner, Certification.Body, Certification.Address, Certification.Contact", "why": "certifying organisation and contact details, not bean properties"},
+    {"column": "Grading.Date, Expiration", "why": "certificate dates, not bean properties"},
+    {"column": "Altitude, unit_of_measurement", "why": "free-text altitude (383 distinct values, 'm' and 'ft'); altitude_mean_meters is the usable version"},
+    {"column": "altitude_low_meters, altitude_high_meters", "why": "carry almost the same information as altitude_mean_meters"},
+    {"column": "raw files only: view_certificate_1, view_certificate_2, Cupping Protocol and Descriptors, View Green Analysis Details, Request a Sample, NA, NA.1, NA.2, NA.3, Unnamed: 51, Status, Notes", "why": "empty (1.0 missing), a single value, or 0.996 missing"}
+  ],
+  "risks": [
+    "Only 1311 arabica and 28 robusta rows, below the 3000 the brief asks for.",
+    "Robusta has 28 rows from 5 countries, and its score columns have other names (Fragrance...Aroma, Salt...Acid, Bitter...Sweet, Mouthfeel, Uniform.Cup), so combining it with arabica needs a column mapping.",
+    "The raw files store numbers as text ('12 %' in Moisture, '0 full defects', 'Sample  90.58' in Total Cup Points); the cleaned files already hold them as numbers.",
+    "arabica_data_cleaned has 1311 rows and arabica_ratings_raw has 1312; the profile does not say which row is missing.",
+    "0.0 is among the Moisture example values; it may stand for a missing measurement.",
+    "Country names such as 'United States (Hawaii)' and 'Tanzania, United Republic Of' need mapping to the names the globe uses.",
+    "The raw files contain certification contact and address details; their examples are hidden in the profile and they must never be published.",
+    "Snapshot of January 2018 (Scout red flag snapshot_january_2018)."
+  ],
+  "message": "This CQI dataset is about green coffee and has a country for almost every row, a clear score to predict (Total.Cup.Points) and 18 numeric columns, but only 1,311 arabica and 28 robusta rows, far below the 3,000 the brief asks for. Please decide whether to accept it with that size, and whether to use arabica only or also the 28 robusta rows."
+}

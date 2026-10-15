@@ -1,0 +1,534 @@
+{
+  "dataset_id": "ds_cqi_jldbc_2018",
+  "source_url": "https://raw.githubusercontent.com/jldbc/coffee-quality-database/master/data/robusta_ratings_raw.csv",
+  "file_name": "robusta_ratings_raw.csv",
+  "size_bytes": 14610,
+  "rows": 28,
+  "columns": 51,
+  "column_profiles": {
+    "Unnamed: 0": {
+      "type": "int64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 1,
+      "examples": [
+        0
+      ]
+    },
+    "quality_score": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 23,
+      "examples": [
+        83.75,
+        83.5,
+        83.25
+      ]
+    },
+    "view_certificate_1": {
+      "type": "float64",
+      "missing_count": 28,
+      "missing_share": 1.0,
+      "distinct_values": 0,
+      "examples": []
+    },
+    "view_certificate_2": {
+      "type": "float64",
+      "missing_count": 28,
+      "missing_share": 1.0,
+      "distinct_values": 0,
+      "examples": []
+    },
+    "Cupping Protocol and Descriptors": {
+      "type": "float64",
+      "missing_count": 28,
+      "missing_share": 1.0,
+      "distinct_values": 0,
+      "examples": []
+    },
+    "View Green Analysis Details": {
+      "type": "float64",
+      "missing_count": 28,
+      "missing_share": 1.0,
+      "distinct_values": 0,
+      "examples": []
+    },
+    "Request a Sample": {
+      "type": "float64",
+      "missing_count": 28,
+      "missing_share": 1.0,
+      "distinct_values": 0,
+      "examples": []
+    },
+    "Species": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 1,
+      "examples": [
+        "Robusta"
+      ]
+    },
+    "Owner": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 12,
+      "examples": [
+        "Ankole coffee producers coop",
+        "Nishant Gurjer",
+        "Andrew Hetzel"
+      ]
+    },
+    "Country of Origin": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 5,
+      "examples": [
+        "Uganda",
+        "India",
+        "United States"
+      ]
+    },
+    "Farm Name": {
+      "type": "object",
+      "missing_count": 3,
+      "missing_share": 0.107,
+      "distinct_values": 14,
+      "examples": [
+        "Kyangundu cooperative society",
+        "Sethuraman Estate Kaapi Royale",
+        "Sethuraman Estate"
+      ]
+    },
+    "Lot Number": {
+      "type": "object",
+      "missing_count": 22,
+      "missing_share": 0.786,
+      "distinct_values": 6,
+      "examples": [
+        "25",
+        "7",
+        "RKR"
+      ]
+    },
+    "Mill": {
+      "type": "object",
+      "missing_count": 8,
+      "missing_share": 0.286,
+      "distinct_values": 14,
+      "examples": [
+        "Ankole coffee producers",
+        "Sethuraman Estate",
+        "UGACOF"
+      ]
+    },
+    "ICO Number": {
+      "type": "object",
+      "missing_count": 11,
+      "missing_share": 0.393,
+      "distinct_values": 7,
+      "examples": [
+        "0",
+        "14/1148/2017/21",
+        "0000"
+      ]
+    },
+    "Company": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 14,
+      "examples": [
+        "Ankole Coffee Producers Coop",
+        "Kaapi Royale",
+        "Sethuraman Estate"
+      ]
+    },
+    "Altitude": {
+      "type": "object",
+      "missing_count": 3,
+      "missing_share": 0.107,
+      "distinct_values": 17,
+      "examples": [
+        "1488",
+        "3170",
+        "1000m"
+      ]
+    },
+    "Region": {
+      "type": "object",
+      "missing_count": 2,
+      "missing_share": 0.071,
+      "distinct_values": 14,
+      "examples": [
+        "Sheema South Western",
+        "Chikmagalur Karnataka Indua",
+        "Chikmagalur"
+      ]
+    },
+    "Producer": {
+      "type": "object",
+      "missing_count": 2,
+      "missing_share": 0.071,
+      "distinct_values": 17,
+      "examples": [
+        "Ankole coffee producers coop",
+        "Nishant Gurjer Kaapi Royale",
+        "Nishant Gurjer"
+      ]
+    },
+    "Number of Bags": {
+      "type": "int64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 9,
+      "examples": [
+        300,
+        320,
+        1
+      ]
+    },
+    "Bag Weight": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 4,
+      "examples": [
+        "60 kg",
+        "2 kg",
+        "1 kg"
+      ]
+    },
+    "In-Country Partner": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 2,
+      "examples": [
+        "Uganda Coffee Development Authority",
+        "Specialty Coffee Association"
+      ]
+    },
+    "Harvest Year": {
+      "type": "int64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 6,
+      "examples": [
+        2013,
+        2017,
+        2015
+      ]
+    },
+    "Grading Date": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 17,
+      "examples": [
+        "June 26th, 2014",
+        "October 31st, 2017",
+        "April 30th, 2015"
+      ]
+    },
+    "Owner.1": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 12,
+      "examples": [
+        "Ankole coffee producers coop",
+        "Nishant Gurjer",
+        "Andrew Hetzel"
+      ]
+    },
+    "Variety": {
+      "type": "object",
+      "missing_count": 25,
+      "missing_share": 0.893,
+      "distinct_values": 2,
+      "examples": [
+        "Other",
+        "Arusha"
+      ]
+    },
+    "Status": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 1,
+      "examples": [
+        "Completed"
+      ]
+    },
+    "Processing Method": {
+      "type": "object",
+      "missing_count": 18,
+      "missing_share": 0.643,
+      "distinct_values": 2,
+      "examples": [
+        "Washed / Wet",
+        "Natural / Dry"
+      ]
+    },
+    "NA": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 1,
+      "examples": [
+        "Sample"
+      ]
+    },
+    "Fragrance / Aroma": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 11,
+      "examples": [
+        7.83,
+        8.0,
+        7.92
+      ]
+    },
+    "Flavor": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 11,
+      "examples": [
+        8.08,
+        7.75,
+        7.83
+      ]
+    },
+    "Aftertaste": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 12,
+      "examples": [
+        7.75,
+        7.92,
+        7.83
+      ]
+    },
+    "Salt / Acid": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 11,
+      "examples": [
+        7.92,
+        8.0,
+        7.75
+      ]
+    },
+    "Bitter / Sweet": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 11,
+      "examples": [
+        8.0,
+        7.83,
+        7.75
+      ]
+    },
+    "Mouthfeel": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 12,
+      "examples": [
+        8.25,
+        7.92,
+        7.83
+      ]
+    },
+    "NA.1": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 1,
+      "examples": [
+        "Sample"
+      ]
+    },
+    "Uniform Cup": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 2,
+      "examples": [
+        10.0,
+        9.33
+      ]
+    },
+    "Clean Cup": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 2,
+      "examples": [
+        10.0,
+        9.33
+      ]
+    },
+    "Balance": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 12,
+      "examples": [
+        7.92,
+        7.75,
+        7.83
+      ]
+    },
+    "Cupper Points": {
+      "type": "float64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 14,
+      "examples": [
+        8.0,
+        8.08,
+        7.67
+      ]
+    },
+    "Total Cup Points": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 23,
+      "examples": [
+        "Sample  83.75",
+        "Sample  83.50",
+        "Sample  83.25"
+      ]
+    },
+    "NA.2": {
+      "type": "float64",
+      "missing_count": 28,
+      "missing_share": 1.0,
+      "distinct_values": 0,
+      "examples": []
+    },
+    "Moisture": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 6,
+      "examples": [
+        "12 %",
+        "0 %",
+        "10 %"
+      ]
+    },
+    "Category One Defects": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 3,
+      "examples": [
+        "0 full defects",
+        "20 full defects",
+        "63 full defects"
+      ]
+    },
+    "Quakers": {
+      "type": "int64",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 1,
+      "examples": [
+        0
+      ]
+    },
+    "Color": {
+      "type": "object",
+      "missing_count": 3,
+      "missing_share": 0.107,
+      "distinct_values": 3,
+      "examples": [
+        "Green",
+        "Bluish-Green",
+        "Blue-Green"
+      ]
+    },
+    "Category Two Defects": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 7,
+      "examples": [
+        "2 full defects",
+        "0 full defects",
+        "7 full defects"
+      ]
+    },
+    "NA.3": {
+      "type": "float64",
+      "missing_count": 28,
+      "missing_share": 1.0,
+      "distinct_values": 0,
+      "examples": []
+    },
+    "Expiration": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 17,
+      "examples": [
+        "June 26th, 2015",
+        "October 31st, 2018",
+        "April 29th, 2016"
+      ]
+    },
+    "Certification Body": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 2,
+      "examples": [
+        "Uganda Coffee Development Authority",
+        "Specialty Coffee Association"
+      ]
+    },
+    "Certification Address": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 2,
+      "examples": [
+        "hidden: may contain personal contact details"
+      ]
+    },
+    "Certification Contact": {
+      "type": "object",
+      "missing_count": 0,
+      "missing_share": 0.0,
+      "distinct_values": 2,
+      "examples": [
+        "hidden: may contain personal contact details"
+      ]
+    }
+  },
+  "countries": {
+    "Country of Origin": {
+      "number_of_countries": 5,
+      "rows_without_country": 0,
+      "top_15_rows_per_country": {
+        "India": 13,
+        "Uganda": 10,
+        "United States": 2,
+        "Ecuador": 2,
+        "Vietnam": 1
+      }
+    }
+  }
+}
