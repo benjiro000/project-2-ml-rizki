@@ -1,0 +1,147 @@
+{
+  "run": {
+    "run_id": "scout_run_01",
+    "agent": "01_scout",
+    "date": "2026-10-15",
+    "mode": "manual first run: WebSearch in place of search_web, WebFetch in place of open_page",
+    "goal": "Candidate datasets about GREEN (unroasted) coffee beans: physical, composition, origin, processing (incl. fermentation and civet/luwak) and quality. Trade, shipping, retail and consumption out of scope.",
+    "budget": "15 web steps (each search and each opened page = 1). Used 15 of 15.",
+    "verification_note": "WebSearch returns an automatic summary of results and WebFetch returns an automatic summary of each page, so every page opened in this run is recorded as summary_only, never opened_and_read. One search call (step 8) reported that it ran two searches internally; it is counted as one step.",
+    "steps": [
+      "1 search: CQI coffee quality database (quality, origin)",
+      "2 search: green bean composition datasets (composition)",
+      "3 search: fermentation and processing datasets (processing)",
+      "4 open: github.com/jldbc/coffee-quality-database",
+      "5 open: baselight.app CQI May 2023 mirror -> 301 redirect to baselight.ai",
+      "6 open: baselight.ai redirect target -> Baselight has shut down, no dataset on page",
+      "7 search: civet / kopi luwak green bean data (processing, luwak)",
+      "8 search: green coffee bean image datasets (images, physical)",
+      "9 open: data.mendeley.com/datasets/dtd2fggpyp/3 (MIR spectra, defects)",
+      "10 open: coffee.comvislab-usk.org (USK-Coffee images)",
+      "11 open: www2.mdpi.com/2311-7524/9/7/778 -> error: certificate has expired",
+      "12 search: Kaggle page of CQI Arabica Reviews May 2023",
+      "13 open: kaggle.com/datasets/erwinhmtang/coffee-quality-institute-reviews-may2023 -> only the page title came back",
+      "14 search: fermentation datasets on Zenodo / figshare (processing)",
+      "15 open: rdi.libraries.mit.edu/record/zenodo:4159415 -> error: getaddrinfo ENOTFOUND"
+    ]
+  },
+
+  "candidates": [
+    {
+      "intent": "register_dataset",
+      "dataset": {
+        "dataset_id": "ds_cqi_jldbc_2018",
+        "source_id": "src_cqi_github_jldbc",
+        "title": "coffee-quality-database",
+        "kind": "tabular",
+        "access": "GitHub repository https://github.com/jldbc/coffee-quality-database, folder 'data' (described as containing \"both raw and cleaned data\")",
+        "licence": "MIT license",
+        "rows": 1340,
+        "rows_note": "README: \"reviews of 1312 arabica and 28 robusta coffee beans\"; heading: \"Digitizing 1,340 coffee reviews\". Per-file row counts not stated.",
+        "fields_seen": ["Aroma", "Flavor", "Aftertaste", "Acidity", "Body", "Balance", "Uniformity", "Cup Cleanliness", "Sweetness", "Moisture", "Defects", "Processing Method", "Color", "Species", "Owner", "Country of Origin", "Farm Name", "Lot Number", "Mill", "Company", "Altitude", "Region"],
+        "countries_covered": [],
+        "species": "both",
+        "green_bean_measures": ["Moisture", "Defects", "Color", "Species", "Altitude", "Country of Origin", "Region", "Farm Name", "Lot Number"],
+        "processing_info": ["Processing Method (field listed in README; values not seen)"],
+        "has_luwak_or_fermentation_detail": "unknown",
+        "target_candidates": ["Aroma", "Flavor", "Aftertaste", "Acidity", "Body", "Balance", "Uniformity", "Cup Cleanliness", "Sweetness"],
+        "derived_from": "Coffee Quality Institute review pages, scraped in January 2018 with Selenium and Beautiful Soup (as stated in the README)",
+        "borderline": false,
+        "red_flags": ["scraped_copy", "small_for_brief", "snapshot_january_2018", "robusta_only_28_rows", "fields_documented_in_readme_not_confirmed_per_file", "country_values_not_seen"],
+        "why_relevant": "The README lists green-bean measures (moisture, defects, colour), processing method, species, country, region and altitude next to cupping attribute scores for 1,340 reviews, under an MIT license. This is the original scraper repo that the Kaggle and R-package copies point back to."
+      }
+    },
+    {
+      "intent": "register_dataset",
+      "dataset": {
+        "dataset_id": "ds_usk_coffee_images",
+        "source_id": "src_usk_coffee_dataset",
+        "title": "USK-COFFEE DATASET: A multi-class dataset composed of the various green bean arabica",
+        "kind": "image_set",
+        "access": "Google Form linked on the page as 'Data and Code' (\"browse here\" / \"Click Here\"); the page asks users to read the README first (bit.ly/USK-Coffee-README)",
+        "licence": "unknown",
+        "rows": 8000,
+        "rows_note": "Landing page: 8,000 images, 2,000 per class (peaberry, longberry, premium, defect)",
+        "fields_seen": ["class label: peaberry, longberry, premium, defect", "RGB image, 256 x 256 pixels"],
+        "countries_covered": [],
+        "species": "arabica",
+        "green_bean_measures": ["photos of green beans", "shape (peaberry, longberry)", "defect class"],
+        "processing_info": [],
+        "has_luwak_or_fermentation_detail": "false",
+        "target_candidates": ["class label (peaberry / longberry / premium / defect)"],
+        "derived_from": null,
+        "borderline": false,
+        "red_flags": ["licence_unknown", "no_country_field", "access_via_google_form", "readme_not_read"],
+        "why_relevant": "8,000 photos of green arabica beans in four balanced classes, including a defect class and bean shapes. No licence is stated on the page; it only says the dataset is \"open for everyone\". Bean origin is not stated (the field survey was at KNT Coffee, Banda Aceh, Indonesia, but the page does not call that the bean source)."
+      }
+    }
+  ],
+
+  "opened_not_registered": [
+    {
+      "source_id": "src_mendeley_mir_defects",
+      "title": "Mid-infrared spectral dataset and machine learning tools for defect detection in green and roasted coffee",
+      "url": "https://data.mendeley.com/datasets/dtd2fggpyp/3",
+      "reason": "Licence (CC BY 4.0) and access ('Download All') are shown, but the landing page lists no files, sample count or variables, so rule (b) is not met. Defect classes seen: control, bitten, discolored, insect-damaged, sour, black; green and roasted stages; ATR-FTIR 4000-650 cm-1. Strong candidate for physical/defect and composition themes once the file list is seen."
+    },
+    {
+      "source_id": "src_cqi_kaggle_may2023_kaggle",
+      "title": "Coffee Quality Institute Arabica Reviews May2023",
+      "url": "https://www.kaggle.com/datasets/erwinhmtang/coffee-quality-institute-reviews-may2023",
+      "reason": "Only the page title came back (no licence, files or columns), probably because the page needs JavaScript. A citing paper (search result only) says it has 1,509 cupping records, and a search summary mentions a separate green analysis table; neither is verified."
+    }
+  ],
+
+  "seen_not_opened": [
+    {"url": "https://rdrr.io/github/Rkabacoff/qacData/man/coffee.html", "theme": "quality", "note": "R package doc: subset of 1,312 arabica beans scraped with the jldbc scraper. Copy of CQI data."},
+    {"url": "https://think.cs.vt.edu/corgis/python/coffee/", "theme": "quality", "note": "CORGIS coffee dataset; content not described in the search result."},
+    {"url": "https://baselight.app/u/kaggle/dataset/volpatto_coffee_quality_database_from_cqi", "theme": "quality", "note": "Kaggle mirror of CQI 2018 data (arabica, robusta, merged; robusta 28 rows). Baselight has since shut down (seen at step 6), so this mirror is probably gone too."},
+    {"url": "https://r-packages.io/datasets/coffee_ratings", "theme": "quality", "note": "coffee_ratings dataset page (CQI copy)."},
+    {"url": "https://jurnal.unmer.ac.id/index.php/jtmi/article/view/16348", "theme": "quality", "note": "LightGBM paper that cites the Kaggle URL of CQI Arabica Reviews May 2023 and says it has 1,509 cupping records."},
+    {"url": "https://data.mendeley.com/datasets/9hjtpksb9v", "theme": "composition", "note": "Caffeine, trigonelline and neochlorogenic acid in coffee LEAVES of 80 accessions (Chapingo, Mexico). Leaves, not beans: likely out of scope."},
+    {"url": "https://ejol.aau.edu.et/index.php/SINET/article/download/7014/7389/16325", "theme": "composition", "note": "Ethiopian study of 42 arabica accessions: green bean caffeine, chlorogenic acid, sucrose, trigonelline by HPLC. No dataset link seen."},
+    {"url": "https://www.cropj.com/santiago_14_8_2020_1275_1282.pdf", "theme": "composition", "note": "Brazilian HPLC study: trigonelline, chlorogenic acid, caffeine in green beans. No dataset link seen."},
+    {"url": "https://doaj.org/article/24132fda2e764358b2451249aac9cf0c", "theme": "composition", "note": "2024 study of Ethiopian Amhara-region beans: caffeine, trigonelline, chlorogenic acids. No dataset link seen."},
+    {"url": "https://rdi.libraries.mit.edu/record/zenodo:4159415", "theme": "composition, origin", "note": "Search summary: Zenodo record with 1D and 2D NMR spectra of 715 green coffee samples for origin and adulteration work. Open failed (step 15)."},
+    {"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5585669", "theme": "luwak", "note": "2017 paper: UV-Visible spectra + PLS regression to quantify adulteration of Indonesian palm civet coffee. Green or roasted not stated."},
+    {"url": "https://jtsiskom.undip.ac.id/article/view/13734", "theme": "luwak", "note": "Visible spectroscopy of 160 civet and non-civet samples (960 spectra, 450-650 nm). Green or roasted not stated."},
+    {"url": "https://scholar.its.ac.id/en/publications/laser-induced-breakdown-spectroscopy-libs-for-spectral-characteri/", "theme": "luwak, composition", "note": "LIBS on green arabica and robusta beans, regular and luwak, from 5 plantations in East Java. Data availability unknown."},
+    {"url": "https://www2.mdpi.com/2311-7524/9/7/778", "theme": "luwak", "note": "Horticulturae 9(7) 778: NIR study of wild versus feeding civet coffee, has a Data Availability section. Open failed (step 11)."},
+    {"url": "https://www.gov.uk/government/news/collaborating-with-queens-university-to-improve-coffee-authenticity", "theme": "luwak", "note": "UK government review calling for large, well-curated coffee authenticity datasets. Not a dataset."},
+    {"url": "https://www.aimspress.com/article/doi/10.3934/agrfood.2025050", "theme": "images, physical", "note": "2025 paper: 4,367 green bean images from Bangladesh, 6 classes (black, sour, fade, broken, normal, peaberry). Public availability unknown."},
+    {"url": "https://universe.roboflow.com/proyectocafeunl/usk-coffe-backup-gcaof", "theme": "images", "note": "Roboflow copy of USK-Coffee (scraped_copy; primary source registered above)."},
+    {"url": "https://universe.roboflow.com/yolo-annotated-dataset/usk-coffe-segmentasi", "theme": "images", "note": "Roboflow segmentation copy of USK-Coffee (scraped_copy)."},
+    {"url": "https://universe.roboflow.com/testing-jtj2v/coffee-green-been-defect", "theme": "images, physical", "note": "Roboflow 'Coffee Green Been Defect' dataset; contents not described."},
+    {"url": "https://gts.ai/dataset-download/coffee-bean-dataset-resized/", "theme": "images", "note": "'Coffee Bean Dataset Resized', said to be sourced from Kaggle; contents and green/roasted unknown."},
+    {"url": "https://sol.sbc.org.br/index.php/wvc/article/download/27537/27349", "theme": "images, physical", "note": "Paper with over 200 annotated RGB and hyperspectral images of coffee defects. Availability unknown."},
+    {"url": "https://data.mendeley.com/datasets/vgcb8djsj7/2", "theme": "processing, fermentation", "note": "Colombian (Sierra Nevada de Santa Marta) coffee fermentation microbiome: 695 bacterial and 156 fungal genera. No cup-quality data seen."},
+    {"url": "https://data.mendeley.com/datasets/zk545wdcz2/3", "theme": "processing", "note": "ATR-FTIR spectra of coffee SILVERSKIN under wet and semi-wet postharvest treatments, temperatures and fermentation times. By-product, not the bean: possibly borderline."},
+    {"url": "https://www.ebi.ac.uk/metagenomics/api/v1/samples/ERS4539875/studies?format=api", "theme": "processing, fermentation", "note": "EBI Metagenomics: spontaneous fermentation of coffees in northern Peru, good vs bad quality. Quality metadata unknown."},
+    {"url": "https://ukranews.com/en/news/982840-china-sets-up-microbial-strain-resource-dataset-for-coffee-fermentation", "theme": "fermentation", "note": "News: China sets up a microbial strain resource dataset for coffee fermentation. Not a dataset page."}
+  ],
+
+  "could_not_open": [
+    "www2.mdpi.com/2311-7524/9/7/778 (civet NIR paper): fetch error 'certificate has expired'. Stopped on this item.",
+    "rdi.libraries.mit.edu/record/zenodo:4159415 (715 green coffee NMR spectra): fetch error 'getaddrinfo ENOTFOUND'. Stopped; budget also used up.",
+    "baselight.app CQI May 2023 mirror: redirects to baselight.ai, which now only shows an announcement (7 July 2026) that Baselight has shut down.",
+    "kaggle.com CQI Arabica Reviews May2023: only the page title came back; no licence, files or columns visible."
+  ],
+
+  "done_for_now": {
+    "intent": "done_for_now",
+    "summary": "15 of 15 steps used. Registered 2 datasets: the CQI 2018 scrape on GitHub (1,340 rows, MIT, small_for_brief) and the USK-Coffee green bean image set (8,000 images, licence unknown). Two more were opened but not registered because the page lacked fields or licence (Mendeley MIR defect spectra, Kaggle CQI May 2023). Two pages failed to open.",
+    "outputs": ["ds_cqi_jldbc_2018", "ds_usk_coffee_images"],
+    "themes_still_empty": ["composition (no green-bean composition dataset verified; Zenodo NMR record could not be opened)", "processing / fermentation (only microbiome and silverskin data seen, nothing on the bean itself)", "luwak (papers only, no dataset seen)"],
+    "open_questions": [
+      "Human gate: is a 1,340-row dataset acceptable given the 3,000-row brief, or should we look for the CQI May 2023 update (1,509 records per a citing paper, unverified)?",
+      "Is a dataset with no stated licence (USK-Coffee) acceptable for the project and the public globe?"
+    ],
+    "next_searches": [
+      "Open the Zenodo record for the 715 green coffee NMR spectra directly on zenodo.org (search for it first so the URL is in the thread)",
+      "Open the file list of Mendeley dataset dtd2fggpyp to see sample counts and variables",
+      "Search Zenodo / Mendeley for 'cafe verde' 'composicion quimica' and 'biji kopi hijau' datasets",
+      "Search for green bean NIR datasets with origin labels (e.g. 'green coffee NIR origin dataset')",
+      "Search for 'anaerobic fermentation coffee sensory data supplementary' in journal supplements"
+    ]
+  }
+}
