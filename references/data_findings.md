@@ -1,10 +1,10 @@
 # Data findings log
 
-A running log of what we know about our data, for the presentation and the README. Collected from references/scout_run_01.json, references/scout_run_02.json, references/reviews/ds_cqi_jldbc_2018.json, the four profiles in references/profiles/ and references/gate2_columns.md. Last updated 16 Oct 2026.
+A running log of what we know about our data, for the presentation and the README. Collected from references/scout_run_01.json, references/scout_run_02.json, references/reviews/ds_cqi_jldbc_2018.json, the four profiles in references/profiles/ references/gate2_columns.md, references/cleaning_report.json (cleaning v2) and the first-look figures. Last updated 16 Oct 2026 (cleaning v2).
 
 **How each number was found.** Every number below carries one of three tags:
 
-- **[code]**: counted in code from the local copies of the files (src/profile_dataset.py, the read-only counts behind the gate 2 sheet, or the read-only check before the first cleaning run on 16 Oct 2026). This is the strongest evidence.
+- **[code]**: counted in code from the local copies of the files (src/profile_dataset.py, the read-only counts behind the gate 2 sheet, the read-only check before the first cleaning run on 16 Oct 2026, src/run_cleaning.py (cleaning v2) or src/first_look.py). This is the strongest evidence.
 - **[page summary]**: read from an automatic summary of a web page (Scout runs). The page itself was not read word for word, so treat these as likely but not certain.
 - **[search only]**: only seen in a search result. Not confirmed.
 
@@ -50,12 +50,20 @@ Anything marked **uncertain** is a guess or an open question, not a fact.
 |---|---|---|
 | Moisture = 0.0, Arabica | 252 of 1,311 rows (19%) | [code] gate 2 sheet, checked again 16 Oct |
 | Moisture = 0.0, Robusta | 12 of 28 rows (43%) | [code] gate 2 sheet, checked again 16 Oct |
-| Moisture between 0.01 and 0.05, Arabica | 38 rows; also doubtful, most values sit between 0.10 and 0.12. **Not changed** by any rule yet | [code] gate 2 sheet, checked again 16 Oct |
+| Moisture is stored as a fraction | 0.11 means 11 %; after cleaning v2 the Arabica values run from 0.06 to 0.28, median 0.11 | [code] first_look.py; the fraction reading is from the value range, no documentation says so |
+| Moisture above 0 and at most 0.05, Arabica | 38 rows: Hawaii 10, Ethiopia 9, Colombia 5, Brazil 4, Guatemala 4, Thailand 3, Indonesia 1, El Salvador 1, Mexico 1. Values 0.01 (15), 0.02 (7), 0.03 (4), 0.04 (4), 0.05 (8). **Set to missing in cleaning v2** | [code] cleaning report |
+| Moisture above 0 and at most 0.05, Robusta | 0 rows | [code] cleaning report |
+| Why the 0.01 to 0.05 group looks like a reporting habit | green coffee is normally about 0.10 to 0.12; the group clusters in two origins (Hawaii and Ethiopia, 19 of 38) instead of spreading over all countries. **Guess:** a different way of writing the value, not drier beans | counts [code]; the reason is a guess |
+| Moisture above 0.14, Arabica | 24 rows, Robusta 0. **Not changed** (report only). 10 highest: Thailand 0.28, Colombia 0.22, Colombia 0.21, Thailand 0.20, Ethiopia 0.20, Ethiopia 0.20, Nicaragua 0.18, Colombia 0.18, Guatemala 0.17, China 0.17 (Mexico also has 0.17, a tie for 10th place) | [code] cleaning report |
+| Arabica Moisture after cleaning v2 | 1,020 non-empty values (290 empty: 252 zeros + 38 low values) | [code] cleaning report |
+| Arabica Moisture groups after cleaning v2 | 0.01-0.05: 0; above 0.05 to 0.08: 28; above 0.08 to 0.14: 968; above 0.14: 24 | [code] first_look.py |
 | altitude_mean_meters empty | Arabica 227 rows (17.3%), Robusta 3 rows | [code] |
 | altitude_mean_meters above 3,000 m, Arabica | 14 rows (Guatemala 5, Myanmar 5, Brazil, Colombia, Nicaragua, Indonesia 1 each); largest 190,164 m, also 110,000 m and 11,000 m | [code] gate 2 sheet, checked again 16 Oct |
 | altitude_mean_meters above 3,000 m, Robusta | 2 rows, both India (3,170 m and 3,140 m) | [code] 16 Oct |
-| altitude_mean_meters under 50 m, Arabica | 17 rows: Brazil 13, Costa Rica 2, Kenya 1, Mexico 1 (values 1, 12 and 13 m) | [code] 16 Oct |
-| altitude_mean_meters under 50 m, Robusta | 1 row: Ecuador, 40 m | [code] 16 Oct |
+| altitude_mean_meters under 50 m, Arabica | 17 rows: Brazil 13, Costa Rica 2, Kenya 1, Mexico 1 (values 1, 12 and 13 m). **Set to missing in cleaning v2** | [code] 16 Oct, cleaning report |
+| altitude_mean_meters under 50 m, Robusta | 1 row: Ecuador, 40 m. **Kept**: a plausible altitude for Robusta | [code] 16 Oct, cleaning report |
+| Lowest Arabica altitude after cleaning v2 | 50 m (1 row, Taiwan); 1,052 Arabica rows have an altitude | [code] first_look.py |
+| Altitude bump near 2,500 m, Arabica | 4 rows: Malawi 2,500 m, Colombia 2,527 m, Colombia 2,560 m, Colombia 2,560 m. Nothing between 2,285 m (Tanzania) and 2,500 m. **Not changed** (report only). **Guess:** possible but high for Arabica; could be the top of a typed range rather than a mean | counts [code] cleaning report; the meaning is a guess |
 | altitude_mean_meters exactly 1 m | 12 Arabica rows | [code] gate 2 sheet |
 | Where the low altitudes come from | the typed Altitude text is "1.2" (read as 12 m), "1.3" (13 m), "12oo" (12 m), "1" and "-1" (1 m). **Uncertain:** "1.2" may have meant 1,200 m and "12oo" 1,200 m, but the files do not say | [code] 16 Oct; the meaning is a guess |
 | Total.Cup.Points = 0.0 | 1 row, in arabica_data_cleaned.csv (Honduras); every part score on that row is 0.0. Looks like an empty score sheet | [code] gate 2 sheet, checked again 16 Oct |
@@ -64,6 +72,18 @@ Anything marked **uncertain** is a guess or an open question, not a fact.
 | Variety = "Other" | 108 Arabica rows | [code] gate 2 sheet |
 | Processing.Method = "Other" | 26 Arabica rows | [code] gate 2 sheet |
 | Harvest.Year | text such as "TEST", "mmm", "Mayo a Julio", "4T/10" next to real years in Arabica; 6 clean whole-number years in Robusta | [code] gate 2 sheet |
+
+### Score patterns
+
+| Finding | Number | How found |
+|---|---|---|
+| Tanzania scores exactly 10 on Uniformity, Clean.Cup and Sweetness | all 40 Tanzania rows. Uganda is the same (26 of 26), and across all Arabica rows it is 1,082 of 1,310 (83 %) | [code] 16 Oct |
+| What that means | **Guess:** a scoring habit (10 is the default unless a cup has a fault), so these three columns say little about a country and are not informative for clustering | guess |
+| Guatemala outlier | 1 row with Total.Cup.Points 59.83, the lowest Arabica total (next lowest 63.08; mean 82.18). Low because Clean.Cup and Sweetness are 1.33 each and Uniformity is 8.0; the other part scores are 6.67 to 7.67. Kept: it is a real (if unusual) score sheet | [code] 16 Oct |
+| Arabica row without a country | 1 row: no Variety, Processing.Method, Color or altitude either; Total.Cup.Points 79.08, Moisture 0.10. Kept in the table; it cannot be shown on the globe | [code] 16 Oct |
+| Hawaii on the three "10" columns | 73 rows; only 36 score 10 on all three (49 %, the lowest share of any country with 20 or more rows). Hawaii is 0.36 below the Arabica average on Uniformity | [code] 16 Oct, figure g2 |
+
+**Heatmap note (figures g and g2).** In the original flavour fingerprint (g) the colours mostly show which part score is high (Uniformity, Clean.Cup and Sweetness sit near 10 for every country), so the countries look alike. The centred version (g2_flavour_fingerprint_centered.png) shows each country's mean minus the mean of all 1,310 Arabica rows, with a diverging colour map centred on 0. It makes the differences visible [code, figure]: Ethiopia is 0.33 to 0.55 above average on seven of the ten part scores; Mexico and Honduras are below average on almost all of them; Hawaii is below on Uniformity, Clean.Cup and Sweetness. All differences are under 0.6 points. **Guess:** the differences are small next to the spread inside each country, so a model may find country only a weak signal.
 
 ### Missing values and categories
 
@@ -100,9 +120,10 @@ Decided by Rizki on 16 Oct 2026. Full details and expected counts are in referen
 4. **Profile columns (10):** Aroma, Flavor, Aftertaste, Acidity, Body, Balance, Uniformity, Clean.Cup, Sweetness, Cupper.Points. Kept in the clean table, never used as features when predicting the total.
 5. **Dropped:** everything else, including all eight personal data columns, the three identifiers, Region, Harvest.Year, In.Country.Partner and Quakers.
 6. **New column species** ("arabica" or "robusta"). For Robusta, only the strong column matches are used (Fragrance...Aroma as Aroma, Uniform.Cup as Uniformity); the guessed matches (Acidity, Body, Sweetness) stay empty for Robusta rows.
-7. **Value rules:** Moisture = 0.0 becomes missing (expected 252 Arabica, 12 Robusta). altitude_mean_meters above 3,000 becomes missing (count reported). Altitude under 50 m is not changed, only listed with its country.
+7. **Value rules:** Moisture = 0.0 becomes missing (expected 252 Arabica, 12 Robusta). altitude_mean_meters above 3,000 becomes missing (count reported). Altitude under 50 m is not changed, only listed with its country (changed in cleaning v2, see item 10).
 8. **Row rule:** drop rows where Total.Cup.Points is 0 (expected 1, in arabica_data_cleaned.csv).
 9. **Scope:** models use Arabica only. Robusta stays in the clean table for the globe and for exploration.
+10. **Cleaning v2 (16 Oct 2026):** Arabica altitude under 50 m becomes missing (expected and real: 17; the Robusta Ecuador value of 40 m stays). Moisture above 0 and at most 0.05 becomes missing for both species (expected 38 Arabica, real 38; Robusta real 0). Report only, no change: Moisture above 0.14 (24 Arabica rows) and Arabica altitudes from 2,400 to 3,000 m (4 rows). Result: 1,338 rows, 20 columns, 1,020 non-empty Arabica Moisture values.
 
 ## 4. Not found
 
@@ -120,5 +141,6 @@ Decided by Rizki on 16 Oct 2026. Full details and expected counts are in referen
 - **Roboflow image set** (universe.roboflow.com/packer/coffee-bean-tm9bq): a search summary mentioned Arabica, Excelsa, Liberica and Robusta classes [search only], but the page returned HTTP 403, so classes, licence and whether the beans are green are **unknown**.
 - **Herawati et al. 2022** (Excelsa, PMC9410941): Table 1, supplementary Table 1S and Table 3 are known only from a page summary; not read in full, and the supplementary file was not downloaded.
 - **Mubarak et al. 2019** (Liberica against Arabica, Asian Journal of Agriculture and Biology): the full-text PDF was not opened, so table numbers and sample counts are **unknown**.
-- Not yet decided: what to do with the 38 Arabica Moisture values between 0.01 and 0.05, and with the 18 altitudes under 50 m.
+- Not yet decided: what to do with the 24 Arabica Moisture values above 0.14 and the 4 Arabica altitudes near 2,500 m (both report only in cleaning v2).
+- Whether to leave Uniformity, Clean.Cup and Sweetness out of any clustering, since most rows score exactly 10 on all three.
 - Which Arabica row is in the raw file but not in the cleaned file is **unknown**.

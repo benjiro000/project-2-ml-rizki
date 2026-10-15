@@ -4,7 +4,7 @@ Why this script exists: before any model, we look at the clean data to
 see its shape, its gaps and anything odd. Nothing here changes the data,
 splits it or fits a model. It only reads the clean table and saves PNGs.
 
-Output (seven PNG files):
+Output (eight PNG files):
     references/figures/first_look/
 
 Run from the project root with the Anaconda python:
@@ -84,11 +84,13 @@ ax.set_ylabel("Number of samples")
 save(fig, "b_moisture_arabica.png")
 
 # Why print these groups: to see how many values look too dry, normal or wrong.
+# Why fractions: Moisture is stored as a fraction (0.11 = 11 %), so the
+# group limits are 0.05, 0.08 and 0.14, not 5, 8 and 14.
 print("\nArabica moisture groups (empty values left out):")
 print("  0.01 to 0.05 (0.05 included):", ((moisture >= 0.01) & (moisture <= 0.05)).sum())
-print("  above 0.05 up to 8:          ", ((moisture > 0.05) & (moisture <= 8)).sum())
-print("  above 8 up to 14:            ", ((moisture > 8) & (moisture <= 14)).sum())
-print("  above 14:                    ", (moisture > 14).sum())
+print("  above 0.05 up to 0.08:       ", ((moisture > 0.05) & (moisture <= 0.08)).sum())
+print("  above 0.08 up to 0.14:       ", ((moisture > 0.08) & (moisture <= 0.14)).sum())
+print("  above 0.14:                  ", (moisture > 0.14).sum())
 print("  exactly 0.05:                ", (moisture == 0.05).sum())
 # Why both species: the question is about the Moisture column as a whole.
 all_moisture = df["Moisture"].dropna()
@@ -164,3 +166,26 @@ ax.set_xlabel("Part score")
 ax.set_ylabel("Country of origin")
 plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
 save(fig, "g_flavour_fingerprint_heatmap.png")
+
+# --- g2. Centred flavour fingerprint: country mean minus Arabica mean ------
+# Why centre: every country scores close to 10 on Uniformity, Clean.Cup and
+# Sweetness, so in g the colours mostly show which part score is high, not
+# which country differs. Here 0 means "same as the average Arabica row".
+arabica_mean = arabica[PART_SCORES].mean()  # all Arabica rows, not only the top 10
+centred = fingerprint - arabica_mean        # pandas subtracts column by column
+
+# Why a symmetric limit: the same distance above or below 0 gets the same
+# strength of colour, so red and blue can be compared fairly.
+limit = centred.abs().max().max()
+
+fig, ax = plt.subplots(figsize=(14, 8))
+# Why coolwarm: a diverging colour map, blue below the average, red above,
+# light grey at 0. center=0 puts the grey exactly on "no difference".
+sns.heatmap(centred, annot=True, fmt="+.2f", cmap="coolwarm", center=0,
+            vmin=-limit, vmax=limit, ax=ax,
+            cbar_kws={"label": "Country mean minus Arabica mean (points)"})
+ax.set_title("Flavour fingerprint, centred: difference from the average Arabica row")
+ax.set_xlabel("Part score")
+ax.set_ylabel("Country of origin")
+plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
+save(fig, "g2_flavour_fingerprint_centered.png")
