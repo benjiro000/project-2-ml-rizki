@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Coffee Globe</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; background: #02030f; color: #eee; }
+
+    /* The stage holds the globe, with the layer buttons on its left and the legend on its right */
+    #stage { position: relative; width: 100%; height: 75vh; min-height: 420px; }
+    #globe { width: 100%; height: 100%; overflow: hidden; }
+
+    #toolbar {
+      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); z-index: 2;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem;
+    }
+    #toolbar .label { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.1rem; }
+    .toggle { font: inherit; font-size: 14px; color: #eee; background: #1a1612; border: 1px solid #5a4a3a; border-radius: 999px; padding: 6px 16px; cursor: pointer; }
+    .toggle:hover { border-color: #c88c46; }
+    .toggle.on { background: #c88c46; color: #1a1612; border-color: #c88c46; font-weight: 600; }
+
+    #legend {
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); z-index: 2;
+      display: flex; flex-direction: column; gap: 0.55rem;
+      max-width: 230px; max-height: 90%; overflow: auto;
+      padding: 0.8rem 1rem; font-size: 14px;
+      background: rgba(2, 3, 15, 0.55); border-radius: 12px;
+      pointer-events: none;
+    }
+    .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+    #info { padding: 1rem 1.5rem 1rem; max-width: 800px; line-height: 1.6; }
+    #info h3 { margin: 0 0 0.3rem; font-size: 1.5rem; }
+    #info ul { padding-left: 1.2rem; margin-top: 0.3rem; }
+    .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 13px; color: #111; margin: 0 6px 0.6rem 0; }
+    #sources { padding: 0 1.5rem 2rem; max-width: 800px; font-size: 8px; opacity: 0.6; line-height: 1.5; }
+
+    /* Narrow screens (phones): stack the buttons, globe and legend instead of overlaying them */
+    @media (max-width: 700px) {
+      #stage { height: auto; }
+      #globe { height: 60vh; }
+      #toolbar, #legend {
+        position: static; transform: none; max-width: none; max-height: none;
+        flex-direction: row; flex-wrap: wrap; align-items: center;
+        padding: 0.6rem 1rem; background: none;
+      }
+      #legend { gap: 0.8rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="toolbar">
+      <span class="label">Layers</span>
+      <button id="btn-routes" class="toggle" aria-pressed="false">Shipping routes</button>
+      <button id="btn-coe" class="toggle" aria-pressed="false">Cup of Excellence</button>
+    </div>
+    <div id="globe"></div>
+    <div id="legend"></div>
+  </div>
+  <div id="info"></div>
+  <div id="sources">
+    Sources: International Coffee Organization, USDA Foreign Agricultural Service, Cecafé (Brazil), VICOFA and Vietnam Customs,
+    Uganda Coffee Development Authority, Alliance for Coffee Excellence, ITC. Figures are rounded and change every year, so check
+    the original sources before quoting them.
+  </div>
+
+  <script src="//unpkg.com/globe.gl"></script>
+  <script>
+    // ---------------------------------------------------------------
+    // 1. COFFEE COUNTRIES
+    // ---------------------------------------------------------------
+    const TYPES = {
+      arabica: { label: 'Mainly arabica', color: '200,140,70' },
+      robusta: { label: 'Mainly robusta', color: '160,60,40' },
+      both:    { label: 'Both / other species', color: '220,175,60' }
+    };
+
+    const coffee = {
+      // ---------- Americas ----------
+      BRA: { name: 'Brazil', type: 'both', regions: 'Minas Gerais, São Paulo, Espírito Santo, Bahia',
+        note: 'The largest coffee producer in the world for well over a century. Much of the crop is dry-processed ("natural"), giving sweet, nutty, chocolatey cups. Brazil also grows a lot of robusta, known locally as conilon.' },
+      COL: { name: 'Colombia', type: 'arabica', regions: 'Huila, Nariño, Antioquia, Caldas, Quindío',
+        note: 'Famous for washed arabica from small family farms. Its Coffee Cultural Landscape is a UNESCO World Heritage Site, and the Juan Valdez brand has long represented Colombian growers.' },
+      HND: { name: 'Honduras', type: 'arabica', regions: 'Marcala, Copán, Montecillos, Opalaca',
+        note: 'One of the biggest producers in Central America, with coffee grown mostly by smallholders at altitude. Marcala was the first coffee region in Honduras to receive a protected designation of origin.' },
+      PER: { name: 'Peru', type: 'arabica', regions: 'Cajamarca, Chanchamayo, Cusco, Puno',
+        note: 'A leading source of organic and fair-trade coffee, grown by thousands of small cooperatives high in the Andes.' },
+      MEX: { name: 'Mexico', type: 'arabica', regions: 'Chiapas, Oaxaca, Veracruz, Puebla',
+        note: 'Mostly small farms, many of them organic and shade-grown. Mild, clean, nutty arabica, and a major supplier to the United States.' },
+      GTM: { name: 'Guatemala', type: 'arabica', regions: 'Antigua, Huehuetenango, Atitlán, Cobán',
+        note: 'Volcanic soils and many microclimates produce a wide range of flavours, from chocolatey to bright and fruity. Antigua is among the best-known regions in Central America.' },
+      NIC: { name: 'Nicaragua', type: 'arabica', regions: 'Jinotega, Nueva Segovia, Matagalpa',
+        note: 'Known for soft, balanced cups, and for the large-beaned Maragogipe variety, nicknamed the "elephant bean".' },
+      CRI: { name: 'Costa Rica', type: 'arabica', regions: 'Tarrazú, Central Valley, West Valley',
+        note: 'Growing robusta is prohibited by law, so all of its coffee is arabica. Costa Rican mills also popularised the "honey" processing method.' },
+      SLV: { name: 'El Salvador', type: 'arabica', regions: 'Apaneca-Ilamatepec, Alotepec, Chinameca',
+        note: 'Home of the Pacamara, a variety bred there in the 1950s by crossing Pacas and Maragogipe. Coffee is a big part of the country\'s history and economy.' },
+      PAN: { name: 'Panama', type: 'arabica', regions: 'Boquete, Volcán, Renacimiento',
+        note: 'Best known for Geisha (Gesha) coffee from Boquete, which regularly breaks auction price records.' },
+      ECU: { name: 'Ecuador', type: 'both', regions: 'Loja, Manabí, Galápagos (San Cristóbal)',
+        note: 'Grows both arabica and robusta, including small amounts of coffee on the Galápagos Islands.' },
+      VEN: { name: 'Venezuela', type: 'arabica', regions: 'Andean states of Mérida, Táchira, Trujillo',
+        note: 'Historically a major exporter of coffee. Production today comes mostly from the Andean highlands.' },
+      BOL: { name: 'Bolivia', type: 'arabica', regions: 'Yungas, Caranavi',
+        note: 'Small volumes of high-altitude arabica from the Yungas valleys, mostly from smallholders and cooperatives.' },
+      DOM: { name: 'Dominican Republic', type: 'arabica', regions: 'Barahona, Jarabacoa, Cibao',
+        note: 'Grown in the mountains of the island, with smooth, medium-bodied cups. Much of the harvest is also drunk locally.' },
+      HTI: { name: 'Haiti', type: 'arabica', regions: 'Northern and southern highlands',
+        note: 'In the 1700s, the colony that became Haiti supplied a large share of the world\'s coffee. Today it is grown by smallholders on mountain slopes.' },
+      CUB: { name: 'Cuba', type: 'arabica', regions: 'Sierra Maestra, Escambray, Turquino',
+        note: 'Grown in the eastern mountains. Strong, sweetened espresso (cafecito) is part of everyday life.' },
+      JAM: { name: 'Jamaica', type: 'arabica', regions: 'Blue Mountains',
+        note: 'Jamaica Blue Mountain is one of the most expensive coffees in the world, and is still traditionally shipped in wooden barrels instead of sacks.' },
+      PRI: { name: 'Puerto Rico', type: 'arabica', regions: 'Yauco, Maricao, Adjuntas',
+        note: 'Once a major exporter to Europe. Today small farms in the central mountains produce premium arabica.' },
+      USA: { name: 'United States', type: 'arabica', regions: 'Hawaii (Kona, Ka\'u), California, Puerto Rico',
+        note: 'Hawaii is the main producer. Kona coffee grows on the slopes of Hualālai and Mauna Loa on the Big Island, and is one of the few coffees grown commercially in the US.' },
+
+      // ---------- Africa ----------
+      ETH: { name: 'Ethiopia', type: 'arabica', regions: 'Yirgacheffe, Sidamo, Guji, Harrar, Limu',
+        note: 'Widely considered the birthplace of arabica coffee, which still grows wild in its forests. Coffee is central to daily life through the traditional coffee ceremony, and the cups range from floral and tea-like to wine-like and fruity.' },
+      UGA: { name: 'Uganda', type: 'both', regions: 'Mount Elgon (Bugisu), Rwenzori, Western Uganda',
+        note: 'One of Africa\'s largest producers. Most of its coffee is robusta, which is native to the region, with arabica grown on the slopes of Mount Elgon.' },
+      KEN: { name: 'Kenya', type: 'arabica', regions: 'Nyeri, Kirinyaga, Kiambu, Embu',
+        note: 'Known for bright, juicy cups with berry-like acidity, often from the SL28 and SL34 varieties. Much of the coffee is sold through a weekly auction system.' },
+      TZA: { name: 'Tanzania', type: 'both', regions: 'Kilimanjaro, Mbeya, Mbinga, Arusha',
+        note: 'Arabica grown on the slopes of Mount Kilimanjaro and in the southern highlands, famous for peaberry beans, plus some robusta in the west.' },
+      RWA: { name: 'Rwanda', type: 'arabica', regions: 'Lake Kivu, Nyamasheke, Huye',
+        note: 'High-altitude Bourbon arabica from many small farms and washing stations. Its specialty coffee sector has grown strongly since the 1990s.' },
+      BDI: { name: 'Burundi', type: 'arabica', regions: 'Kayanza, Ngozi, Kirundo',
+        note: 'Coffee is the main export, grown by hundreds of thousands of smallholders on tiny plots, mostly washed Bourbon.' },
+      CMR: { name: 'Cameroon', type: 'both', regions: 'West and Northwest highlands (arabica), coastal and southern zones (robusta)',
+        note: 'Grows both species, with arabica in the western highlands and robusta in the lowlands.' },
+      CIV: { name: 'Ivory Coast', type: 'robusta', regions: 'Western and central regions',
+        note: 'A major robusta producer in West Africa, though better known for cocoa.' },
+      COD: { name: 'DR Congo', type: 'both', regions: 'Kivu, Ituri, Équateur',
+        note: 'Grows both arabica in the eastern highlands near Lake Kivu and robusta in the Congo basin.' },
+      MDG: { name: 'Madagascar', type: 'robusta', regions: 'Eastern and northwestern coast',
+        note: 'Mainly robusta, grown by small farmers in the humid coastal regions.' },
+      AGO: { name: 'Angola', type: 'robusta', regions: 'Cuanza Sul, Uíge, Cuanza Norte',
+        note: 'Was once among the world\'s major robusta exporters, but production fell sharply during decades of civil war and is now slowly recovering.' },
+      MWI: { name: 'Malawi', type: 'arabica', regions: 'Mzuzu, Misuku Hills, Thyolo',
+        note: 'Small amounts of arabica grown in the northern highlands, often by smallholder cooperatives.' },
+      ZMB: { name: 'Zambia', type: 'arabica', regions: 'Northern Province, Mafinga Hills, Kateshi',
+        note: 'Small-scale arabica grown in the northern highlands, with a growing specialty sector.' },
+      ZWE: { name: 'Zimbabwe', type: 'arabica', regions: 'Eastern Highlands, Chipinge',
+        note: 'Arabica grown in the cool eastern highlands along the Mozambique border.' },
+      TGO: { name: 'Togo', type: 'robusta', regions: 'Plateaux region',
+        note: 'Mostly robusta, grown by smallholders in the southwest alongside cocoa.' },
+      GIN: { name: 'Guinea', type: 'robusta', regions: 'Forest Guinea',
+        note: 'Robusta grown in the forested southeast of the country.' },
+      SLE: { name: 'Sierra Leone', type: 'robusta', regions: 'Eastern and southern provinces',
+        note: 'Smallholder robusta, historically one of the country\'s main cash crops.' },
+      LBR: { name: 'Liberia', type: 'both', regions: 'Lofa, Nimba, Bong',
+        note: 'Gives its name to Liberica, a rarer coffee species native to West Africa, alongside robusta.' },
+      CAF: { name: 'Central African Republic', type: 'robusta', regions: 'Southwest forest zone',
+        note: 'Small-scale robusta, once an important export for the country.' },
+      GHA: { name: 'Ghana', type: 'robusta', regions: 'Volta, Ashanti, Western regions',
+        note: 'A small robusta producer, overshadowed by cocoa.' },
+      NGA: { name: 'Nigeria', type: 'robusta', regions: 'Southern and southwestern states',
+        note: 'Small-scale robusta production, though domestic coffee drinking is growing.' },
+
+      // ---------- Asia ----------
+      VNM: { name: 'Vietnam', type: 'robusta', regions: 'Central Highlands (Đắk Lắk, Lâm Đồng, Gia Lai)',
+        note: 'The world\'s largest robusta producer and generally ranked second overall. Coffee culture includes cà phê sữa đá (iced coffee with condensed milk) and egg coffee from Hanoi.' },
+      IDN: { name: 'Indonesia', type: 'both', regions: 'Sumatra (Gayo, Lintong, Mandheling), Java, Sulawesi (Toraja), Bali, Flores, Papua',
+        note: 'One of the biggest producers in the world, with a mix of arabica and robusta. Sumatran coffees are known for the wet-hulling process (giling basah), which gives full-bodied, earthy cups. Indonesia is also known for kopi luwak.' },
+      IND: { name: 'India', type: 'both', regions: 'Karnataka (Chikmagalur, Coorg), Kerala, Tamil Nadu',
+        note: 'Grown mostly under shade in the Western Ghats. Monsooned Malabar is a distinctive coffee exposed to monsoon winds. Legend says Baba Budan smuggled the first seeds from Yemen in the 1600s.' },
+      YEM: { name: 'Yemen', type: 'arabica', regions: 'Haraz, Bani Matar, Hajjah, Ibb',
+        note: 'One of the first places in the world where coffee was cultivated and traded. Its beans were shipped through the port of Mocha, which gave its name to the coffee. Grown on ancient mountain terraces.' },
+      LAO: { name: 'Laos', type: 'both', regions: 'Bolaven Plateau',
+        note: 'Robusta and arabica grown on the volcanic soil of the Bolaven Plateau in the south.' },
+      THA: { name: 'Thailand', type: 'both', regions: 'Chiang Mai, Chiang Rai (arabica), Chumphon, Ranong (robusta)',
+        note: 'Arabica in the northern hills, often promoted as an alternative to opium poppies, and robusta in the south.' },
+      MMR: { name: 'Myanmar', type: 'arabica', regions: 'Shan State, Pyin Oo Lwin',
+        note: 'A small but growing specialty coffee scene around Pyin Oo Lwin and the Shan Hills.' },
+      CHN: { name: 'China', type: 'arabica', regions: 'Yunnan (Pu\'er, Baoshan), Hainan',
+        note: 'Almost all Chinese coffee comes from Yunnan province, which has expanded rapidly as domestic coffee drinking has grown.' },
+      PHL: { name: 'Philippines', type: 'both', regions: 'Batangas, Cavite, Benguet, Sulu, Mindanao',
+        note: 'One of the few countries growing all four commercial species: arabica, robusta, liberica and excelsa. Kapeng barako, a strong liberica coffee, is a Batangas speciality.' },
+      TLS: { name: 'Timor-Leste', type: 'arabica', regions: 'Ermera, Aileu, Ainaro',
+        note: 'Coffee is the largest export crop. Many farmers grow Hibrido de Timor, a natural arabica–robusta cross.' },
+      NPL: { name: 'Nepal', type: 'arabica', regions: 'Gulmi, Lalitpur, Kavre, Sindhupalchok',
+        note: 'A small producer growing organic arabica in the Himalayan foothills.' },
+      MYS: { name: 'Malaysia', type: 'both', regions: 'Johor, Sabah, Sarawak, Perak',
+        note: 'Grows liberica and robusta. Ipoh white coffee, roasted with margarine and served with condensed milk, is a famous local drink.' },
+      TWN: { name: 'Taiwan', type: 'arabica', regions: 'Alishan, Gukeng (Yunlin)',
+        note: 'Small amounts of high-priced arabica from mountain farms such as Alishan.' },
+
+      // ---------- Oceania ----------
+      PNG: { name: 'Papua New Guinea', type: 'arabica', regions: 'Western Highlands, Eastern Highlands, Wahgi Valley',
+        note: 'Coffee is a key crop for smallholders in the highlands, with many trees descended from Typica and Bourbon varieties.' },
+      AUS: { name: 'Australia', type: 'arabica', regions: 'Far North Queensland, Northern New South Wales',
+        note: 'A small producer that uses mechanical harvesting, while being a major coffee-drinking nation known for the flat white.' },
+      VUT: { name: 'Vanuatu', type: 'arabica', regions: 'Tanna island',
+        note: 'Grown on the slopes of the volcanic island of Tanna.' }
+    };
+
+    // ---------------------------------------------------------------
+    // 2. CUP OF EXCELLENCE (competition and auction run by the
+    //    Alliance for Coffee Excellence). s = 'active' or 'past'.
+    //    Based on the 2025 and 2026 auction calendars. Update yearly:
+    //    https://allianceforcoffeeexcellence.org
+    // ---------------------------------------------------------------
+    const COE_COLORS = { active: '180,110,225', past: '210,190,235' };
+    const COE_TEXT = {
+      active: 'Active host, on the 2025–26 calendar',
+      past: 'Past host, not on the 2025–26 calendar'
+    };
+    const coe = {
+      BRA: { s: 'active', note: 'Where it all began: the first competition, in 1999, was called "Best of Brazil".' },
+      NIC: { s: 'active', note: 'A long-running participant.' },
+      MEX: { s: 'active', note: 'A long-running participant.' },
+      HND: { s: 'active', note: 'A long-running participant.' },
+      CRI: { s: 'active', note: 'A long-running participant, joining in 2007.' },
+      GTM: { s: 'active', note: 'A long-running participant.' },
+      SLV: { s: 'active', note: 'A long-running participant.' },
+      PER: { s: 'active', note: 'A long-running participant.' },
+      THA: { s: 'active', note: 'A newcomer: its first competition was held within the last few years.' },
+      TWN: { s: 'active', note: 'A newcomer: its first competition was held within the last few years.' },
+      IDN: { s: 'active', note: 'A newcomer: its first competition was held within the last few years.' },
+      COL: { s: 'past', note: 'Took part every year from 2005 to 2023.' },
+      ETH: { s: 'past', note: 'Held competitions from 2020 to 2024.' },
+      ECU: { s: 'past', note: 'Held competitions for three years, the last in 2023.' },
+      RWA: { s: 'past', note: 'The first African host, with its first competition in 2008.' },
+      BDI: { s: 'past', note: 'Joined after Rwanda as the second East African host.' },
+      BOL: { s: 'past', note: 'Hosted competitions in earlier years.' }
+    };
+
+    // ---------------------------------------------------------------
+    // 3. TRADE: export facts, importing countries, ports and routes
+    // ---------------------------------------------------------------
+    const trade = {
+      BRA: 'About 40 million bags in 2025, roughly 20% down on the year before, sent to more than 120 countries. Germany (5.4 million bags) and the USA (5.3 million bags) were the biggest buyers, followed by Italy, Japan and Belgium.',
+      VNM: 'About 1.6 million tonnes in 2025, worth a record US$8.92 billion. Europe takes around half of it. Germany (13.7% of value), Italy (7.8%) and Spain (7.1%) are the top three markets, and robusta made up 73.8% of export value.',
+      COL: 'About 12 million 60-kg bags in 2024. The USA imported over US$1.5 billion of Colombian coffee in 2023.',
+      UGA: '8.7 million bags worth about US$2.5 billion in calendar 2025, up from 5.9 million bags worth US$1.4 billion in 2024.'
+    };
+
+    const IMPORT_COLOR = '#5fb0ff';
+
+    const IMPORTERS = {
+      DEU: { name: 'Germany', text: 'About US$5.6 billion of coffee imported in 2024, second in the world after the USA. It was the biggest buyer of Brazilian coffee in 2025 (5.4 million bags) and of Vietnamese coffee (nearly US$1.23 billion), partly because it is a major roasting and re-export hub for the EU.' },
+      USA: { name: 'United States', text: 'The world\'s largest importer: about US$9 billion of coffee in 2024, roughly 17.7% of global imports. It took 5.3 million bags of Brazilian coffee in 2025, down 33% after steep US import tariffs.' },
+      ITA: { name: 'Italy', text: 'Home to large roasters such as Lavazza, and a big buyer of robusta for espresso blends. After Germany and the USA it is one of the major buyers of Brazilian coffee, and it took about 7.8% of Vietnam\'s coffee exports in 2025.' },
+      JPN: { name: 'Japan', text: 'Has almost no coffee production of its own, so it relies on imports, with Brazil and Vietnam among its main suppliers. It is also a huge market for canned and instant coffee.' },
+      BEL: { name: 'Belgium', text: 'Antwerp is a major European entry port for green coffee, and Belgium is among the major buyers of Brazilian coffee.' },
+      ESP: { name: 'Spain', text: 'Vietnam\'s third-largest coffee market in 2025, taking about 7.1% of its export value.' },
+      DZA: { name: 'Algeria', text: 'Took about 6.5% of Vietnam\'s coffee export volume in 2025, more than the USA (5.9%).' },
+      SAU: { name: 'Saudi Arabia', text: 'A significant buyer of Ethiopian coffee.' },
+      NLD: { name: 'Netherlands', text: 'Exported about US$1.2 billion of coffee products in 2023, much of it re-exports, but buys more than it sells abroad, with a net trade deficit of about US$355 million (ITC figures). It is also among Vietnam\'s top-10 coffee markets.' }
+    };
+
+    // role: 'origin' (export port) or 'destination' (import port)
+    // country = coffee country the port serves; place = where the port is
+    // color = the colour of that exporting country's routes (change freely)
+    const P = {
+      santos:    { name: 'Santos', place: 'Brazil', country: 'Brazil', code: 'BRA', lat: -23.96, lng: -46.33, role: 'origin', color: '#ffd23f' },
+      caimep:    { name: 'Cai Mep', place: 'Vietnam', country: 'Vietnam', code: 'VNM', lat: 10.53, lng: 107.03, role: 'origin', color: '#ff4d4d' },
+      cartagena: { name: 'Cartagena', place: 'Colombia', country: 'Colombia', code: 'COL', lat: 10.39, lng: -75.51, role: 'origin', color: '#ff9f40' },
+      djibouti:  { name: 'Djibouti', place: 'Djibouti', country: 'Ethiopia', code: 'ETH', lat: 11.59, lng: 43.15, role: 'origin', color: '#3ddc84' },
+      mombasa:   { name: 'Mombasa', place: 'Kenya', country: 'Uganda', code: 'UGA', lat: -4.04, lng: 39.67, role: 'origin', color: '#b388ff' },
+      belawan:   { name: 'Belawan (Medan)', place: 'Indonesia', country: 'Indonesia', code: 'IDN', lat: 3.78, lng: 98.69, role: 'origin', color: '#ff6fb5' },
+      cortes:    { name: 'Puerto Cortés', place: 'Honduras', country: 'Honduras', code: 'HND', lat: 15.84, lng: -87.95, role: 'origin', color: '#40c4ff' },
+      quetzal:   { name: 'Puerto Quetzal', place: 'Guatemala', country: 'Guatemala', code: 'GTM', lat: 13.93, lng: -90.78, role: 'origin', color: '#d7ff4d' },
+      callao:    { name: 'Callao', place: 'Peru', country: 'Peru', code: 'PER', lat: -12.05, lng: -77.15, role: 'origin', color: '#00e5c3' },
+      kochi:     { name: 'Kochi', place: 'India', country: 'India', code: 'IND', lat: 9.97, lng: 76.27, role: 'origin', color: '#ffffff' },
+
+      hamburg:   { name: 'Hamburg', place: 'Germany', country: 'Germany', code: 'DEU', lat: 53.55, lng: 9.97, role: 'destination', color: IMPORT_COLOR },
+      newyork:   { name: 'New York', place: 'USA', country: 'USA', code: 'USA', lat: 40.67, lng: -74.04, role: 'destination', color: IMPORT_COLOR },
+      genoa:     { name: 'Genoa', place: 'Italy', country: 'Italy', code: 'ITA', lat: 44.41, lng: 8.92, role: 'destination', color: IMPORT_COLOR },
+      antwerp:   { name: 'Antwerp', place: 'Belgium', country: 'Belgium', code: 'BEL', lat: 51.23, lng: 4.40, role: 'destination', color: IMPORT_COLOR },
+      rotterdam: { name: 'Rotterdam', place: 'Netherlands', country: 'Netherlands', code: 'NLD', lat: 51.95, lng: 4.14, role: 'destination', color: IMPORT_COLOR },
+      barcelona: { name: 'Barcelona', place: 'Spain', country: 'Spain', code: 'ESP', lat: 41.35, lng: 2.17, role: 'destination', color: IMPORT_COLOR },
+      algiers:   { name: 'Algiers', place: 'Algeria', country: 'Algeria', code: 'DZA', lat: 36.77, lng: 3.06, role: 'destination', color: IMPORT_COLOR },
+      jeddah:    { name: 'Jeddah', place: 'Saudi Arabia', country: 'Saudi Arabia', code: 'SAU', lat: 21.49, lng: 39.17, role: 'destination', color: IMPORT_COLOR },
+      yokohama:  { name: 'Yokohama', place: 'Japan', country: 'Japan', code: 'JPN', lat: 35.44, lng: 139.64, role: 'destination', color: IMPORT_COLOR }
+    };
+
+    // [from, to, text]. A null text falls back to a generic line
+    // (no published figure available).
+    const ROUTES = [
+      ['santos', 'hamburg', 'Brazil to Germany: 5.4 million bags in 2025 (13.5% of Brazil\'s exports), making Germany Brazil\'s biggest buyer that year.'],
+      ['santos', 'newyork', 'Brazil to the USA: 5.3 million bags in 2025, down 33% on the year before after steep US import tariffs.'],
+      ['santos', 'genoa', 'Brazil to Italy: one of Brazil\'s major buyers after Germany and the USA. No volume figure shown here.'],
+      ['santos', 'yokohama', 'Brazil to Japan: one of Brazil\'s major buyers after Germany and the USA. No volume figure shown here.'],
+      ['santos', 'antwerp', 'Brazil to Belgium: one of Brazil\'s major buyers after Germany and the USA. No volume figure shown here.'],
+
+      ['caimep', 'hamburg', 'Vietnam to Germany: Vietnam\'s biggest coffee market in 2025, worth nearly US$1.23 billion (about 13.7% of its coffee export value).'],
+      ['caimep', 'genoa', 'Vietnam to Italy: about 7.8% of Vietnam\'s coffee export value in 2025.'],
+      ['caimep', 'barcelona', 'Vietnam to Spain: about 7.1% of Vietnam\'s coffee export value in 2025.'],
+      ['caimep', 'algiers', 'Vietnam to Algeria: about 6.5% of Vietnam\'s coffee export volume in 2025, more than the USA.'],
+      ['caimep', 'newyork', 'Vietnam to the USA: about 5.9% of Vietnam\'s coffee export volume in 2025.'],
+      ['caimep', 'rotterdam', 'Vietnam to the Netherlands: among Vietnam\'s top-10 coffee markets in 2025. No volume figure shown here.'],
+      ['caimep', 'yokohama', 'Vietnam to Japan: one of Vietnam\'s largest coffee buyers. No volume figure shown here.'],
+
+      ['cartagena', 'newyork', 'Colombia to the USA: the USA imported over US$1.5 billion of Colombian coffee in 2023. Colombia exported about 12 million bags in total in 2024.'],
+      ['cartagena', 'yokohama', null],
+
+      ['djibouti', 'hamburg', null],
+      ['djibouti', 'jeddah', null],
+
+      ['mombasa', 'genoa', 'Uganda to Italy: one of the flows of Ugandan robusta to European roasters. Uganda exported 8.7 million bags worth about US$2.5 billion in 2025 across all destinations.'],
+
+      ['belawan', 'newyork', null],
+      ['belawan', 'yokohama', null],
+      ['cortes', 'hamburg', null],
+      ['cortes', 'newyork', null],
+      ['quetzal', 'newyork', null],
+      ['callao', 'newyork', null],
+      ['callao', 'hamburg', null],
+      ['kochi', 'genoa', null]
+    ];
+
+    const qual = (a, b) => P[a].country + ' to ' + P[b].country +
+      ': one of the regular trade flows for ' + P[a].country + ' coffee. No volume figure shown here; see ICO or USDA data for numbers.';
+
+    const PORT_LIST = Object.values(P);
+    const ROUTE_LIST = ROUTES.map(([f, t, text]) => ({ fromPort: P[f], toPort: P[t], text: text || qual(f, t) }));
+
+    // ---------------------------------------------------------------
+    // 4. STATE, HELPERS AND INFO PANEL
+    // ---------------------------------------------------------------
+    const rgba = (type, a) => `rgba(${TYPES[type].color},${a})`;
+    const infoEl = document.getElementById('info');
+    const legendEl = document.getElementById('legend');
+    let hovered = null;
+    let showRoutes = false;
+    let showCoe = false;
+
+    function centroid(feature) {
+      const g = feature.geometry;
+      const rings = g.type === 'Polygon' ? [g.coordinates[0]] : g.coordinates.map(p => p[0]);
+      const ring = rings.reduce((a, b) => (b.length > a.length ? b : a));
+      const lng = ring.reduce((s, p) => s + p[0], 0) / ring.length;
+      const lat = ring.reduce((s, p) => s + p[1], 0) / ring.length;
+      return { lat, lng };
+    }
+
+    const badge = (label, color) => `<span class="tag" style="background:${color}">${label}</span>`;
+
+    function introText() {
+      let html = '';
+      if (showCoe) {
+        html += '<p><b>Cup of Excellence</b> is a competition and online auction for the highest-scoring coffee lots, run by the Alliance for Coffee Excellence. Purple countries are active hosts (11 on the 2025–26 calendar) and pale purple ones are past hosts.</p>';
+      }
+      if (showRoutes) {
+        html += '<p><b>Shipping routes:</b> each exporting country has its own line colour, running from its export port to the import ports (blue dots). The lines show main trade flows, not exact sea lanes. Click a line, a port or a blue country for import and export figures. For scale, the world drank roughly 177 million 60-kg bags in 2023/24.</p>';
+      }
+      return html;
+    }
+
+    function renderLegend() {
+      const dot = (bg, text) => `<span><span class="dot" style="background:${bg}"></span>${text}</span>`;
+      const items = showCoe
+        ? [dot('rgb(180,110,225)', 'Cup of Excellence: active host'),
+           dot('rgb(210,190,235)', 'Cup of Excellence: past host'),
+           dot('rgba(200,140,70,0.3)', 'Other coffee countries')]
+        : [dot('#c88c46', 'Mainly arabica'),
+           dot('#a03c28', 'Mainly robusta'),
+           dot('#dcaf3c', 'Both / other species')];
+      if (showRoutes) {
+        PORT_LIST.filter(p => p.role === 'origin').forEach(p => items.push(dot(p.color, p.country + ' routes')));
+        items.push(dot(IMPORT_COLOR, 'Import port and importing country'));
+      }
+      legendEl.innerHTML = items.join('');
+    }
+
+    function coeLine(code) {
+      const e = coe[code];
+      if (!e) return '<p><b>Cup of Excellence:</b> Not a Cup of Excellence host country.</p>';
+      return `<p><b>Cup of Excellence:</b> ${COE_TEXT[e.s]}. ${e.note}</p>`;
+    }
+
+    function showCountry(code) {
+      const c = coffee[code];
+      const imp = showRoutes ? IMPORTERS[code] : null;
+      let html = '';
+      if (c) {
+        html += `<h3>${c.name}</h3>${badge(TYPES[c.type].label, rgba(c.type, 1))}`;
+        if (coe[code]) html += badge('Cup of Excellence', `rgb(${COE_COLORS[coe[code].s]})`);
+        html += `<p><b>Main growing regions:</b> ${c.regions}</p><p>${c.note}</p>`;
+        if (trade[code]) html += `<p><b>Exports:</b> ${trade[code]}</p>`;
+        html += coeLine(code);
+        if (showRoutes) {
+          const mine = ROUTE_LIST.filter(r => r.fromPort.code === code);
+          if (mine.length) {
+            html += '<p><b>Shipping routes on this map:</b></p><ul>' + mine.map(r => `<li>${r.text}</li>`).join('') + '</ul>';
+          }
+        }
+      } else if (imp) {
+        html += `<h3>${imp.name}</h3>${badge('Coffee importer', IMPORT_COLOR)}`;
+      }
+      if (imp) {
+        html += `<p><b>Imports:</b> ${imp.text}</p>`;
+        const origins = [...new Set(ROUTE_LIST.filter(r => r.toPort.code === code).map(r => r.fromPort.country))];
+        if (origins.length) html += `<p><b>Origins on this map:</b> ${origins.join(', ')}.</p>`;
+      }
+      infoEl.innerHTML = html;
+    }
+
+    function showPort(p) {
+      let html = `<h3>${p.name}, ${p.place}</h3>`;
+      if (p.role === 'origin') {
+        html += badge('Export port', p.color);
+        html += p.country === p.place
+          ? `<p>A main shipping port for ${p.country} coffee.</p>`
+          : `<p>A main outlet for ${p.country} coffee, located in ${p.place}.</p>`;
+        if (trade[p.code]) html += `<p><b>Exports from ${p.country}:</b> ${trade[p.code]}</p>`;
+      } else {
+        html += badge('Import port', IMPORT_COLOR);
+        html += `<p>${IMPORTERS[p.code].text}</p>`;
+      }
+      infoEl.innerHTML = html;
+    }
+
+    function showRoute(r) {
+      infoEl.innerHTML = `<h3>${r.fromPort.name} → ${r.toPort.name}</h3>` +
+        badge('Shipping route', r.fromPort.color) +
+        `<p>${r.text}</p>` +
+        '<p style="font-size:13px;opacity:0.7">The line shows a main trade flow between two countries, not the exact sea lane.</p>';
+    }
+
+    // ---------------------------------------------------------------
+    // 5. THE GLOBE
+    // ---------------------------------------------------------------
+    const world = Globe()
+      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+      .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+
+      // countries
+      .polygonCapColor(d => {
+        const code = d.properties.ADM0_A3;
+        const c = coffee[code];
+        const isHover = d === hovered;
+        if (!c && showRoutes && IMPORTERS[code]) return `rgba(95,176,255,${isHover ? 0.8 : 0.5})`;
+        if (showCoe) {
+          const e = coe[code];
+          if (e) return `rgba(${COE_COLORS[e.s]},${isHover ? 1 : 0.92})`;
+          return c ? rgba(c.type, 0.2) : 'rgba(80,80,80,0.12)';
+        }
+        if (!c) return 'rgba(80,80,80,0.25)';
+        return rgba(c.type, isHover ? 1 : 0.8);
+      })
+      .polygonSideColor(() => 'rgba(0,0,0,0.1)')
+      .polygonAltitude(d => {
+        const code = d.properties.ADM0_A3;
+        const isHover = d === hovered;
+        if (showCoe && coe[code]) return isHover ? 0.07 : 0.04;
+        if (coffee[code]) return isHover ? 0.05 : 0.01;
+        if (showRoutes && IMPORTERS[code]) return isHover ? 0.04 : 0.01;
+        return 0.005;
+      })
+      .polygonsTransitionDuration(200)
+      .polygonLabel(d => {
+        const code = d.properties.ADM0_A3;
+        const c = coffee[code];
+        const imp = showRoutes ? IMPORTERS[code] : null;
+        if (!c && !imp) return `<b>${d.properties.ADMIN}</b><br>No coffee data`;
+        let html = `<div style="max-width:240px"><b>${c ? c.name : imp.name}</b>`;
+        if (c) html += `<br>${TYPES[c.type].label}<br><i>${c.regions}</i>`;
+        if (showCoe) {
+          html += '<br>' + (coe[code]
+            ? 'Cup of Excellence: ' + (coe[code].s === 'active' ? 'active host' : 'past host')
+            : 'Not a Cup of Excellence host');
+        }
+        if (imp) html += '<br>Coffee importer, click for details';
+        return html + '</div>';
+      })
+      .onPolygonHover(d => {
+        hovered = d;
+        world.polygonsData(world.polygonsData());
+      })
+      .onPolygonClick(d => {
+        const code = d.properties.ADM0_A3;
+        if (!coffee[code] && !(showRoutes && IMPORTERS[code])) return;
+        world.controls().autoRotate = false;
+        world.pointOfView(centroid(d), 1000);
+        showCountry(code);
+      })
+
+      // shipping routes: steady thin lines, one colour per exporting country
+      .arcStartLat(d => d.fromPort.lat)
+      .arcStartLng(d => d.fromPort.lng)
+      .arcEndLat(d => d.toPort.lat)
+      .arcEndLng(d => d.toPort.lng)
+      .arcColor(d => d.fromPort.color)
+      .arcStroke(0.25)
+      .arcAltitudeAutoScale(0.35)
+      .arcDashLength(1)
+      .arcDashGap(0)
+      .arcDashAnimateTime(0)
+      .arcLabel(d => `<b>${d.fromPort.name} → ${d.toPort.name}</b><br>Click for details`)
+      .onArcClick(d => {
+        world.controls().autoRotate = false;
+        showRoute(d);
+      })
+
+      // ports (dots and names)
+      .pointLat(d => d.lat)
+      .pointLng(d => d.lng)
+      .pointColor(d => d.color)
+      .pointAltitude(0.015)
+      .pointRadius(0.35)
+      .pointLabel(d => `<b>${d.name}, ${d.place}</b><br>${d.role === 'origin' ? 'Export port' : 'Import port'}`)
+      .onPointClick(d => {
+        world.controls().autoRotate = false;
+        showPort(d);
+      })
+      .labelLat(d => d.lat)
+      .labelLng(d => d.lng)
+      .labelText(d => d.name)
+      .labelSize(0.7)
+      .labelDotRadius(0)
+      .labelColor(() => 'rgba(255,255,255,0.9)')
+      .labelResolution(2)
+      .labelAltitude(0.02)
+      (document.getElementById('globe'));
+
+    world.controls().autoRotate = true;
+    world.controls().autoRotateSpeed = 0.4;
+
+    // Make the globe follow the size of its box (and so the browser window)
+    const globeEl = document.getElementById('globe');
+    function fitGlobe() {
+      world.width(globeEl.clientWidth);
+      world.height(globeEl.clientHeight);
+    }
+    fitGlobe();
+    window.addEventListener('resize', fitGlobe);
+
+    fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
+      .then(r => r.json())
+      .then(countries => {
+        world.polygonsData(countries.features);
+      });
+
+    // ---------------------------------------------------------------
+    // 6. LAYER BUTTONS
+    // ---------------------------------------------------------------
+    function applyLayers() {
+      world
+        .arcsData(showRoutes ? ROUTE_LIST : [])
+        .pointsData(showRoutes ? PORT_LIST : [])
+        .labelsData(showRoutes ? PORT_LIST.filter(p => p.role === 'destination') : []);
+      world.polygonsData(world.polygonsData());
+      renderLegend();
+      infoEl.innerHTML = introText();
+    }
+
+    function wireToggle(id, onChange) {
+      const btn = document.getElementById(id);
+      btn.addEventListener('click', () => {
+        const on = !btn.classList.contains('on');
+        btn.classList.toggle('on', on);
+        btn.setAttribute('aria-pressed', String(on));
+        onChange(on);
+        applyLayers();
+      });
+    }
+
+    wireToggle('btn-routes', on => { showRoutes = on; });
+    wireToggle('btn-coe', on => { showCoe = on; });
+
+    renderLegend();
+    infoEl.innerHTML = introText();
+  </script>
+</body>
+</html>
