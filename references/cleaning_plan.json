@@ -1,0 +1,61 @@
+{
+  "intent": "propose_cleaning_plan",
+  "steps": [
+    {
+      "name": "load_arabica",
+      "why": "Read the Arabica file with only the 19 columns kept at gate 2, so personal data is never loaded.",
+      "rule": "read arabica_data_cleaned.csv with usecols = features + target + profile columns",
+      "expected_count": 1311
+    },
+    {
+      "name": "load_robusta",
+      "why": "Read the Robusta file the same way; the guessed matches for Acidity, Body and Sweetness are not loaded.",
+      "rule": "read robusta_data_cleaned.csv with usecols = kept columns under their Robusta names (Fragrance...Aroma, Uniform.Cup), without Salt...Acid, Mouthfeel and Bitter...Sweet",
+      "expected_count": 28
+    },
+    {
+      "name": "stack_with_sql",
+      "why": "One table for both species, with a species column, the same column names and the same column order.",
+      "rule": "run src/sql/clean_cqi.sql on two in-memory SQLite tables: explicit SELECT, UNION ALL, literal 'arabica' / 'robusta', NULL for Robusta Acidity, Body and Sweetness",
+      "expected_count": 1339
+    },
+    {
+      "name": "moisture_zero_to_missing",
+      "why": "Moisture 0.0 most likely means 'not measured'; green beans always hold some water.",
+      "rule": "Moisture = 0.0 becomes missing; expected 252 Arabica and 12 Robusta values",
+      "expected_count": 264
+    },
+    {
+      "name": "altitude_above_3000_to_missing",
+      "why": "Altitudes such as 11,000 m and 190,164 m are typing or unit errors.",
+      "rule": "altitude_mean_meters > 3000 becomes missing; count reported, no expected count",
+      "expected_count": null
+    },
+    {
+      "name": "altitude_below_50_list_only",
+      "why": "Values such as 1 m look wrong, but Rizki decided to change nothing for now.",
+      "rule": "list rows with altitude_mean_meters < 50 with species and country in the report; no value changed",
+      "expected_count": null
+    },
+    {
+      "name": "drop_total_zero",
+      "why": "A total of 0 with every part score 0 is an empty score sheet, not a real score.",
+      "rule": "drop rows where Total.Cup.Points = 0; expected 1 row, in arabica_data_cleaned.csv",
+      "expected_count": 1
+    },
+    {
+      "name": "write_clean_csv",
+      "why": "Save the clean table for the notebooks and the globe; data is never committed.",
+      "rule": "write the table to the clean data folder as cqi_clean.csv, without the row index",
+      "expected_count": 1338
+    }
+  ],
+  "sql": "-- Stack the Arabica and Robusta CQI files into one table with the gate 2 columns.\n-- Run by src/run_cleaning.py on two in-memory SQLite tables: arabica_raw and robusta_raw.\n-- Why explicit columns: only the 19 columns kept at gate 2 come through, never a personal data column.\n-- Why double quotes: the column names contain dots, which SQL only accepts inside quotes.\n\nSELECT\n    'arabica'                AS species,\n    \"Country.of.Origin\"      AS \"Country.of.Origin\",\n    \"Variety\"                AS \"Variety\",\n    \"Processing.Method\"      AS \"Processing.Method\",\n    \"Color\"                  AS \"Color\",\n    \"Moisture\"               AS \"Moisture\",\n    \"Category.One.Defects\"   AS \"Category.One.Defects\",\n    \"Category.Two.Defects\"   AS \"Category.Two.Defects\",\n    \"altitude_mean_meters\"   AS \"altitude_mean_meters\",\n    \"Total.Cup.Points\"       AS \"Total.Cup.Points\",\n    \"Aroma\"                  AS \"Aroma\",\n    \"Flavor\"                 AS \"Flavor\",\n    \"Aftertaste\"             AS \"Aftertaste\",\n    \"Acidity\"                AS \"Acidity\",\n    \"Body\"                   AS \"Body\",\n    \"Balance\"                AS \"Balance\",\n    \"Uniformity\"             AS \"Uniformity\",\n    \"Clean.Cup\"              AS \"Clean.Cup\",\n    \"Sweetness\"              AS \"Sweetness\",\n    \"Cupper.Points\"          AS \"Cupper.Points\"\nFROM arabica_raw\n\nUNION ALL\n\n-- Robusta: same columns in the same order.\n-- Why the renames: Fragrance...Aroma and Uniform.Cup are strong matches at gate 2.\n-- Why NULL: the Acidity, Body and Sweetness matches are only guesses, so they stay empty.\nSELECT\n    'robusta'                AS species,\n    \"Country.of.Origin\"      AS \"Country.of.Origin\",\n    \"Variety\"                AS \"Variety\",\n    \"Processing.Method\"      AS \"Processing.Method\",\n    \"Color\"                  AS \"Color\",\n    \"Moisture\"               AS \"Moisture\",\n    \"Category.One.Defects\"   AS \"Category.One.Defects\",\n    \"Category.Two.Defects\"   AS \"Category.Two.Defects\",\n    \"altitude_mean_meters\"   AS \"altitude_mean_meters\",\n    \"Total.Cup.Points\"       AS \"Total.Cup.Points\",\n    \"Fragrance...Aroma\"      AS \"Aroma\",\n    \"Flavor\"                 AS \"Flavor\",\n    \"Aftertaste\"             AS \"Aftertaste\",\n    NULL                     AS \"Acidity\",\n    NULL                     AS \"Body\",\n    \"Balance\"                AS \"Balance\",\n    \"Uniform.Cup\"            AS \"Uniformity\",\n    \"Clean.Cup\"              AS \"Clean.Cup\",\n    NULL                     AS \"Sweetness\",\n    \"Cupper.Points\"          AS \"Cupper.Points\"\nFROM robusta_raw;\n",
+  "risks": [
+    "Moisture values between 0.01 and 0.05 (38 Arabica rows) are also doubtful but are not changed by any rule.",
+    "Altitudes under 50 m (1, 12 and 13 m) are kept as they are; the typed Altitude text ('1.2', '12oo') suggests they may be parsing errors of about 1,200 m, but that is a guess.",
+    "Robusta has no Acidity, Body or Sweetness values in the clean table, and its total may not be directly comparable with the Arabica total.",
+    "With 1,310 Arabica rows left for modelling, the dataset is below the few thousand rows the brief asks for."
+  ],
+  "message": "This plan keeps only the 20 columns you approved at gate 2, stacks Arabica and Robusta with a species column, and turns impossible Moisture and altitude values into missing. It drops the one empty score sheet and stops if any count differs from what you expected."
+}

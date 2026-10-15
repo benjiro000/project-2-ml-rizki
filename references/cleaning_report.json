@@ -1,0 +1,387 @@
+{
+  "dataset_id": "ds_cqi_jldbc_2018",
+  "run_date": "2026-10-16",
+  "based_on": [
+    "references/gate2_decisions.json",
+    "references/cleaning_plan.json"
+  ],
+  "steps": [
+    {
+      "step": "load_arabica",
+      "rows_before": 1311,
+      "rows_after": 1311,
+      "columns_before": 44,
+      "columns_after": 19,
+      "values_changed": 0,
+      "note": "personal data and dropped columns are never loaded"
+    },
+    {
+      "step": "load_robusta",
+      "rows_before": 28,
+      "rows_after": 28,
+      "columns_before": 44,
+      "columns_after": 16,
+      "values_changed": 0,
+      "note": "personal data and dropped columns are never loaded; Acidity, Body and Sweetness not loaded (guessed matches)"
+    },
+    {
+      "step": "stack_with_sql",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 19,
+      "columns_after": 20,
+      "values_changed": 0,
+      "note": "added species; renamed Fragrance...Aroma to Aroma and Uniform.Cup to Uniformity; Acidity, Body, Sweetness left empty for 28 robusta rows"
+    },
+    {
+      "step": "moisture_zero_to_missing",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 264,
+      "note": "per species: {'arabica': 252, 'robusta': 12}"
+    },
+    {
+      "step": "altitude_above_3000_to_missing",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 16,
+      "note": "per species: {'arabica': 14, 'robusta': 2}; no expected count, reported only"
+    },
+    {
+      "step": "altitude_below_50_list_only",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 0,
+      "note": "18 rows listed, none changed"
+    },
+    {
+      "step": "drop_total_zero",
+      "rows_before": 1339,
+      "rows_after": 1338,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 0,
+      "note": "rows dropped per species: {'arabica': 1, 'robusta': 0}"
+    },
+    {
+      "step": "write_clean_csv",
+      "rows_before": 1338,
+      "rows_after": 1338,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 0,
+      "note": "written to the clean data folder (never committed)"
+    }
+  ],
+  "rule_counts": [
+    {
+      "rule": "moisture_zero_to_missing",
+      "real": {
+        "arabica": 252,
+        "robusta": 12
+      },
+      "expected": {
+        "arabica": 252,
+        "robusta": 12
+      }
+    },
+    {
+      "rule": "altitude_above_3000_to_missing",
+      "real": {
+        "arabica": 14,
+        "robusta": 2
+      },
+      "expected": null
+    },
+    {
+      "rule": "altitude_below_50_list_only",
+      "real": 18,
+      "expected": null,
+      "note": "listed only, no value changed"
+    },
+    {
+      "rule": "drop_total_zero",
+      "real": {
+        "arabica": 1,
+        "robusta": 0
+      },
+      "expected": 1,
+      "expected_file": "arabica_data_cleaned.csv"
+    }
+  ],
+  "low_altitude_rows": [
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 12.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 12.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Kenya",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Costa Rica",
+      "altitude_mean_meters": 13.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Costa Rica",
+      "altitude_mean_meters": 13.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Brazil",
+      "altitude_mean_meters": 1.0
+    },
+    {
+      "species": "arabica",
+      "Country.of.Origin": "Mexico",
+      "altitude_mean_meters": 12.0
+    },
+    {
+      "species": "robusta",
+      "Country.of.Origin": "Ecuador",
+      "altitude_mean_meters": 40.0
+    }
+  ],
+  "robusta_empty_columns": {
+    "columns": [
+      "Acidity",
+      "Body",
+      "Sweetness"
+    ],
+    "why": "the Robusta matches for these columns are guesses (medium or weak) at gate 2, so they were left empty instead of guessed"
+  },
+  "final": {
+    "rows_per_species": {
+      "arabica": 1310,
+      "robusta": 28
+    },
+    "columns": 20,
+    "column_names": [
+      "species",
+      "Country.of.Origin",
+      "Variety",
+      "Processing.Method",
+      "Color",
+      "Moisture",
+      "Category.One.Defects",
+      "Category.Two.Defects",
+      "altitude_mean_meters",
+      "Total.Cup.Points",
+      "Aroma",
+      "Flavor",
+      "Aftertaste",
+      "Acidity",
+      "Body",
+      "Balance",
+      "Uniformity",
+      "Clean.Cup",
+      "Sweetness",
+      "Cupper.Points"
+    ]
+  },
+  "checks": [
+    {
+      "check": "arabica rows loaded",
+      "real": 1311,
+      "expected": 1311,
+      "result": "pass"
+    },
+    {
+      "check": "robusta rows loaded",
+      "real": 28,
+      "expected": 28,
+      "result": "pass"
+    },
+    {
+      "check": "rows after stacking",
+      "real": 1339,
+      "expected": 1339,
+      "result": "pass"
+    },
+    {
+      "check": "output columns match gate 2",
+      "real": [
+        "species",
+        "Country.of.Origin",
+        "Variety",
+        "Processing.Method",
+        "Color",
+        "Moisture",
+        "Category.One.Defects",
+        "Category.Two.Defects",
+        "altitude_mean_meters",
+        "Total.Cup.Points",
+        "Aroma",
+        "Flavor",
+        "Aftertaste",
+        "Acidity",
+        "Body",
+        "Balance",
+        "Uniformity",
+        "Clean.Cup",
+        "Sweetness",
+        "Cupper.Points"
+      ],
+      "expected": [
+        "species",
+        "Country.of.Origin",
+        "Variety",
+        "Processing.Method",
+        "Color",
+        "Moisture",
+        "Category.One.Defects",
+        "Category.Two.Defects",
+        "altitude_mean_meters",
+        "Total.Cup.Points",
+        "Aroma",
+        "Flavor",
+        "Aftertaste",
+        "Acidity",
+        "Body",
+        "Balance",
+        "Uniformity",
+        "Clean.Cup",
+        "Sweetness",
+        "Cupper.Points"
+      ],
+      "result": "pass"
+    },
+    {
+      "check": "Moisture 0.0 set to missing",
+      "real": {
+        "arabica": 252,
+        "robusta": 12
+      },
+      "expected": {
+        "arabica": 252,
+        "robusta": 12
+      },
+      "result": "pass"
+    },
+    {
+      "check": "rows with Total.Cup.Points 0 dropped",
+      "real": 1,
+      "expected": 1,
+      "result": "pass"
+    },
+    {
+      "check": "dropped row is in arabica_data_cleaned.csv",
+      "real": 1,
+      "expected": 1,
+      "result": "pass"
+    },
+    {
+      "check": "rows per species",
+      "real": {
+        "arabica": 1310,
+        "robusta": 28
+      },
+      "expected": {
+        "arabica": 1310,
+        "robusta": 28
+      },
+      "result": "pass"
+    },
+    {
+      "check": "personal data columns in output",
+      "real": [],
+      "expected": [],
+      "result": "pass"
+    },
+    {
+      "check": "Moisture 0.0 left",
+      "real": 0,
+      "expected": 0,
+      "result": "pass"
+    },
+    {
+      "check": "altitude above 3000 m left",
+      "real": 0,
+      "expected": 0,
+      "result": "pass"
+    },
+    {
+      "check": "raw files unchanged",
+      "real": {
+        "arabica": "8be3e516337d6e9f4ddbfe372e2e5efd",
+        "robusta": "566a4592f57788cdc8f4e6736cb03788"
+      },
+      "expected": {
+        "arabica": "8be3e516337d6e9f4ddbfe372e2e5efd",
+        "robusta": "566a4592f57788cdc8f4e6736cb03788"
+      },
+      "result": "pass"
+    },
+    {
+      "check": "git status shows nothing from data/",
+      "real": "",
+      "expected": "",
+      "result": "pass"
+    }
+  ]
+}

@@ -26,4 +26,12 @@ PATHS = {
     "prompts": os.path.join(PROJECT_ROOT, "prompts"),
     "profiles": os.path.join(PROJECT_ROOT, "references", "profiles"),
     "reviews": os.path.join(PROJECT_ROOT, "references", "reviews"),
+    # Cleaning (agent 3): the two raw CQI files in, one clean table out.
+    "raw_cqi_arabica": os.path.join(PROJECT_ROOT, "data", "raw", "ds_cqi_jldbc_2018", "arabica_data_cleaned.csv"),
+    "raw_cqi_robusta": os.path.join(PROJECT_ROOT, "data", "raw", "ds_cqi_jldbc_2018", "robusta_data_cleaned.csv"),
+    "clean_cqi": os.path.join(PROJECT_ROOT, "data", "clean", "cqi_clean.csv"),
+    "sql_clean_cqi": os.path.join(PROJECT_ROOT, "src", "sql", "clean_cqi.sql"),
+    "gate2_decisions": os.path.join(PROJECT_ROOT, "references", "gate2_decisions.json"),
+    "cleaning_plan": os.path.join(PROJECT_ROOT, "references", "cleaning_plan.json"),
+    "cleaning_report": os.path.join(PROJECT_ROOT, "references", "cleaning_report.json"),
 }
