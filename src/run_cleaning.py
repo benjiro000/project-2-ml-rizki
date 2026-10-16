@@ -1,4 +1,4 @@
-"""Clean the CQI data (v2), following the gate 2 decisions.
+"""Clean the CQI data (v3), following the gate 2 decisions.
 
 Why this script exists: cleaning is plain code, not an LLM call. It reads
 the decisions Rizki made at gate 2 (references/gate2_decisions.json), runs
@@ -72,6 +72,8 @@ low_altitude_arabica_rule = find_rule(decisions["value_rules"], "altitude_below_
 low_moisture_rule = find_rule(decisions["value_rules"], "moisture_low_to_missing")
 high_moisture_rule = find_rule(decisions["value_rules"], "moisture_above_014_report_only")
 altitude_2500_rule = find_rule(decisions["value_rules"], "altitude_near_2500_report_only")
+# Cleaning v3 rule.
+very_high_moisture_rule = find_rule(decisions["value_rules"], "moisture_above_015_to_missing")
 
 # Why read the limits from the condition text: the numbers live in one
 # place (the decisions file), so code and decisions cannot drift apart.
@@ -153,6 +155,19 @@ steps.append(step_line(high_moisture_rule["rule_id"], len(df), len(df), df.shape
                        df.shape[1], 0,
                        f"per species: {high_moisture_counts}; reported only, none changed"))
 
+# --- Step 4d (v3): Moisture above 0.15 becomes missing ----------------------
+# Why after step 4c: the 0.14 report should still show the values before they go.
+# Why missing and not a dropped row: the rest of the row (scores, country) is fine.
+very_high_limit = very_high_moisture_rule["limits"]["above"]
+rows_before, columns_before = df.shape
+very_high_moisture_mask = df[moisture_column] > very_high_limit
+df, very_high_moisture_counts = mask_to_missing(df, moisture_column, very_high_moisture_mask)
+checks.append(check(f"Moisture above {very_high_limit} set to missing",
+                    very_high_moisture_counts, very_high_moisture_rule["expected_count"]))
+steps.append(step_line(very_high_moisture_rule["rule_id"], rows_before, len(df), columns_before,
+                       df.shape[1], sum(very_high_moisture_counts.values()),
+                       f"per species: {very_high_moisture_counts}"))
+
 # --- Step 5: altitude above 3000 m becomes missing ------------------------
 rows_before, columns_before = df.shape
 df, high_counts = above_to_missing(df, high_altitude_rule["column"], high_limit)
@@ -230,11 +245,14 @@ checks.append(check(f"altitude above {high_limit:.0f} m left",
 checks.append(check("rows in the clean table", len(df), sum(expected_species.values())))
 checks.append(check("columns in the clean table", df.shape[1], len(expected_columns)))
 arabica_moisture = df.loc[df["species"] == "arabica", moisture_column]
+# Why the v3 number: the v3 rule runs after the v2 rule, so its count is the final one.
 checks.append(check("non-empty Moisture values, arabica", int(arabica_moisture.notna().sum()),
-                    low_moisture_rule["expected_non_empty_after"]["arabica"]))
+                    very_high_moisture_rule["expected_non_empty_after"]["arabica"]))
 checks.append(check(f"Moisture above {low['above']} and at most {low['at_most']} left",
                     int(((df[moisture_column] > low["above"])
                          & (df[moisture_column] <= low["at_most"])).sum()), 0))
+checks.append(check(f"Moisture above {very_high_limit} left",
+                    int((df[moisture_column] > very_high_limit).sum()), 0))
 checks.append(check(f"arabica altitude under {below} m left",
                     int(((df["species"] == "arabica") & (df[altitude_column] < below)).sum()), 0))
 
@@ -264,7 +282,9 @@ report = {
          "expected": low_moisture_rule["expected_count"],
          "countries": low_moisture_countries},
         {"rule": high_moisture_rule["rule_id"], "real": high_moisture_counts, "expected": None,
-         "note": "reported only, no value changed"},
+         "note": "reported only, no value changed; counted before moisture_above_015_to_missing"},
+        {"rule": very_high_moisture_rule["rule_id"], "real": very_high_moisture_counts,
+         "expected": very_high_moisture_rule["expected_count"]},
         {"rule": altitude_2500_rule["rule_id"], "real": len(near_2500_rows), "expected": None,
          "note": "listed only, no value changed"},
         {"rule": total_zero_rule["rule_id"], "real": total_zero_counts,

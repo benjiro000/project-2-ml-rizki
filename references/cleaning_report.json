@@ -61,6 +61,15 @@
       "note": "per species: {'arabica': 24, 'robusta': 0}; reported only, none changed"
     },
     {
+      "step": "moisture_above_015_to_missing",
+      "rows_before": 1339,
+      "rows_after": 1339,
+      "columns_before": 20,
+      "columns_after": 20,
+      "values_changed": 16,
+      "note": "per species: {'arabica': 16, 'robusta': 0}"
+    },
+    {
       "step": "altitude_above_3000_to_missing",
       "rows_before": 1339,
       "rows_after": 1339,
@@ -180,7 +189,18 @@
         "robusta": 0
       },
       "expected": null,
-      "note": "reported only, no value changed"
+      "note": "reported only, no value changed; counted before moisture_above_015_to_missing"
+    },
+    {
+      "rule": "moisture_above_015_to_missing",
+      "real": {
+        "arabica": 16,
+        "robusta": 0
+      },
+      "expected": {
+        "arabica": 16,
+        "robusta": 0
+      }
     },
     {
       "rule": "altitude_near_2500_report_only",
@@ -487,6 +507,18 @@
       "result": "pass"
     },
     {
+      "check": "Moisture above 0.15 set to missing",
+      "real": {
+        "arabica": 16,
+        "robusta": 0
+      },
+      "expected": {
+        "arabica": 16,
+        "robusta": 0
+      },
+      "result": "pass"
+    },
+    {
       "check": "arabica altitude under 50 m set to missing",
       "real": {
         "arabica": 17,
@@ -554,12 +586,18 @@
     },
     {
       "check": "non-empty Moisture values, arabica",
-      "real": 1020,
-      "expected": 1020,
+      "real": 1004,
+      "expected": 1004,
       "result": "pass"
     },
     {
       "check": "Moisture above 0 and at most 0.05 left",
+      "real": 0,
+      "expected": 0,
+      "result": "pass"
+    },
+    {
+      "check": "Moisture above 0.15 left",
       "real": 0,
       "expected": 0,
       "result": "pass"

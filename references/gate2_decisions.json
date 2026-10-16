@@ -151,7 +151,20 @@
       "limits": {"above": 0.14},
       "action": "change nothing; report the count and the 10 highest values with their country",
       "why": "above 14 % is wetter than normal green coffee, but may be real; left for a later decision",
-      "expected_count": null
+      "expected_count": null,
+      "later_decision": "cleaning v3: values above 0.15 become missing (rule moisture_above_015_to_missing); this report still counts everything above 0.14, before that rule runs"
+    },
+    {
+      "rule_id": "moisture_above_015_to_missing",
+      "added_in": "cleaning v3",
+      "column": "Moisture",
+      "condition": "Moisture > 0.15, both species",
+      "limits": {"above": 0.15},
+      "action": "set to missing",
+      "why": "Moisture is stored as a fraction (0.15 = 15 %). Green coffee is normally about 0.10 to 0.12; values above 0.15 are too wet to be a normal measurement, so they are treated like the zeros and the 0.01 to 0.05 values. No rows are dropped",
+      "expected_count": {"arabica": 16, "robusta": 0},
+      "expected_count_note": "counted read-only on the v2 clean table before the v3 run",
+      "expected_non_empty_after": {"arabica": 1004}
     },
     {
       "rule_id": "altitude_near_2500_report_only",
