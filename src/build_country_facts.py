@@ -43,7 +43,7 @@ SOURCES = {
     "fao": {"label": "FAOSTAT, crops and livestock products (coffee, green)",
             "url": "https://www.fao.org/faostat/en/#data/QCL"},
     "psd": {"label": "USDA FAS, Production, Supply and Distribution (coffee)",
-            "url": "https://apps.fas.usda.gov/psdonline/"},
+            "url": "https://apps.fas.usda.gov/psdonline/app/index.html#/app/downloads"},
 }
 
 # ISO3 -> "Display name | other spellings seen in CQI, FAOSTAT and PSD"
