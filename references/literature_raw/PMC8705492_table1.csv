@@ -1,0 +1,7 @@
+#caption,"The average concentration (mg/L) for caffeine and chlorogenic acid (CGA) content in coffee beans (n = 52) with different roasting degrees, regardless of geographical origin."
+Coffee Type,Roasting Temperature (°C),CGA (Average ± SD),Caffeine (Average ± SD)
+(mg/L),(%),(mg/L),(%)
+Green Coffee (n =11),---,543.23 ± 8.916 a,5.43 ± 0.089 a,166.72 ± 5.08,1.67 ± 0.051
+Light Roast (n = 14),155–165,270.93 ± 10.759 a,2.71 ± 0.108 a,196.35 ± 6.67,1.96 ± 0.067
+Medium Roast (n= 11),175–185,187.45 ± 9.05 a,1.87 ± 0.091 a,203.63 ± 3.158,2.03 ± 0.032
+Dark Roast (n = 16),205–215,90.53 ± 12.97 a,0.91 ± 0.130 a,189.85 ± 5.81,1.90 ± 0.058

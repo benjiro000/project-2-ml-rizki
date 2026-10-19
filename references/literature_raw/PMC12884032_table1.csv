@@ -1,0 +1,32 @@
+#caption,"Sucrose concentration (% w/w) in green coffee bean samples from Brazil (BRA1‐10), Rwanda (RWA1‐4), India (IND1‐4), Ethiopia (ETH1‐4), Guatemala (GUA1‐4), and Honduras (HON1‐4)."
+country,sample,sucrose (% w/w),average (% w/w)
+Brazil,BRA1,9.6 ± 0.5ab,9.6 ± 1.0A
+BRA2,9.9 ± 0.1ab
+BRA3,10.7 ± 0.1ab
+BRA4,7.6 ± 0.0ab
+BRA5,9.1 ± 0.0ab
+BRA6,9.6 ± 0.2ab
+BRA7,10.4 ± 0.1ab
+BRA8,8.2 ± 0.0ab
+BRA9,9.6 ± 0.3ab
+BRA10,10.6 ± 0.3ab
+Rwanda,RWA1,8.3 ± 1.0ab,9.2 ± 1.0AC
+RWA2,8.9 ± 1.1ab
+RWA3,9.1 ± 0.6ab
+RWA4,10.7 ± 0.7ab
+India,IND1,7.3 ± 0.8b,8.3 ± 1.4C
+IND2,8.2 ± 0.5ab
+IND3,10.1 ± 0.3ab
+IND4,7.4 ± 0.7b
+Ethiopia,ETH1,10.5 ± 0.4ab,10.9 ± 0.3B
+ETH2,10.9 ± 0.3ab
+ETH3,10.9 ± 0.1a
+ETH4,11.2 ± 0.6a
+Guatemala,GUA1,10.1 ± 0.2ab,9.54 ± 0.8AC
+GUA2,8.7 ± 1.2ab
+GUA3,9.0 ± 0.1ab
+GUA4,9.5 ± 0.2ab
+Honduras,HON1,8.5 ± 0.2ab,8.6 ± 0.4AC
+HON2,8.5 ± 0.1ab
+HON3,8.5 ± 0.1ab
+HON4,9.1 ± 0.4ab

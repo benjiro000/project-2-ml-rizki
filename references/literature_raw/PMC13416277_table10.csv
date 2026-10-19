@@ -1,0 +1,15 @@
+#caption,Mean performance statistics of NIRS for predicting composition of Trigonelline content in green Arabica coffee beans using the RF algorithm.
+Pretreatment,RMSEp,R2p,RPD,RPIQ,CCC,Bias,R2sp
+Raw_data,0.009 f,0.958 a,8.528 a,6.204 a,0.991 a,0.001 a,0.975 a
+SG,0.008 f,0.958 a,8.619 a,6.227 a,0.991 a,0.001 a,0.976 a
+SNV,0.022 cd,0.907 c,3.135 cde,3.108 cd,0.938 de,−0.001 a,0.873 cd
+SNV1D,0.027 b,0.857 d,2.491 ef,2.590 de,0.894 f,0.002 a,0.844 d
+SNV2D,0.036 a,0.739 e,1.901 f,2.120 e,0.793 g,0.003 a,0.708 e
+D1,0.019 e,0.930 b,3.690 bcd,3.731 b,0.956 bc,0.001 a,0.909 ab
+D2,0.023 de,0.891 bc,2.923 bcd,3.399 bc,0.928 d,0.001 a,0.876 bc
+SNVSG,0.022 c,0.909 c,3.140 de,3.084 cd,0.938 e,0.000 a,0.874 cd
+SGD1,0.018 e,0.932 b,3.783 b,3.788 b,0.957 b,0.001 a,0.907 ab
+SG.D1W5,0.019 e,0.930 b,3.686 bc,3.750 b,0.956 bc,0.001 a,0.906 ab
+SG.D1W11,0.019 e,0.930 b,3.737 bc,3.751 b,0.956 b,0.001 a,0.906 ab
+SG.D2W5,0.023 de,0.899 bc,2.969 bcd,3.406 bc,0.930 cd,0.001 a,0.878 bc
+SG.D2W11,0.022 cde,0.908 bc,3.041 bcd,3.374 bc,0.933 de,0.001 a,0.889 bc

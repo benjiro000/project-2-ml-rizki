@@ -1,0 +1,15 @@
+source_id,file,key,sentence
+src_pettazzoni2026_plb,PMC12884032.xml,caffeine,"Caffeine (CAF) (Fig. 2b) exhibited varying concentrations across the groups, with Brazilian coffee having the highest average concentration (8.9 mg g−1 FW). Rwanda (average 7.1 mg g−1 FW), Guatemala (8.0 mg g−1 FW), and Honduras (8.1 mg g−1 FW) beans showed relatively consistent levels within each country."
+src_pettazzoni2026_plb,PMC12884032.xml,caffeine_ind_eth,"In contrast, greater CAF variability was detected within samples of India and Ethiopia (average content of 7.5 mg g−1 FW and 6.9 mg g−1 FW, respectively)."
+src_pettazzoni2026_plb,PMC12884032.xml,trigonelline,Rwandan coffee had the highest trigonelline (TRI) average concentration (8.3 mg g−1 FW) followed by Brazil (8.0 mg g−1 FW) (Fig. 3b).
+src_pettazzoni2026_plb,PMC12884032.xml,trigonelline_others,"India, Ethiopia, Guatemala and Honduras showed no significantly different TRI levels among countries with average levels ranging from 6.5 mg g−1 FW for India to 7.1 mg g−1 FW for Guatemala."
+src_pettazzoni2026_plb,PMC12884032.xml,cqa_total,"Samples from Brazil, Rwanda, India, Guatemala, and Honduras had relatively homogeneous CQA levels, with averages ranging from 49.6 mg g−1 FW of Guatemala to 57.7 mg g−1 FW of Brazil."
+src_pettazzoni2026_plb,PMC12884032.xml,ferulic,"The lowest average concentration was found in Indian samples (0.19 mg g−1 FW), while the highest was in Honduran samples (0.33 mg g−1 FW)."
+src_pettazzoni2026_plb,PMC12884032.xml,polyphenols,"Specifically, Brazilian samples contained higher polyphenol levels compared to the average of other origins, with 11% more than Rwandan samples (50.1 mg GAeq g−1 FW), 13% more than Indian (49.3 mg GAeq g−1 FW), 3% more than Ethiopian (55.1 mg GAeq g−1FW), 9% more than Guatemalan (51.6 mg GAeq g−1 FW), and 6% more than Honduran samples (53.2 mg GAeq g−1 FW) (Fig. 1)."
+src_pettazzoni2026_plb,PMC12884032.xml,polyphenols_bra,"Brazilian coffee beans had the highest polyphenol content among all countries, with an average of 56.6 mg GAeq g−1 FW."
+src_pettazzoni2026_plb,PMC12884032.xml,putrescine_bra,"Its concentration showed the most significant variability in Brazilian samples, with a minimum of 0.09 μg g−1 FW in sample BRA6 and a maximum of 1.92 μg g−1 FW in sample BRA3."
+src_juwita2026_liberica_idn,PMC13452413.xml,cqa_total,"Total CQA content ranged from 3.59 to 5.38 g/100 g db,"
+src_juwita2026_liberica_idn,PMC13452413.xml,trigonelline,"Trigonelline, the primary non-caffeine alkaloid, ranged from 0.27 to 0.34 g/100 g db,"
+src_juwita2026_liberica_idn,PMC13452413.xml,caffeine,Caffeine content also varied significantly depending on origin and processing method (0.91–1.26 g/100 g db; p < 0.05)
+src_zainuri2023_rinjani,zainuri2023_biotropia_1940.pdf,protein,"The protein content of A rabica coffee beans was between 11.06 and 12.02 %, whereas the Robusta coffee beans contained protein levels ranging from 13.55 to 14.50%."
+src_zainuri2023_rinjani,zainuri2023_biotropia_1940.pdf,caffeine,Arabica beans had a lower (avg. 1.09%) caffeine content than Robusta beans (avg. 2.09%).

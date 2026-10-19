@@ -1,0 +1,72 @@
+{
+  "intent": "review_dataset",
+  "dataset_id": "literature_cards_scout_run_03",
+  "verdict": "needs_human",
+  "based_on": [
+    "references/literature_cards.json (19 countries: 75 composition rows, 51 processing_fine items, 36 varieties, 26 sources)",
+    "references/sources.json (66 entries; the 33 added by Scout run 3)",
+    "references/literature_raw/ (paper XML, table CSVs, text_quotes.csv, 4 PDFs)",
+    "Scout run 3 done_for_now (scout_run_03_done.json)",
+    "Rizki's decisions of 19 Oct 2026: keep 'where' and 'mean'; keep 'natural, honey' as one row; text numbers only when printed in a sentence; drop the Comoros source (keep it in the ledger, no numbers); keep both PSD licence wordings; do not commit PDFs"
+  ],
+  "note_on_format": "This is a literature-card review, not a dataset file, so the checks are the four Rizki set for this run plus a check that his decisions are applied. candidate_targets, useful_columns and unusable_columns do not apply; rows_not_to_publish replaces them. Rows are named by country, list and position in that country's list (1 = first).",
+  "checks": [
+    {
+      "check": "spot_check_numbers",
+      "result": "yes",
+      "evidence": "10 spot checks below all match. Beyond the 10: all 24 Pettazzoni Table 1 / Table S3 and Tsegay Table 2 rows were recomputed in code from the CSVs (0 mismatches, altitude bands match too), and the other 51 rows were compared by eye with their table CSV or text_quotes.csv sentence: 75 of 75 match. 47 rows come from tables and 28 from printed sentences."
+    },
+    {
+      "check": "unit_basis_stated",
+      "result": "yes",
+      "evidence": "Every one of the 75 unit strings names a basis: 33 fresh weight (Pettazzoni; the paper prints 'FW', and sucrose '10.9% (w/w) corresponding to 109 mg g−1 FW'), 14 dry (Juwita '% db' / 'g/100 g db', Peru Table 1 footnote '(*) Results expressed on a dry weight basis', Uganda protein 'corrected on a dry basis'), 28 'basis not stated' (Tsegay, Zainuri, Mitra, Uganda caffeine and trigonelline, Irchad). The wording differs ('dry basis', 'dry weight', '(as printed; basis not stated)'), so the card must not put rows with different bases side by side as if comparable."
+    },
+    {
+      "check": "no_impossible_values",
+      "result": "yes",
+      "evidence": "Highest protein on the card is 17.7 % db (Juwita, Meranti natural); no value is negative and min <= max in every row. Carbohydrate 62.19-65.23 % db (Juwita) is the largest fraction of the bean, as expected. The Irchad protein of 94.45 / 95.48 % is correctly not used. One plausibility hold: UGA caffeine (see rows_not_to_publish)."
+    },
+    {
+      "check": "src_in_ledger",
+      "result": "yes",
+      "evidence": "All 26 src ids used by rows exist in sources.json and in the card's sources map; none unused; card URLs equal ledger URLs; all 26 are opened_and_read. The 33 new ledger entries each have all 9 fields and no duplicate source_id. The 7 ledger-only entries (Awwad, Joët, Alpizar, FAOSTAT, USDA PSD, Europe PMC API, pypdf) contribute nothing to the card, as stated."
+    },
+    {
+      "check": "rizki_decisions_applied",
+      "result": "no",
+      "evidence": "Applied: 'where' on all 75 rows and 'mean' on the 33 mean-only rows; the three 'natural, honey' rows (IDN composition 7-9) kept as one row each; all 28 text-number rows match a sentence in text_quotes.csv and no number was read from a figure; both PSD licence wordings kept. Not yet applied: the Comoros items are still on the card (COM composition 1-2, processing_fine 1, varieties 1, and src_irchad2026_comoros in the card's sources map), and the ledger used_for still says 'caffeine from Table 1'. PDFs: .gitignore does not cover references/literature_raw/*.pdf (git check-ignore finds no rule), so 4 PDFs would be committed with the folder."
+    }
+  ],
+  "spot_checks": [
+    {"row": "BRA composition 1 (sucrose)", "card": "7.6-10.7, n 10", "source": "PMC12884032_table1.csv: BRA4 7.6, BRA3 10.7, 10 Brazil samples", "match": "yes"},
+    {"row": "RWA composition 2 (total free amino acids)", "card": "395.7-531.5 µg/g FW, n 4", "source": "PMC12884032_supp_tableS3: RWA1 395.7, RWA3 531.5", "match": "yes"},
+    {"row": "BRA composition 3 (caffeine)", "card": "mean 8.9 mg/g FW", "source": "text_quotes.csv caffeine: 'Brazilian coffee having the highest average concentration (8.9 mg g−1 FW)'", "match": "yes"},
+    {"row": "ETH composition 11 (oleic acid, Group 2)", "card": "3.5-17.4, n 19", "source": "PMC7218600_table2.csv: 1780 m 3.50, 1865 m 17.4, 19 samples 1715-1888 m", "match": "yes (the paper's summary row prints 3.54; its Table 3 prints 3.50, so the per-sample value is right)"},
+    {"row": "ETH composition 13 (palmitic acid, Group 3)", "card": "26.6-87.8, n 13", "source": "PMC7218600_table2.csv: 1990 m 26.6, 1988 m 87.8, 13 samples 1909-2210 m", "match": "yes (summary row prints 26.8)"},
+    {"row": "IDN composition 1 (protein, natural)", "card": "14.85-17.7 % db, n 3", "source": "PMC13452413_table2.csv Protein (% db) natural: Jambi 17.46, Kayong 14.85, Meranti 17.70", "match": "yes"},
+    {"row": "IDN composition 7 (caffeine, natural, honey)", "card": "0.91-1.26 g/100 g db, n 6", "source": "text_quotes.csv: '(0.91–1.26 g/100 g db; p < 0.05)'", "match": "yes (the paper's Discussion prints '0.90–1.26 g/100 g db'; the card follows the Results sentence)"},
+    {"row": "IDN composition 11 (protein, robusta, Zainuri)", "card": "13.55-14.5 %, n 3", "source": "text_quotes.csv and the PDF: 'Robusta coffee beans contained protein levels ranging from 13.55 to 14.50%'; 3 Robusta sites (Rempek, Selelos, Genggelang); 500-1500 masl; 'natural processing by drying for 2–3 weeks'", "match": "yes"},
+    {"row": "IND composition 9 (caffeine, luwak)", "card": "mean 2.232 %, n 5", "source": "PMC12549920_table1.csv Caffeine %: civet 2.232 ± 0.53 (n = 5); text: sites at ~901-992 m, January 2025", "match": "yes"},
+    {"row": "PER composition 2 (chlorogenic acid)", "card": "30.5-55.42 mg/g dry weight, n 150", "source": "PMC12787891_table1.csv CGA Min 30.50, Max 55.42; caption '150 coffee accessions'; footnote '(*) Results expressed on a dry weight basis'; 774 m a.s.l.; 2022-2023 harvest", "match": "yes"}
+  ],
+  "rows_not_to_publish": [
+    {"row": "COM composition 1", "what": "caffeine, liberica (Excelsa), mean 0.89 % (basis not stated), src_irchad2026_comoros", "why": "Rizki: drop the Comoros source, no numbers. The same table prints protein of 94-95 % and SD 0.000 for caffeine."},
+    {"row": "COM composition 2", "what": "caffeine, robusta, mean 1.52 % (basis not stated), src_irchad2026_comoros", "why": "Rizki: drop the Comoros source, no numbers."},
+    {"row": "COM processing_fine 1", "what": "washed, 'Robusta and Excelsa cherries hand-depulped, washed and air-dried (Ngazidja, 2022)', src_irchad2026_comoros", "why": "Rizki: drop the Comoros source. With it gone, COM has no card items left."},
+    {"row": "COM varieties 1", "what": "'Robusta and Excelsa', src_irchad2026_comoros", "why": "Rizki: drop the Comoros source."},
+    {"row": "card sources map: src_irchad2026_comoros", "what": "label/short/url entry", "why": "No row uses it once the four COM items go. It stays in sources.json."},
+    {"row": "UGA composition 1", "what": "caffeine, arabica, 1.942-3.0 g/100 g (basis not stated), n 155, src_mbihayeimaana2026_uganda", "why": "Hold for Rizki. The number matches Table 1, but the same paper says 'Arabica coffee green beans on average contain 0.9–1.5% caffeine on a dry weight basis while Robusta coffee green beans contain 1.2–2.4%'. The whole Ugandan range sits above that, and its minimum (1.942 %) is higher than every other Arabica caffeine on the card (Peru max 1.539 % dry, Zainuri Arabica 1.09 %, Pettazzoni max 0.89 % FW); its mean (2.616) sits with the Robusta values (Zainuri 2.09 %, Mitra 2.232-2.652 %)."}
+  ],
+  "risks": [
+    "Comoros: after the four items go, the ledger used_for of src_irchad2026_comoros still reads 'caffeine from Table 1'; the Scout or code should change it to say no numbers are used (Rizki, 19 Oct 2026). The References panel shows this text.",
+    "PDFs: add 'references/literature_raw/*.pdf' to .gitignore before committing the folder (PMC12884032_supp_PLB-28-520-s001.pdf, PMC8705492_supp_TableS1.pdf, mintesnot2018_eajs_495_mirror.pdf, zainuri2023_biotropia_1940.pdf). text_quotes.csv already holds the Zainuri sentences, so the numbers stay traceable.",
+    "Tsegay fatty acids (ETH composition 5-16) are 'mg/g' with no basis; one sample's four acids add up to 212 mg/g (1518 m: 84.0 + 21.3 + 12.9 + 93.7). Publishable as printed, but do not compare them with the Juwita fatty-acid percentages.",
+    "UGA composition rows say processing 'natural', but the paper's cherries were 'air dried in the laboratory'. The 'where' text says so; the card should show it so nobody reads it as how Ugandan farms process coffee.",
+    "IND composition 8, 10, 12, 14 (Mitra hand-harvested beans) have processing null; the card should print 'not stated' rather than leave a blank.",
+    "Pettazzoni trigonelline rows say 'Fig. 2c'; the quoted sentence says 'Fig. 3b'. The paper uses both labels, so this is cosmetic.",
+    "Some processing_fine items describe research trials rather than common farm practice (CHN honey and anaerobic from the Liang Hainan trial; BRA carbonic-maceration from da Silva; PER washed at the INIA station). Their notes say so honestly; this is the same reasoning the Scout used to give UGA no processing item.",
+    "Non-commercial licences (Juwita, Zainuri, Mitra, Andini, Rusinek, Mintesnot) are fine for a student project; flag again if the globe is ever used commercially.",
+    "src_europepmc_rest_api is 'access_blocked' because its terms page returned a 403, even though the API itself served the full texts; the used_for line explains this."
+  ],
+  "message": "Every number on the cards matches its saved table or printed sentence, every row states its unit basis, no value is impossible, and every source is in the ledger. Before publishing, the four Comoros items need removing (Rizki's decision), PDFs need a .gitignore line, and Rizki should decide whether the Ugandan Arabica caffeine (1.94-3.0 %, above the paper's own Arabica range) goes on the globe."
+}

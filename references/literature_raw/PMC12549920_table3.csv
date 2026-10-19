@@ -1,0 +1,12 @@
+#caption,Fatty acod Methyl esters of civet-scat borne and manually harvested coffee.
+Parameters (%),Formula,Civet coffeemean ± sd (n = 5),Manual coffee mean ± sd (n = 5),p-value,df,t-value
+Caprylic acid methyl ester,C₉H₁₈O₂,0.287 ± 0.13,0.029 ± 0.06,0.007,5.857,3.9543
+Capric acid methyl ester,C₁₁H₂₂O₂,0.1996 ± 0.12,0.0168 ± 0.04,0.02,4.771,3.2398
+Lauric acid methyl ester,C₁₃H₂₆O₂,0.0906 ± 0.10,0.0932 ± 0.04,0.95,5.2323,-0.05615
+Myrisitic acid methyl ester,C₁₅H₃₀O₂,0.2124 ± 0.10,0.1746 ± 0.05,0.48,6.0054,0.73596
+Palmitic acid methyl ester,C₁₇H₃₄O₂,43.3832 ± 9.93,35.399 ± 1.47,0.14,4.1754,1.7779
+Stearic acid methyl ester,C₁₉H₃₈O₂,4.3922 ± 2.82,2.6964 ± 0.43,0.25,4.1847,1.3298
+Oleic acid methyl ester,C₁₉H₃₆O₂,14.9692 ± 1.83,16.262 ± 0.67,0.19,5.0658,-1.481
+Linoleic acid methyl ester,C₁₉H₃₄O₂,31.8362 ± 13.56,40.805 ± 1.75,0.21,4.1334,-1.4668
+Linolenic acid methyl ester,C₁₉H₃₂O₂,0.7688 ± 0.43,1.0638 ± 0.23,0.2,6.0699,-1.3572
+Arachidic acid methyl ester,C₂₁H₄₂O₂,3.8606 ± 0.80,3.46 ± 0.43,0.35,6.1241,0.99148

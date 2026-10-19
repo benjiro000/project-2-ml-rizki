@@ -1,0 +1,12 @@
+#caption,The relative retention time (RRT) and method of identification of some fatty acids found in the Ethiopian green coffee beans
+Number,Chemical name,Common name,RT,MS-ID,RRT
+1,Tetradecanoic acid,Myristic acid,9.870,NIST-14,1.51
+2,Pentadecanoic acid,Pentadecanoic acid,10.98,NIST-14,1.62
+3,cis-7-Hexadecenoic acid,Hypogeic acid,11.16,NIST-14,1.70
+4,Hexadecanoic acid,Palmitic acid,11.46,NIST-14,1.75
+5,Heptadecanoic acid,Margaric acid,12.42,NIST-14,1.90
+6,9-Octadecenoic acid,Oleic acid,13.35,NIST-14,2.04
+7,"9,12-Octadecadienoic acid",Linoleic acid,13.43,NIST-14,2.05
+8,Octadecanoic acid,Stearic acid,13.61,NIST-14,2.06
+9,"9,12,15-Octadecatrienoic acid",Linolenic acid,13.78,NIST-14,2.08
+10,Eicosanoic acid,Arachidic acid,16.18,NIST-14,2.47

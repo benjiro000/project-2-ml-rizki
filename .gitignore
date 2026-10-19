@@ -37,5 +37,10 @@ Thumbs.db
 data/clean/*
 !data/clean/.gitkeep
 
+# Paper PDFs are publishers' files: keep them local. The saved tables and quotes are enough to trace every number.
+references/literature_raw/**/*.pdf
+
 # Riptide artifacts (cloud-synced)
 .humanlayer/tasks/
+# Full paper text (XML) stays local too, like the PDFs.
+references/literature_raw/**/*.xml

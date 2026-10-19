@@ -1,0 +1,42 @@
+#caption,"Descriptive statistics for 40 agro-morphological, physicochemical, colorimetric, bioactive, and antioxidant activity traits in 150 coffee accessions from the INIA National Coffee Germplasm Collection (Peru)."
+Trait,Abbreviation,Unit,Mean,SD,CV,Min,Max,Median,Skewness,Kurtosis,Shapiro
+Yield per plant,YPP,kg plant−1,0.90,0.55,61.58,0.14,2.64,0.79,0.99,0.83,<0.0001
+Cherry fruit length,CFL,mm,15.53,1.00,6.46,12.55,20.18,15.42,0.68,2.49,0.0018
+Cherry fruit width,CFW,mm,13.66,0.82,6.00,11.45,15.69,13.69,0.09,−0.34,0.6558
+Cherry fruit thickness,CFT,mm,11.83,0.73,6.18,10.13,14.18,11.78,0.37,0.14,0.2373
+Parchment coffee weight,PCW,g,0.19,0.03,16.66,0.14,0.37,0.19,2.25,8.85,<0.0001
+Parchment coffee length,PCL,mm,11.98,1.02,8.52,8.77,16.17,11.92,1.35,4.71,<0.0001
+Parchment coffee width,PCWD,mm,7.89,0.38,4.77,6.76,9.38,7.85,0.75,2.77,<0.0001
+Parchment coffee thickness,PCT,mm,4.78,0.27,5.70,4.24,5.83,4.74,1.13,2.48,<0.0001
+Green coffee weight,GCW,g,0.16,0.03,16.24,0.10,0.28,0.16,1.73,6.35,<0.0001
+Green coffee length,GCL,mm,9.63,0.77,7.97,7.93,13.00,9.58,1.68,5.91,<0.0001
+Green coffee width,GCWD,mm,6.72,0.33,4.95,5.92,8.20,6.72,0.78,2.37,0.0006
+Green coffee thickness,GCT,mm,3.68,0.20,5.42,3.12,4.20,3.67,0.17,0.06,0.6541
+Cherry coffee color L*,CCCL,Coordinate,37.50,7.49,19.97,30.54,60.05,35.05,1.95,2.68,<0.0001
+Cherry coffee color a*,CCCA,Coordinate,22.16,7.48,33.74,−0.97,30.81,24.15,−2.07,3.20,<0.0001
+Cherry coffee color b*,CCCB,Coordinate,16.82,8.98,53.39,8.38,44.70,13.92,2.07,3.13,<0.0001
+Cherry coffee color C*,CCCC,Coordinate,29.92,4.87,16.26,20.61,45.00,28.82,1.17,1.32,<0.0001
+Cherry coffee color h°,CCCH,Angle,35.29,19.04,53.94,21.17,91.61,28.51,2.21,3.41,<0.0001
+Parchment coffee color L*,PCCL,Coordinate,51.26,1.71,3.34,46.23,55.61,51.23,0.02,0.13,0.9517
+Parchment coffee color a*,PCCA,Coordinate,2.38,0.87,36.50,0.55,4.56,2.22,0.55,−0.26,0.0004
+Parchment coffee color b*,PCCB,Coordinate,17.81,1.47,8.26,13.09,21.78,17.76,−0.23,0.76,0.1355
+Parchment coffee color C*,PCCC,Coordinate,17.99,1.55,8.61,13.14,22.17,17.90,−0.13,0.63,0.1800
+Parchment coffee color h°,PCCH,Angle,82.56,2.29,2.78,77.06,87.94,82.72,−0.25,−0.42,0.1342
+Green Coffee Color L*,GCCL,Coordinate,44.60,1.58,3.54,39.01,48.88,44.59,−0.19,0.96,0.0509
+Green Coffee Color a*,GCCA,Coordinate,0.94,0.24,25.29,0.39,1.59,0.92,0.38,−0.06,0.0410
+Green Coffee Color b*,GCCB,Coordinate,9.92,0.85,8.56,6.72,12.07,9.83,−0.33,0.78,0.1693
+Green Coffee Color C*,GCCC,Coordinate,9.97,0.85,8.55,6.76,12.15,9.90,−0.33,0.79,0.1816
+Green Coffee Color h°,GCCH,Angle,84.64,1.30,1.53,81.20,87.72,84.71,−0.16,−0.11,0.8360
+Soluble solids content initial,IB,°Brix,19.31,1.96,10.14,15.23,24.50,19.30,0.27,−0.16,0.0788
+Soluble solids content final,FB,°Brix,12.75,1.72,13.50,8.53,16.13,12.95,−0.40,−0.46,0.0066
+Initial pH,IPH,Value,5.25,0.39,7.45,4.44,6.28,5.19,0.37,−0.61,0.0069
+Final pH,FPH,Value,4.03,0.36,8.90,3.08,4.78,4.09,−0.41,−0.22,0.0381
+Green coffee humidity,GCH,%,6.89,0.64,9.35,5.22,8.64,6.94,−0.11,−0.39,0.5635
+Total phenolic content (*),TPC,mg GAE g−1,45.53,4.07,8.94,32.73,57.78,44.99,0.14,0.75,0.0702
+Total flavonoid content (*),TFC,mg CE g−1,40.01,3.81,9.53,28.82,50.68,39.78,−0.23,0.42,0.5024
+ABTS (*),ABTS,µmol TE g−1,206.00,21.22,10.30,146.50,259.60,205.70,−0.07,−0.20,0.3863
+DPPH (*),DPPH,µmol TE g−1,223.70,41.22,18.43,114.70,321.10,232.10,−0.77,0.09,<0.0001
+FRAP (*),FRAP,µmol Fe+2 g−1,383.80,73.55,19.17,156.30,520.40,391.80,−0.82,0.59,<0.0001
+Chlorogenic acid (*),CGA,mg g−1,42.88,5.51,12.85,30.50,55.42,42.70,−0.03,−0.55,0.4237
+Trigonellin (*),TGN,mg g−1,12.08,1.51,12.52,9.04,15.74,11.85,0.05,−0.80,0.0171
+Caffeine (*),CAF,mg g−1,11.84,1.18,9.96,8.57,15.39,11.76,0.13,0.36,0.5022

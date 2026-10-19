@@ -1,0 +1,8 @@
+#caption,Nutrient profile of unroasted civet-scat borne and manually harvested ripened coffee.
+Parameters,Unit,Civet coffeemean ± sd (n = 5),Manual coffee mean ± sd (n = 5),p-value,df,t-value
+ph,-,5.436 ± 0.10,5.472 ± 0.11,0.60,7.9071,-0.5421
+Protein,%,15.404 ± 1.77,15.492 ± 0.90,0.92,5.9449,-0.099283
+Caffeine,%,2.232 ± 0.53,2.652 ± 0.31,0.17,6.3738,-1.5289
+Total fat,%,8.364 ± 1.47,5.946 ± 1.70,0.043,7.8407,2.4048
+Total sugar,%,2.288 ± 0.79,1.794 ± 0.55,0.28,7.1224,1.1438
+Acidity,%,0.612 ± 0.18,0.7 ± 0.06,0.35,4.8913,-1.0098

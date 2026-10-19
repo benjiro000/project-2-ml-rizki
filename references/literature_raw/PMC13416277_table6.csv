@@ -1,0 +1,15 @@
+#caption,Mean performance statistics of NIRS for predicting composition of Protein content in green Arabica coffee beans using the SVM algorithm.
+Pretreatment,RMSEp,R2p,RPD,RPIQ,CCC,Bias,R2sp
+Raw_data,0.174 d,0.968 a,5.772 a,5.870 a,0.982 a,−0.016 a,0.953 a
+SG,0.174 d,0.968 a,5.772 a,5.869 a,0.982 a,−0.017 a,0.952 a
+SNV,0.246 cd,0.933 ab,4.322 b,4.357 b,0.962 ab,−0.029 a,0.933 a
+SNV1D,0.317 abc,0.901 bcde,3.218 c,3.243 cd,0.942 bcd,−0.048 a,0.898 b
+SNV2D,0.398 a,0.827 f,2.559 c,2.580 d,0.902 e,−0.014 a,0.855 c
+D1,0.294 ab,0.913 abc,3.389 bc,3.425 c,0.951 abc,−0.047 a,0.900 b
+D2,0.367 ab,0.858 cdef,2.938 c,2.963 cd,0.920 cde,−0.013 a,0.885 b
+SNVSG,0.245 cd,0.934 ab,4.325 b,4.361 b,0.963 ab,−0.029 a,0.933 a
+SGD1,0.367 ab,0.868 cdef,2.942 c,2.965 cd,0.922 cde,−0.053 a,0.880 bc
+SG.D1W5,0.294 ab,0.912 abc,3.375 bc,3.412 c,0.951 abc,−0.046 a,0.899 b
+SG.D1W11,0.300 ab,0.909 def,3.302 c,3.341 cd,0.949 cd,−0.043 a,0.897 b
+SG.D2W5,0.383 ab,0.847 ef,2.865 c,2.886 cd,0.913 de,−0.011 a,0.882 bc
+SG.D2W11,0.379 ab,0.851 def,2.899 c,2.918 cd,0.915 cde,−0.010 a,0.884 b

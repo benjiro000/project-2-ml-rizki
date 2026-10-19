@@ -1,0 +1,6 @@
+#caption,The correlation value of four fatty acids in green coffee beans with each other at significant level (p = 0.01)
+Fatty acids,Palmitic acid (mg/g),Stearic acid (mg/g),Oleic acid (mg/g),Linoleic acid (mg/g)
+Palmitic acid (mg/g),1.00,0.09,0.04,0.139
+Stearic acid (mg/g),0.09,1.00,0.727**,0.555**
+Oleic acid (mg/g),0.04,0.727**,1.00,0.742**
+Linoleic acid (mg/g),0.139,0.555**,0.742**,1.00

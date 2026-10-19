@@ -1,0 +1,5 @@
+#caption,"Summary statistics for the caffeine, protein and trigonelline reference data."
+,Min,1st Quartile,Median,Mean,3rd Quartile,Max,Range
+Caffeine (g/100 g),1.942,2.488,2.617,2.616,2.739,3.00,1.058
+Protein (%),11.160,13.120,13.660,13.700,14.160,15.940,4.780
+Trigonelline (g/100 g),0.941,1.041,1.082,1.082,1.123,1.228,0.287

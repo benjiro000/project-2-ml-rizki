@@ -1,0 +1,9 @@
+#caption,"HPLC parameters set using a reverse-phase C18 column, a water–organic solvent mobile phase, 10 µL injection volume, 30 °C column temperature, 1.0 mL min−1 flow rate, and UV detection at 273 nm."
+Parameter Requested,Status or Quantity
+Injection volume,10 µL
+Column temperature,25–30 °C
+Column type/dimensions,"Reverse-phase C18 column, commonly 250 × 4.6 mm, 5 µm or 150 × 4.6 mm, 5 µm"
+Mobile phase composition,"Water:acetonitrile, commonly 80:20 or 70:30 v/v; may include 0.1% formic/acetic acid"
+Flow rate,0.8–1.0 mL/min; commonly 1.0 mL/min
+Run time/acquisition method,"5–15 min per sample; caffeine peak often around 3–8 min, depending on column/mobile phase"
+Detector settings beyond MS transition,UV/PDA detection commonly at 272–280 nm; caffeine monitored at 273 nm

@@ -1,0 +1,38 @@
+#caption,"Biochemical, nutritional and mineral composition of robusta and excelsa cultivated in the Comoros: descriptive statistics and inter-species comparison."
+Variable (Unit),Group,Mean,SD,CV (%),F-Statistic,p-Value,Tukey Sig.
+"Total phenolics, total flavonoids, soluble sugars, tannins, antioxidant activity & caffeine"
+Total phenolics (TP) (mg GAE/g DW),Excelsa,49.08,4.25,8.67%,620.64,1.50 × 10−5,Yes b
+Robusta,121.79,2.73,2.24%,620.64,1.50 × 10−5,Yes a
+Total flavonoids (TF) (mg QE/g DW),Excelsa,15.98,3.26,20.42%,35.03,0.0041,Yes b
+Robusta,29.43,2.20,7.46%,35.03,0.0041,Yes a
+Total soluble sugars (TSS) (mg GE/g DW),Excelsa,41.09,2.84,6.92%,57.93,0.0016,Yes b
+Robusta,60.47,3.37,5.58%,57.93,0.0016,Yes a
+Hydrolysable tannins (HTs) (mg TAE/g DW),Excelsa,8.88,2.79,31.48%,0.21,0.6721,No a
+Robusta,10.06,3.54,35.12%,0.21,0.6721,No a
+DPPH antioxidant activity (mM Trolox eq/g DW),Excelsa,41.74,5.29,12.67%,24.12,0.0080,Yes b
+Robusta,64.97,6.25,9.63%,24.12,0.0080,Yes a
+Caffeine (%),Excelsa,0.89,0.000,—%,1.58 × 1037,2.41 × 10−56,Yes a
+Robusta,1.52,0.000,—%,1.58 × 1037,2.41 × 10−56,Yes b
+Proximate composition: proteins & nitrogen
+Proteins (%),Excelsa,94.45,0.000,—%,5.25 × 1033,2.17 × 10−49,Yes a
+Robusta,95.48,0.000,—%,5.25 × 1033,2.17 × 10−49,Yes b
+Total nitrogen (N) (%),Excelsa,1.61,0.000,—%,2.54 × 1036,9.33 × 10−55,Yes a
+Robusta,1.86,0.000,—%,2.54 × 1036,9.33 × 10−55,Yes b
+Macroelements (g/kg DW)
+Potassium (K) (g/kg DW),Excelsa,31.20,0.000,—%,2.13 × 1038,1.32 × 10−58,Yes a
+Robusta,67.90,0.000,—%,2.13 × 1038,1.32 × 10−58,Yes b
+Sodium (Na) (g/kg DW),Excelsa,13.35,0.05,0.37%,7.94 × 109,0.095,Yes a
+Robusta,7.60,0.10,1.32%,7.94 × 109,0.095,Yes b
+Calcium (Ca) (g/kg DW),Excelsa,6.34,0.09,1.40%,28.72,0.0058,Yes a
+Robusta,6.00,0.06,1.04%,28.72,0.0058,Yes b
+Magnesium (Mg) (g/kg DW),Excelsa,12.99,0.07,0.50%,9.43 × 109,0.067,Yes a
+Robusta,9.34,0.003,0.03%,9.43 × 109,0.067,Yes b
+Microelements (mg/kg DW)
+Iron (Fe) (mg/kg DW),Excelsa,1.05,0.06,5.30%,17.61,0.0137,Yes b
+Robusta,1.20,0.03,2.13%,17.61,0.0137,Yes a
+Zinc (Zn) (mg/kg DW),Excelsa,0.33,0.007,2.14%,749.98,1.10 × 10−5,Yes a
+Robusta,0.13,0.010,7.46%,749.98,1.10 × 10−5,Yes b
+Copper (Cu) (mg/kg DW),Excelsa,0.34,0.003,0.88%,389.56,3.90 × 10−5,Yes a
+Robusta,0.30,0.003,0.84%,389.56,3.90 × 10−5,Yes b
+Manganese (Mn) (mg/kg DW),Excelsa,0.059,0.005,8.47%,30.62,0.0052,Yes b
+Robusta,0.079,0.004,4.46%,30.62,0.0052,Yes a

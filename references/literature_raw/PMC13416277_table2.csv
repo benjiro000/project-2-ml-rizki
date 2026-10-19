@@ -1,0 +1,15 @@
+#caption,Mean performance statistics of NIRS for predicting composition of Caffeine in green Arabica coffee beans using the PLS algorithm.
+Pretreatment,RMSEp,R2p,RPD,RPIQ,CCC,Bias,RMSEcv,R2cv,R2sp
+Raw_data,0.090 b,0.855 a,2.457 a,2.946 a,0.909 a,0.032 a,0.254 c,0.554 a,0.874 a
+SG,0.089 b,0.855 a,2.457 a,2.946 a,0.909 a,0.032 a,0.254 c,0.554 a,0.874 a
+SNV,0.145 a,0.600 b,1.499 b,1.765 b,0.761 b,0.032 a,0.302 ab,0.367 bc,0.582 b
+SNV1D,0.165 a,0.555 b,1.323 b,1.552 b,0.721 b,0.038 a,0.278 bc,0.460 ab,0.591 b
+SNV2D,0.202 a,0.312 b,1.070 b,1.263 b,0.528 b,0.049 a,0.302 ab,0.363 bc,0.303 b
+D1,0.169 a,0.545 b,1.284 b,1.511 b,0.716 b,0.032 a,0.294 abc,0.401 abc,0.591 b
+D2,0.202 a,0.316 b,1.078 b,1.270 b,0.481 b,0.037 a,0.321 a,0.274 c,0.300 b
+SNVSG,0.145 a,0.602 b,1.493 b,1.758 b,0.761 b,0.033 a,0.254 ab,0.367 bc,0.588 b
+SGD1,0.159 a,0.570 b,1.391 b,1.635 b,0.735 b,0.033 a,0.295 abc,0.396 abc,0.587 b
+SG.D1W5,0.169 a,0.547 b,1.289 b,1.517 b,0.717 b,0.032 a,0.294 abc,0.400 abc,0.587 b
+SG.D1W11,0.165 a,0.557 b,1.317 b,1.550 b,0.724 b,0.032 a,0.294 abc,0.399 abc,0.588 b
+SG.D2W5,0.199 a,0.335 b,1.093 b,1.291 b,0.525 b,0.039 a,0.318 ab,0.291 bc,0.330 b
+SG.D2W11,0.210 a,0.341 b,1.031 b,1.215 b,0.536 b,0.059 a,0.301 ab,0.363 bc,0.322 b

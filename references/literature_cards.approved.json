@@ -1,0 +1,1659 @@
+{
+  "sources": {
+    "src_andini2025_gayo_varieties": {
+      "label": "Genetic diversity of cultivated Gayo Arabica Coffee (Coffea arabica L.) based on morphological and microsatellite markers",
+      "short": "Andini 2025",
+      "url": "https://europepmc.org/article/PMC/PMC12308946"
+    },
+    "src_campos2022_guatemala_processing": {
+      "label": "Effect of the Post-Harvest Processing on Protein Modification in Green Coffee Beans by Phenolic Compounds",
+      "short": "Campos 2022",
+      "url": "https://europepmc.org/article/PMC/PMC8775169"
+    },
+    "src_cueva2025_peru_germplasm": {
+      "label": "Morpho-Physicochemical, Bioactive, and Antioxidant Profiling of Peruvian Coffea arabica L. Germplasm Reveals Promising Accessions for Agronomic and Nutraceutical Breeding",
+      "short": "Cueva-Carhuatanta 2025",
+      "url": "https://europepmc.org/article/PMC/PMC12787891"
+    },
+    "src_dasilva2025_brazil_hplc": {
+      "label": "Optimization of Methodology for Simultaneous Quantification of Trigonelline, 5‑Caffeoylquinic Acid, and Caffeine in Green and Roasted Coffee Extracts by HPLC",
+      "short": "da Silva 2025",
+      "url": "https://europepmc.org/article/PMC/PMC12423835"
+    },
+    "src_farag2023_luwak_metabolites": {
+      "label": "Metabolite Profiling of Premium Civet Luwak Bio-Transformed Coffee Compared with Conventional Coffee Types, as Analyzed Using Chemometric Tools",
+      "short": "Farag 2023",
+      "url": "https://europepmc.org/article/PMC/PMC9960232"
+    },
+    "src_hafsah2020_jember_robusta": {
+      "label": "Dataset of volatile compounds from flowers and secondary metabolites from the skin pulp, green beans, and peaberry green beans of robusta coffee",
+      "short": "Hafsah 2020",
+      "url": "https://europepmc.org/article/PMC/PMC7016368"
+    },
+    "src_juwita2026_liberica_idn": {
+      "label": "Unlocking the physicochemical, bioactive, and antioxidant potential of Indonesian Liberica coffee: roles of geographical origin and processing",
+      "short": "Juwita 2026",
+      "url": "https://europepmc.org/article/PMC/PMC13452413"
+    },
+    "src_li2026_typica_luwak_china": {
+      "label": "Comparative Microbiota and Metabolite Profiles of Undried and Dried Typica Luwak (Civet) Coffee Beans",
+      "short": "Li 2026",
+      "url": "https://europepmc.org/article/PMC/PMC13114948"
+    },
+    "src_liang2026_hainan_processing": {
+      "label": "Analysis of Changes in Taste Characteristics of Coffee at Different Primary Processing Methods Using E-Tongue, Untargeted Metabolomics and WGCNA",
+      "short": "Liang 2026",
+      "url": "https://europepmc.org/article/PMC/PMC13163802"
+    },
+    "src_lindsay2026_vietnam_fermentation": {
+      "label": "Fermenting value on Vietnamese coffee farms: working knowledge and the production of quality",
+      "short": "Lindsay 2026",
+      "url": "https://europepmc.org/article/PMC/PMC12712080"
+    },
+    "src_malta2026_brazil_varieties": {
+      "label": "1H NMR-Based Metabolomics and Machine Learning Reveal Candidate Metabolic Markers Associated with Coffea arabica Genealogical Groups",
+      "short": "Malta 2026",
+      "url": "https://europepmc.org/article/PMC/PMC13409573"
+    },
+    "src_mbihayeimaana2026_uganda": {
+      "label": "Rapid Analysis of Caffeine, Protein and Trigonelline in Ugandan Arabica Coffee Using NIRS and Machine Learning Algorithms",
+      "short": "Mbihayeimaana 2026",
+      "url": "https://europepmc.org/article/PMC/PMC13416277"
+    },
+    "src_mintesnot2018_eajs": {
+      "label": "Effect of Altitude, Shade, and Processing Methods on the Quality and Biochemical Composition of Green Coffee Beans in Ethiopia",
+      "short": "Mintesnot 2018",
+      "url": "https://distantreader.org/stacks/journals/ejas/ejas-495.pdf"
+    },
+    "src_mitra2025_civet_india": {
+      "label": "Civet Robusta and natural Robusta coffee are different on key fatty acid methyl esters and total fat",
+      "short": "Mitra 2025",
+      "url": "https://europepmc.org/article/PMC/PMC12549920"
+    },
+    "src_moncayo2025_colombia_natural": {
+      "label": "Impact of Coffee Cherry Fermentation Methods on the Quality Attributes of Dry-Processed Coffee",
+      "short": "Moncayo-Palacios 2025",
+      "url": "https://europepmc.org/article/PMC/PMC12767571"
+    },
+    "src_monrroy2026_panama": {
+      "label": "Phenolic Composition, Antioxidant Activity and Caffeine as Chemical Markers for Differentiating Panamanian Coffea arabica and Coffea canephora",
+      "short": "Monrroy 2026",
+      "url": "https://europepmc.org/article/PMC/PMC13164705"
+    },
+    "src_ogutu2022_kenya_varieties": {
+      "label": "Comprehensive analysis of quality characteristics in main commercial coffee varieties and wild Arabica in Kenya",
+      "short": "Ogutu 2022",
+      "url": "https://europepmc.org/article/PMC/PMC8958313"
+    },
+    "src_penuela2025_colombia_siaf": {
+      "label": "Development of Fermentation Strategies for Quality Mild Coffee Production (Coffea arabica L.) Based on Oxygen Availability and Processing Time",
+      "short": "Peñuela-Martínez 2025",
+      "url": "https://europepmc.org/article/PMC/PMC12427761"
+    },
+    "src_pettazzoni2026_plb": {
+      "label": "Geographic provenance and environmental growing conditions as factors influencing phytochemical composition of Arabica green coffee beans",
+      "short": "Pettazzoni 2026",
+      "url": "https://europepmc.org/article/PMC/PMC12884032"
+    },
+    "src_rusinek2025_roasted_cga": {
+      "label": "Effect of climate, growing region, country of origin, and post-harvest processing on the of content chlorogenic acids (CGAs) and aromatic compounds in roasted coffee beans",
+      "short": "Rusinek 2025",
+      "url": "https://europepmc.org/article/PMC/PMC12358513"
+    },
+    "src_tapia2026_ecuador_cultivars": {
+      "label": "What you plant may not be what you bought: morphological and genetic discordance in specialty Coffea arabica L. cultivars from Ecuador",
+      "short": "Tapia-Armijos 2026",
+      "url": "https://europepmc.org/article/PMC/PMC13409818"
+    },
+    "src_tsegay2020_bmcchem": {
+      "label": "Effect of altitude of coffee plants on the composition of fatty acids of green coffee beans",
+      "short": "Tsegay 2020",
+      "url": "https://europepmc.org/article/PMC/PMC7218600"
+    },
+    "src_varady2024_heavy_metals": {
+      "label": "Effect of processing method (natural, washed, honey, fermentation, maceration) on the availability of heavy metals in specialty coffee",
+      "short": "Várady 2024",
+      "url": "https://europepmc.org/article/PMC/PMC10848008"
+    },
+    "src_yulia2023_gayo_processing": {
+      "label": "The Authentication of Gayo Arabica Green Coffee Beans with Different Cherry Processing Methods Using Portable LED-Based Fluorescence Spectroscopy and Chemometrics Analysis",
+      "short": "Yulia 2023",
+      "url": "https://europepmc.org/article/PMC/PMC10706735"
+    },
+    "src_zainuri2023_rinjani": {
+      "label": "THE CHEMICAL CHARACTERISTICS OF ARABICA AND ROBUSTA GREEN COFFEE BEANS FROM GEOPARK RINJANI, INDONESIA",
+      "short": "Zainuri 2023",
+      "url": "https://journal.biotrop.org/index.php/biotropia/article/view/1940"
+    }
+  },
+  "countries": {
+    "BDI": {
+      "composition": [],
+      "processing_fine": [
+        {
+          "type": "natural",
+          "note": "Burundi specialty lot processed natural.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "type": "anaerobic",
+          "note": "Burundi specialty lot processed by anaerobic fermentation.",
+          "src": "src_varady2024_heavy_metals"
+        }
+      ],
+      "varieties": []
+    },
+    "BRA": {
+      "composition": [
+        {
+          "compound": "sucrose",
+          "unit": "% w/w (fresh weight)",
+          "min": 7.6,
+          "max": 10.7,
+          "n_samples": 10,
+          "altitude_m": "841-1088",
+          "harvest_year": "2021",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Table 1 (per-sample means)"
+        },
+        {
+          "compound": "total free amino acids",
+          "unit": "µg/g fresh weight",
+          "min": 626.6,
+          "max": 997.0,
+          "n_samples": 10,
+          "altitude_m": "841-1088",
+          "harvest_year": "2021",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Supplementary Table S3, TOTAL column"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 8.9,
+          "n_samples": 10,
+          "altitude_m": "841-1088",
+          "harvest_year": "2021",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2b), country mean"
+        },
+        {
+          "compound": "trigonelline",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 8.0,
+          "n_samples": 10,
+          "altitude_m": "841-1088",
+          "harvest_year": "2021",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2c), country mean"
+        },
+        {
+          "compound": "caffeoylquinic acids (CQA, as reported)",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 57.7,
+          "n_samples": 10,
+          "altitude_m": "841-1088",
+          "harvest_year": "2021",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2a), country mean"
+        },
+        {
+          "compound": "total polyphenols (Folin-Ciocalteu)",
+          "unit": "mg gallic acid eq./g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 56.6,
+          "n_samples": 10,
+          "altitude_m": "841-1088",
+          "harvest_year": "2021",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 1), country mean"
+        },
+        {
+          "compound": "putrescine",
+          "unit": "µg/g fresh weight",
+          "min": 0.09,
+          "max": 1.92,
+          "n_samples": 10,
+          "altitude_m": "841-1088",
+          "harvest_year": "2021",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 4), lowest and highest sample"
+        }
+      ],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Wet-processed Arabica from 10 Minas Gerais sites (2021 harvest).",
+          "src": "src_pettazzoni2026_plb"
+        },
+        {
+          "type": "natural",
+          "note": "Red Catuaí and Laurina processed natural (Alto Paranaíba, Minas Gerais, 2023).",
+          "src": "src_dasilva2025_brazil_hplc"
+        },
+        {
+          "type": "carbonic-maceration",
+          "note": "Yellow Catuaí and Geisha processed by carbonic maceration (Alto Paranaíba, 2023).",
+          "src": "src_dasilva2025_brazil_hplc"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Yellow Catuaí",
+          "note": "Grown in Alto Paranaíba, Minas Gerais (2023 crop).",
+          "src": "src_dasilva2025_brazil_hplc"
+        },
+        {
+          "name": "Red Catuaí",
+          "note": "Grown in Alto Paranaíba, Minas Gerais (2023 crop).",
+          "src": "src_dasilva2025_brazil_hplc"
+        },
+        {
+          "name": "Geisha",
+          "note": "Grown in Alto Paranaíba, Minas Gerais (2023 crop).",
+          "src": "src_dasilva2025_brazil_hplc"
+        },
+        {
+          "name": "Arara",
+          "note": "Grown in Alto Paranaíba, Minas Gerais (2023 crop).",
+          "src": "src_dasilva2025_brazil_hplc"
+        },
+        {
+          "name": "Laurina",
+          "note": "Grown in Alto Paranaíba, Minas Gerais (2023 crop).",
+          "src": "src_dasilva2025_brazil_hplc"
+        },
+        {
+          "name": "Mundo Novo",
+          "note": "Described as one of the most widely planted Arabica cultivars in Brazil.",
+          "src": "src_malta2026_brazil_varieties"
+        }
+      ]
+    },
+    "CHN": {
+      "composition": [],
+      "processing_fine": [
+        {
+          "type": "luwak",
+          "note": "Typica Kopi Luwak from captive civets in Baoshan, Yunnan, sun-dried after excretion.",
+          "src": "src_li2026_typica_luwak_china"
+        },
+        {
+          "type": "honey",
+          "note": "Hainan Robusta trial: red honey and black honey next to dry and wet processing.",
+          "src": "src_liang2026_hainan_processing"
+        },
+        {
+          "type": "anaerobic",
+          "note": "Hainan Robusta trial batch processed by anaerobic fermentation.",
+          "src": "src_liang2026_hainan_processing"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Typica",
+          "note": "Used for Kopi Luwak in Baoshan, Yunnan.",
+          "src": "src_li2026_typica_luwak_china"
+        },
+        {
+          "name": "DaFeng No. 1 (Robusta)",
+          "note": "Hainan Robusta cultivar used in the processing trial.",
+          "src": "src_liang2026_hainan_processing"
+        }
+      ]
+    },
+    "COL": {
+      "composition": [],
+      "processing_fine": [
+        {
+          "type": "anaerobic",
+          "note": "Castillo cherries and pulped coffee fermented in sealed self-induced anaerobic tanks up to 192 h (Caldas, 1381 m).",
+          "src": "src_penuela2025_colombia_siaf"
+        },
+        {
+          "type": "natural",
+          "note": "Natural coffees whose cherries were fermented under CO2-based modified atmospheres before drying (Valle del Cauca, 1740 m).",
+          "src": "src_moncayo2025_colombia_natural"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Castillo",
+          "note": "Used in the fermentation trials at Naranjal, Caldas.",
+          "src": "src_penuela2025_colombia_siaf"
+        }
+      ]
+    },
+    "CRI": {
+      "composition": [],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Tarrazú lot processed by traditional fully washed fermentation.",
+          "src": "src_rusinek2025_roasted_cga"
+        },
+        {
+          "type": "drying",
+          "note": "Tarrazú lot dried on patios and raised beds.",
+          "src": "src_rusinek2025_roasted_cga"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Typica",
+          "note": "As labelled on a Tarrazú commercial lot.",
+          "src": "src_rusinek2025_roasted_cga"
+        }
+      ]
+    },
+    "ECU": {
+      "composition": [],
+      "processing_fine": [],
+      "varieties": [
+        {
+          "name": "Sidra",
+          "note": "Planted in southern Ecuador; DNA showed Core Ethiopian material.",
+          "src": "src_tapia2026_ecuador_cultivars"
+        },
+        {
+          "name": "Gesha (as sold)",
+          "note": "Seed sold as Gesha in Ecuador did not always match the Panamanian Gesha genotype.",
+          "src": "src_tapia2026_ecuador_cultivars"
+        }
+      ]
+    },
+    "ETH": {
+      "composition": [
+        {
+          "compound": "sucrose",
+          "unit": "% w/w (fresh weight)",
+          "min": 10.5,
+          "max": 11.2,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Table 1 (per-sample means)"
+        },
+        {
+          "compound": "total free amino acids",
+          "unit": "µg/g fresh weight",
+          "min": 465.7,
+          "max": 631.3,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Supplementary Table S3, TOTAL column"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 6.9,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2b), country mean"
+        },
+        {
+          "compound": "total polyphenols (Folin-Ciocalteu)",
+          "unit": "mg gallic acid eq./g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 55.1,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 1), country mean"
+        },
+        {
+          "compound": "palmitic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 44.9,
+          "max": 98.6,
+          "n_samples": 8,
+          "altitude_m": "1512-1655",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 1"
+        },
+        {
+          "compound": "stearic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 8.53,
+          "max": 23.6,
+          "n_samples": 8,
+          "altitude_m": "1512-1655",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 1"
+        },
+        {
+          "compound": "oleic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 6.0,
+          "max": 13.6,
+          "n_samples": 8,
+          "altitude_m": "1512-1655",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 1"
+        },
+        {
+          "compound": "linoleic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 38.3,
+          "max": 96.2,
+          "n_samples": 8,
+          "altitude_m": "1512-1655",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 1"
+        },
+        {
+          "compound": "palmitic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 37.5,
+          "max": 89.0,
+          "n_samples": 19,
+          "altitude_m": "1715-1888",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 2"
+        },
+        {
+          "compound": "stearic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 3.03,
+          "max": 26.1,
+          "n_samples": 19,
+          "altitude_m": "1715-1888",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 2"
+        },
+        {
+          "compound": "oleic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 3.5,
+          "max": 17.4,
+          "n_samples": 19,
+          "altitude_m": "1715-1888",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 2"
+        },
+        {
+          "compound": "linoleic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 33.6,
+          "max": 86.2,
+          "n_samples": 19,
+          "altitude_m": "1715-1888",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 2"
+        },
+        {
+          "compound": "palmitic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 26.6,
+          "max": 87.8,
+          "n_samples": 13,
+          "altitude_m": "1909-2210",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 3"
+        },
+        {
+          "compound": "stearic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 3.63,
+          "max": 23.5,
+          "n_samples": 13,
+          "altitude_m": "1909-2210",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 3"
+        },
+        {
+          "compound": "oleic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 5.2,
+          "max": 11.3,
+          "n_samples": 13,
+          "altitude_m": "1909-2210",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 3"
+        },
+        {
+          "compound": "linoleic acid",
+          "unit": "mg/g (as printed; basis not stated)",
+          "min": 25.2,
+          "max": 50.6,
+          "n_samples": 13,
+          "altitude_m": "1909-2210",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_tsegay2020_bmcchem",
+          "where": "Table 2, Group 3"
+        }
+      ],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Wet-processed Arabica from Ethiopian smallholder associations.",
+          "src": "src_pettazzoni2026_plb"
+        },
+        {
+          "type": "washed",
+          "note": "Gedeo (Yirgacheffe) Heirloom lots from 2021 processed both washed and natural.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "type": "natural",
+          "note": "Ripe cherries sun-dried whole (dry processing); 40 samples from five districts.",
+          "src": "src_tsegay2020_bmcchem"
+        },
+        {
+          "type": "natural",
+          "note": "Washed and unwashed (natural) beans prepared side by side at farms at 1150, 1545 and 1802 m (2010/11).",
+          "src": "src_mintesnot2018_eajs"
+        },
+        {
+          "type": "drying",
+          "note": "Sidama lots dried on raised African beds; one method dries them under cover in the mountains.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "type": "washed",
+          "note": "Fully washed Sidamo/West Arsi lot: depulped, wet-fermented 48-72 h, then dried.",
+          "src": "src_rusinek2025_roasted_cga"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Heirloom",
+          "note": "Gedeo (Yirgacheffe) lots sold as Ethiopian Heirloom.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "name": "Typica",
+          "note": "As labelled on a Sidamo/West Arsi commercial lot.",
+          "src": "src_rusinek2025_roasted_cga"
+        }
+      ]
+    },
+    "GTM": {
+      "composition": [
+        {
+          "compound": "sucrose",
+          "unit": "% w/w (fresh weight)",
+          "min": 8.7,
+          "max": 10.1,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Table 1 (per-sample means)"
+        },
+        {
+          "compound": "total free amino acids",
+          "unit": "µg/g fresh weight",
+          "min": 662.4,
+          "max": 781.2,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Supplementary Table S3, TOTAL column"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 8.0,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2b), country mean"
+        },
+        {
+          "compound": "trigonelline",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 7.1,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2c), country mean"
+        },
+        {
+          "compound": "caffeoylquinic acids (CQA, as reported)",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 49.6,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2a), country mean"
+        },
+        {
+          "compound": "total polyphenols (Folin-Ciocalteu)",
+          "unit": "mg gallic acid eq./g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 51.6,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 1), country mean"
+        }
+      ],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Wet-processed green beans from two companies in Palencia and Santa Rosa.",
+          "src": "src_campos2022_guatemala_processing"
+        },
+        {
+          "type": "washed",
+          "note": "Fully washed Huehuetenango lot, fermented under water for 48-72 h.",
+          "src": "src_rusinek2025_roasted_cga"
+        },
+        {
+          "type": "carbonic-maceration",
+          "note": "Acatenango (Finca La Senda) Catuai cherries fermented in sealed CO2-rich barrels, 2021.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "type": "anaerobic",
+          "note": "Same farm: natural cherries fermented 250 h in closed tanks, plus an anaerobic honey lot.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "type": "drying",
+          "note": "Huehuetenango lot sun-dried for up to four weeks.",
+          "src": "src_rusinek2025_roasted_cga"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Catuai",
+          "note": "Finca La Senda, Acatenango, 2021.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "name": "Typica",
+          "note": "As labelled on a Huehuetenango commercial lot.",
+          "src": "src_rusinek2025_roasted_cga"
+        }
+      ]
+    },
+    "HND": {
+      "composition": [
+        {
+          "compound": "sucrose",
+          "unit": "% w/w (fresh weight)",
+          "min": 8.5,
+          "max": 9.1,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Table 1 (per-sample means)"
+        },
+        {
+          "compound": "total free amino acids",
+          "unit": "µg/g fresh weight",
+          "min": 643.1,
+          "max": 712.4,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Supplementary Table S3, TOTAL column"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 8.1,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2b), country mean"
+        },
+        {
+          "compound": "ferulic acid",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 0.33,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2a), country mean"
+        },
+        {
+          "compound": "total polyphenols (Folin-Ciocalteu)",
+          "unit": "mg gallic acid eq./g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 53.2,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 1), country mean"
+        }
+      ],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Wet-processed Arabica from Honduran producer associations.",
+          "src": "src_pettazzoni2026_plb"
+        }
+      ],
+      "varieties": []
+    },
+    "IDN": {
+      "composition": [
+        {
+          "compound": "protein",
+          "unit": "% dry basis",
+          "min": 14.85,
+          "max": 17.7,
+          "n_samples": 3,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "natural",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Table 2 (one lot per GI region: Jambi, Kayong, Meranti)"
+        },
+        {
+          "compound": "protein",
+          "unit": "% dry basis",
+          "min": 14.75,
+          "max": 17.27,
+          "n_samples": 3,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "honey",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Table 2 (one lot per GI region: Jambi, Kayong, Meranti)"
+        },
+        {
+          "compound": "carbohydrate (by difference)",
+          "unit": "% dry basis",
+          "min": 62.19,
+          "max": 64.27,
+          "n_samples": 3,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "natural",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Table 2 (one lot per GI region: Jambi, Kayong, Meranti)"
+        },
+        {
+          "compound": "carbohydrate (by difference)",
+          "unit": "% dry basis",
+          "min": 63.95,
+          "max": 65.23,
+          "n_samples": 3,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "honey",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Table 2 (one lot per GI region: Jambi, Kayong, Meranti)"
+        },
+        {
+          "compound": "lipids",
+          "unit": "% dry basis",
+          "min": 5.38,
+          "max": 6.23,
+          "n_samples": 3,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "natural",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Table 2 (one lot per GI region: Jambi, Kayong, Meranti)"
+        },
+        {
+          "compound": "lipids",
+          "unit": "% dry basis",
+          "min": 5.22,
+          "max": 5.72,
+          "n_samples": 3,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "honey",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Table 2 (one lot per GI region: Jambi, Kayong, Meranti)"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "g/100 g dry basis",
+          "min": 0.91,
+          "max": 1.26,
+          "n_samples": 6,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "natural, honey",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Results text (Fig. 3), range over 6 lots (3 regions x natural/honey)"
+        },
+        {
+          "compound": "trigonelline",
+          "unit": "g/100 g dry basis",
+          "min": 0.27,
+          "max": 0.34,
+          "n_samples": 6,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "natural, honey",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Results text (Fig. 3), range over 6 lots (3 regions x natural/honey)"
+        },
+        {
+          "compound": "total caffeoylquinic acids (CQA)",
+          "unit": "g/100 g dry basis",
+          "min": 3.59,
+          "max": 5.38,
+          "n_samples": 6,
+          "altitude_m": null,
+          "harvest_year": "2024",
+          "processing": "natural, honey",
+          "species": "liberica",
+          "src": "src_juwita2026_liberica_idn",
+          "where": "Results text (Fig. 3), range over 6 lots (3 regions x natural/honey)"
+        },
+        {
+          "compound": "protein",
+          "unit": "% (basis not stated)",
+          "min": 11.06,
+          "max": 12.02,
+          "n_samples": 3,
+          "altitude_m": "500-1500",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_zainuri2023_rinjani",
+          "where": "Results text, range over 3 sites"
+        },
+        {
+          "compound": "protein",
+          "unit": "% (basis not stated)",
+          "min": 13.55,
+          "max": 14.5,
+          "n_samples": 3,
+          "altitude_m": "500-1500",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "robusta",
+          "src": "src_zainuri2023_rinjani",
+          "where": "Results text, range over 3 sites"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 1.09,
+          "n_samples": 3,
+          "altitude_m": "500-1500",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "arabica",
+          "src": "src_zainuri2023_rinjani",
+          "where": "Results text, average of 3 sites"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 2.09,
+          "n_samples": 3,
+          "altitude_m": "500-1500",
+          "harvest_year": null,
+          "processing": "natural",
+          "species": "robusta",
+          "src": "src_zainuri2023_rinjani",
+          "where": "Results text, average of 3 sites"
+        }
+      ],
+      "processing_fine": [
+        {
+          "type": "wet-hulled",
+          "note": "Robusta from Jember, East Java processed by the wet-hulled method after a short sealed fermentation.",
+          "src": "src_hafsah2020_jember_robusta"
+        },
+        {
+          "type": "honey",
+          "note": "Gayo Arabica (Aceh) produced by honey, wine (fermented cherry) and natural processes.",
+          "src": "src_yulia2023_gayo_processing"
+        },
+        {
+          "type": "honey",
+          "note": "GI Liberica in Jambi, Riau and West Kalimantan made as honey and natural; washed is rare there for lack of clean water.",
+          "src": "src_juwita2026_liberica_idn"
+        },
+        {
+          "type": "natural",
+          "note": "Lombok Arabica and Robusta dried naturally for 2-3 weeks.",
+          "src": "src_zainuri2023_rinjani"
+        },
+        {
+          "type": "drying",
+          "note": "GI Liberica cherries dried on raised racks in greenhouse solar dryers for 20-30 days.",
+          "src": "src_juwita2026_liberica_idn"
+        },
+        {
+          "type": "luwak",
+          "note": "Commercial Luwak (civet) coffee bought in Bogor; the paper calls Indonesia the first and main Luwak producer.",
+          "src": "src_farag2023_luwak_metabolites"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Gayo 1, Gayo 2, Gayo 3",
+          "note": "Catimor-derived cultivars that most Gayo Highlands farms rely on.",
+          "src": "src_andini2025_gayo_varieties"
+        },
+        {
+          "name": "Ateng Super",
+          "note": "Locally valued cultivar found in the Gayo survey.",
+          "src": "src_andini2025_gayo_varieties"
+        },
+        {
+          "name": "Ateng Janda",
+          "note": "Farmer-preferred cultivar found in the Gayo survey.",
+          "src": "src_andini2025_gayo_varieties"
+        },
+        {
+          "name": "Orange Bourbon",
+          "note": "Traditional landrace in the Gayo survey.",
+          "src": "src_andini2025_gayo_varieties"
+        },
+        {
+          "name": "Liberica (C. liberica)",
+          "note": "Grown under Geographical Indication in Jambi, Riau and West Kalimantan.",
+          "src": "src_juwita2026_liberica_idn"
+        }
+      ]
+    },
+    "IND": {
+      "composition": [
+        {
+          "compound": "sucrose",
+          "unit": "% w/w (fresh weight)",
+          "min": 7.3,
+          "max": 10.1,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Table 1 (per-sample means)"
+        },
+        {
+          "compound": "total free amino acids",
+          "unit": "µg/g fresh weight",
+          "min": 521.4,
+          "max": 668.6,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Supplementary Table S3, TOTAL column"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 7.5,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2b), country mean"
+        },
+        {
+          "compound": "trigonelline",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 6.5,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2c), country mean"
+        },
+        {
+          "compound": "ferulic acid",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 0.19,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2a), country mean"
+        },
+        {
+          "compound": "total polyphenols (Folin-Ciocalteu)",
+          "unit": "mg gallic acid eq./g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 49.3,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 1), country mean"
+        },
+        {
+          "compound": "protein",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 15.404,
+          "n_samples": 5,
+          "altitude_m": "901-992",
+          "harvest_year": "2025",
+          "processing": "luwak",
+          "species": "robusta",
+          "src": "src_mitra2025_civet_india",
+          "where": "Table 1, civet-scat beans (unroasted), mean of 5"
+        },
+        {
+          "compound": "protein",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 15.492,
+          "n_samples": 5,
+          "altitude_m": "901-992",
+          "harvest_year": "2025",
+          "processing": null,
+          "species": "robusta",
+          "src": "src_mitra2025_civet_india",
+          "where": "Table 1, hand-harvested beans (unroasted), mean of 5"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 2.232,
+          "n_samples": 5,
+          "altitude_m": "901-992",
+          "harvest_year": "2025",
+          "processing": "luwak",
+          "species": "robusta",
+          "src": "src_mitra2025_civet_india",
+          "where": "Table 1, civet-scat beans (unroasted), mean of 5"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 2.652,
+          "n_samples": 5,
+          "altitude_m": "901-992",
+          "harvest_year": "2025",
+          "processing": null,
+          "species": "robusta",
+          "src": "src_mitra2025_civet_india",
+          "where": "Table 1, hand-harvested beans (unroasted), mean of 5"
+        },
+        {
+          "compound": "total fat",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 8.364,
+          "n_samples": 5,
+          "altitude_m": "901-992",
+          "harvest_year": "2025",
+          "processing": "luwak",
+          "species": "robusta",
+          "src": "src_mitra2025_civet_india",
+          "where": "Table 1, civet-scat beans (unroasted), mean of 5"
+        },
+        {
+          "compound": "total fat",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 5.946,
+          "n_samples": 5,
+          "altitude_m": "901-992",
+          "harvest_year": "2025",
+          "processing": null,
+          "species": "robusta",
+          "src": "src_mitra2025_civet_india",
+          "where": "Table 1, hand-harvested beans (unroasted), mean of 5"
+        },
+        {
+          "compound": "total sugar",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 2.288,
+          "n_samples": 5,
+          "altitude_m": "901-992",
+          "harvest_year": "2025",
+          "processing": "luwak",
+          "species": "robusta",
+          "src": "src_mitra2025_civet_india",
+          "where": "Table 1, civet-scat beans (unroasted), mean of 5"
+        },
+        {
+          "compound": "total sugar",
+          "unit": "% (basis not stated)",
+          "min": null,
+          "max": null,
+          "mean": 1.794,
+          "n_samples": 5,
+          "altitude_m": "901-992",
+          "harvest_year": "2025",
+          "processing": null,
+          "species": "robusta",
+          "src": "src_mitra2025_civet_india",
+          "where": "Table 1, hand-harvested beans (unroasted), mean of 5"
+        }
+      ],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Wet-processed Arabica from Indian producer associations.",
+          "src": "src_pettazzoni2026_plb"
+        },
+        {
+          "type": "luwak",
+          "note": "Civet coffee recovered from Asian palm civet scats on Kodagu Robusta estates (January 2025).",
+          "src": "src_mitra2025_civet_india"
+        },
+        {
+          "type": "natural",
+          "note": "Monsooned Malabar: naturally processed coffee further exposed to monsoon air on the Malabar coast.",
+          "src": "src_campos2022_guatemala_processing"
+        }
+      ],
+      "varieties": []
+    },
+    "KEN": {
+      "composition": [],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Standard Kenyan practice: pulping, fermentation, washing and sun drying, then AA grading.",
+          "src": "src_ogutu2022_kenya_varieties"
+        },
+        {
+          "type": "natural",
+          "note": "Meru Ruiru 11 lots from 2021 processed washed and as a low-oxygen ('hypoxia') natural.",
+          "src": "src_varady2024_heavy_metals"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "SL28",
+          "note": "One of the four main commercial Arabica varieties in Kenya.",
+          "src": "src_ogutu2022_kenya_varieties"
+        },
+        {
+          "name": "SL34",
+          "note": "One of the four main commercial Arabica varieties in Kenya.",
+          "src": "src_ogutu2022_kenya_varieties"
+        },
+        {
+          "name": "Ruiru 11",
+          "note": "One of the four main commercial Arabica varieties in Kenya.",
+          "src": "src_ogutu2022_kenya_varieties"
+        },
+        {
+          "name": "K7",
+          "note": "One of the four main commercial Arabica varieties in Kenya.",
+          "src": "src_ogutu2022_kenya_varieties"
+        }
+      ]
+    },
+    "NIC": {
+      "composition": [],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Nicaraguan specialty lot processed washed.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "type": "honey",
+          "note": "Nicaraguan specialty lot processed honey.",
+          "src": "src_varady2024_heavy_metals"
+        }
+      ],
+      "varieties": []
+    },
+    "PAN": {
+      "composition": [],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Washed Geisha, Caturra and Caturra/Catuai producer lots (2025 harvest).",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "type": "natural",
+          "note": "Natural (dry-process) Venecia, Caturra and Robusta lots.",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "type": "honey",
+          "note": "Honey (semi-dry) Geisha and Robusta lots.",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "type": "anaerobic",
+          "note": "A Robusta lot made by anaerobic slow drying (ASD).",
+          "src": "src_monrroy2026_panama"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Geisha",
+          "note": "Named on Panamanian producer lots (2025 harvest).",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "name": "Caturra",
+          "note": "Named on Panamanian producer lots (2025 harvest).",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "name": "Catuai",
+          "note": "Named on Panamanian producer lots (2025 harvest).",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "name": "Venecia",
+          "note": "Named on Panamanian producer lots (2025 harvest).",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "name": "Bourbon amarillo",
+          "note": "Named on Panamanian producer lots (2025 harvest).",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "name": "Pacamara",
+          "note": "Named on Panamanian producer lots (2025 harvest).",
+          "src": "src_monrroy2026_panama"
+        },
+        {
+          "name": "Robusta (C. canephora)",
+          "note": "Grown at 450-700 m alongside highland Arabica.",
+          "src": "src_monrroy2026_panama"
+        }
+      ]
+    },
+    "PER": {
+      "composition": [
+        {
+          "compound": "total phenolics (Folin-Ciocalteu)",
+          "unit": "mg GAE/g dry weight",
+          "min": 32.73,
+          "max": 57.78,
+          "n_samples": 150,
+          "altitude_m": "774",
+          "harvest_year": "2022-2023",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_cueva2025_peru_germplasm",
+          "where": "Table 1; accessions from six regions grown together at the Pichanaki station"
+        },
+        {
+          "compound": "chlorogenic acid",
+          "unit": "mg/g dry weight",
+          "min": 30.5,
+          "max": 55.42,
+          "n_samples": 150,
+          "altitude_m": "774",
+          "harvest_year": "2022-2023",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_cueva2025_peru_germplasm",
+          "where": "Table 1; accessions from six regions grown together at the Pichanaki station"
+        },
+        {
+          "compound": "trigonelline",
+          "unit": "mg/g dry weight",
+          "min": 9.04,
+          "max": 15.74,
+          "n_samples": 150,
+          "altitude_m": "774",
+          "harvest_year": "2022-2023",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_cueva2025_peru_germplasm",
+          "where": "Table 1; accessions from six regions grown together at the Pichanaki station"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "mg/g dry weight",
+          "min": 8.57,
+          "max": 15.39,
+          "n_samples": 150,
+          "altitude_m": "774",
+          "harvest_year": "2022-2023",
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_cueva2025_peru_germplasm",
+          "where": "Table 1; accessions from six regions grown together at the Pichanaki station"
+        }
+      ],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "INIA germplasm harvest processed by the wet method with 12-16 h natural fermentation.",
+          "src": "src_cueva2025_peru_germplasm"
+        },
+        {
+          "type": "natural",
+          "note": "Peruvian specialty lot processed natural.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "type": "anaerobic",
+          "note": "Peruvian specialty lots fermented anaerobically (one Amazonas lot for 48-60 h).",
+          "src": "src_rusinek2025_roasted_cga"
+        },
+        {
+          "type": "drying",
+          "note": "Amazonas lot dried in thin layers on beds, turned often, for up to 30 days.",
+          "src": "src_rusinek2025_roasted_cga"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Typica",
+          "note": "As labelled on an Amazonas commercial lot.",
+          "src": "src_rusinek2025_roasted_cga"
+        }
+      ]
+    },
+    "RWA": {
+      "composition": [
+        {
+          "compound": "sucrose",
+          "unit": "% w/w (fresh weight)",
+          "min": 8.3,
+          "max": 10.7,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Table 1 (per-sample means)"
+        },
+        {
+          "compound": "total free amino acids",
+          "unit": "µg/g fresh weight",
+          "min": 395.7,
+          "max": 531.5,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Supplementary Table S3, TOTAL column"
+        },
+        {
+          "compound": "caffeine",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 7.1,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2b), country mean"
+        },
+        {
+          "compound": "trigonelline",
+          "unit": "mg/g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 8.3,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 2c), country mean"
+        },
+        {
+          "compound": "total polyphenols (Folin-Ciocalteu)",
+          "unit": "mg gallic acid eq./g fresh weight",
+          "min": null,
+          "max": null,
+          "mean": 50.1,
+          "n_samples": 4,
+          "altitude_m": null,
+          "harvest_year": null,
+          "processing": "washed",
+          "species": "arabica",
+          "src": "src_pettazzoni2026_plb",
+          "where": "Results text (Fig. 1), country mean"
+        }
+      ],
+      "processing_fine": [
+        {
+          "type": "washed",
+          "note": "Wet-processed Arabica from Rwandan producer associations.",
+          "src": "src_pettazzoni2026_plb"
+        },
+        {
+          "type": "natural",
+          "note": "Nyamasheke (Western Province) Red Bourbon lots from 2021 processed natural.",
+          "src": "src_varady2024_heavy_metals"
+        },
+        {
+          "type": "anaerobic",
+          "note": "Same Nyamasheke lots fermented in closed tanks for 60 or 100 h, then dried on raised beds 25-30 days.",
+          "src": "src_varady2024_heavy_metals"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Red Bourbon",
+          "note": "Nyamasheke lots, 2021.",
+          "src": "src_varady2024_heavy_metals"
+        }
+      ]
+    },
+    "UGA": {
+      "composition": [
+        {
+          "compound": "protein",
+          "unit": "% dry basis",
+          "min": 11.16,
+          "max": 15.94,
+          "n_samples": 172,
+          "altitude_m": "1100-2800",
+          "harvest_year": null,
+          "processing": "lab-dried",
+          "species": "arabica",
+          "src": "src_mbihayeimaana2026_uganda",
+          "where": "Table 1; ripe cherries air-dried in the lab, altitude = range of the two highland zones"
+        },
+        {
+          "compound": "trigonelline",
+          "unit": "g/100 g (basis not stated)",
+          "min": 0.941,
+          "max": 1.228,
+          "n_samples": 172,
+          "altitude_m": "1100-2800",
+          "harvest_year": null,
+          "processing": "lab-dried",
+          "species": "arabica",
+          "src": "src_mbihayeimaana2026_uganda",
+          "where": "Table 1; ripe cherries air-dried in the lab, altitude = range of the two highland zones"
+        }
+      ],
+      "processing_fine": [],
+      "varieties": []
+    },
+    "VNM": {
+      "composition": [],
+      "processing_fine": [
+        {
+          "type": "natural",
+          "note": "Vietnamese Robusta processed natural, sometimes with purchased yeast and 48 h fermentation.",
+          "src": "src_lindsay2026_vietnam_fermentation"
+        },
+        {
+          "type": "honey",
+          "note": "Honey-processed Robusta, including 'extended fermentation honey' lots, made for specialty buyers.",
+          "src": "src_lindsay2026_vietnam_fermentation"
+        }
+      ],
+      "varieties": [
+        {
+          "name": "Catimor",
+          "note": "Arabica variety grown in Vietnam; buyers look for fermentations that add complexity to it.",
+          "src": "src_lindsay2026_vietnam_fermentation"
+        }
+      ]
+    }
+  },
+  "approval": {
+    "approved_by": "Rizki",
+    "date": "2026-10-19",
+    "rules": [
+      "Comoros paper: one plantation only, and its table prints protein of about 95 %",
+      "1.94-3.0 g/100 g is above the paper's own Arabica range (0.9-1.5 %)",
+      "the Ugandan cherries were air-dried in the lab, which says nothing about farm processing"
+    ]
+  }
+}
