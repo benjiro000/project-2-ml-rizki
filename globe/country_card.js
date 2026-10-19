@@ -218,7 +218,7 @@
           lines.push(`${cupLabel(k).padEnd(11)} ${sign(v).padStart(6)}  ${left}┊${right}`);
         });
         lines.push(`<div class="cc-note">Cup scores are sensory scores from Q-graders, not chemistry. Scale of each bar: ±0.5 points.</div>`);
-        return { summary: ranked.slice(0, 2).map((k) => `${cupLabel(k)} ${sign(d[k])}`).join(" · "), lines };
+        return { summary: "vs average: " + ranked.slice(0, 2).map((k) => `${cupLabel(k)} ${sign(d[k])}`).join(" · "), lines };
       } },
     ];
 
