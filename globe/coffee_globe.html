@@ -652,8 +652,8 @@
   <script>
     // ---------------------------------------------------------------
     // 7. REFERENCES PANEL
-    //    Reads data/sources.json, a copy of references/sources.json
-    //    made by src/copy_sources_to_globe.py. Every name starts with
+    //    Reads data/sources.json, built from references/sources.json
+    //    by src/build_references_panel.py. Every name starts with
     //    "refs" so it cannot clash with the globe code above.
     // ---------------------------------------------------------------
     const refsPanel = document.getElementById('refs-panel');
@@ -739,7 +739,7 @@
       refsStatus.textContent = 'Loading sources…';
       fetch('data/sources.json')
         .then(r => {
-          if (!r.ok) throw new Error('HTTP ' + r.status);  // e.g. 404 if the copy script was never run
+          if (!r.ok) throw new Error('HTTP ' + r.status);  // e.g. 404 if the build script was never run
           return r.json();
         })
         .then(data => {
