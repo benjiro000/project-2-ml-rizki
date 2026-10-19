@@ -107,6 +107,7 @@
       <span class="label">Layers</span>
       <button id="btn-routes" class="toggle" aria-pressed="false">Shipping routes</button>
       <button id="btn-coe" class="toggle" aria-pressed="false">Cup of Excellence</button>
+      <button id="btn-beans" class="toggle" aria-pressed="false">Green beans</button>
     </div>
     <div id="globe"></div>
     <div id="legend"></div>
@@ -119,6 +120,8 @@
   </div>
 
   <script src="//unpkg.com/globe.gl"></script>
+  <!-- The green-bean hover card (country facts built by src/build_country_facts.py) -->
+  <script src="country_card.js"></script>
   <script>
     // ---------------------------------------------------------------
     // 1. COFFEE COUNTRIES
@@ -479,6 +482,14 @@
     // ---------------------------------------------------------------
     // 5. THE GLOBE
     // ---------------------------------------------------------------
+    // The green-bean card reads the same Natural Earth properties the tooltip uses
+    const card = CountryCard.create({
+      factsUrl: 'data/country_facts.json',
+      isoOf: f => f.properties.ADM0_A3,
+      nameOf: f => f.properties.ADMIN
+    });
+    card.setEnabled(false);  // starts off, like the other layer buttons
+
     const world = Globe()
       .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
       .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
@@ -508,6 +519,8 @@
       })
       .polygonsTransitionDuration(200)
       .polygonLabel(d => {
+        // When the green-bean card is on it replaces this tooltip, so the two never overlap
+        if (card.enabled) return '';
         const code = d.properties.ADM0_A3;
         const c = coffee[code];
         const imp = showRoutes ? IMPORTERS[code] : null;
@@ -524,10 +537,12 @@
       })
       .onPolygonHover(d => {
         hovered = d;
+        card.hover(d);  // the card ignores this while it is off
         world.polygonsData(world.polygonsData());
       })
       .onPolygonClick(d => {
         const code = d.properties.ADM0_A3;
+        if (card.enabled) card.click(d);  // pins the card; off means the old click only
         if (!coffee[code] && !(showRoutes && IMPORTERS[code])) return;
         world.controls().autoRotate = false;
         world.pointOfView(centroid(d), 1000);
@@ -616,6 +631,18 @@
 
     wireToggle('btn-routes', on => { showRoutes = on; });
     wireToggle('btn-coe', on => { showCoe = on; });
+
+    // Green beans: switches the hover card on and off
+    const beansBtn = document.getElementById('btn-beans');
+    beansBtn.addEventListener('click', () => card.setEnabled(!card.enabled));
+    // The card's own F key can also switch it, so the button follows the card's state
+    card.onChange(() => {
+      beansBtn.classList.toggle('on', card.enabled);
+      beansBtn.setAttribute('aria-pressed', String(card.enabled));
+      // globe.gl only rebuilds a tooltip when the hovered country changes. Switching pointer
+      // interaction off and on clears its memory, so an old tooltip cannot sit next to the card.
+      world.enablePointerInteraction(false).enablePointerInteraction(true);
+    });
 
     renderLegend();
     infoEl.innerHTML = introText();
