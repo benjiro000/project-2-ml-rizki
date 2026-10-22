@@ -7,6 +7,7 @@ Usage
     python download_data.py bank       # Bank Marketing (imbalanced classification)
     python download_data.py flowers    # Flower photos (image option, 218 MB)
     python download_data.py tabular    # the three tabular datasets
+    python download_data.py cqi        # CQI green-coffee reviews (this project's data)
 
 Nothing in data/ is committed, so this script is how anyone reproduces your
 project: they clone the repo, run it, and have the same files you had.
@@ -33,6 +34,7 @@ FLOWERS_URL = (
     "https://storage.googleapis.com/download.tensorflow.org/"
     "example_images/flower_photos.tgz"
 )
+CQI_URL = "https://raw.githubusercontent.com/jldbc/coffee-quality-database/master/data/"
 
 # UCI rejects the default urllib user agent.
 HEADERS = {"User-Agent": "Mozilla/5.0 (Ironhack DSML Project 2)"}
@@ -104,9 +106,18 @@ def download_flowers() -> None:
     print(f"  extracted {sum(counts.values()):,} photos: {counts}")
 
 
+def download_cqi() -> None:
+    """CQI green-coffee reviews, scraped in January 2018 by jldbc: Arabica and Robusta."""
+    print("CQI green-coffee reviews (jldbc, 2018)")
+    folder = RAW / "ds_cqi_jldbc_2018"
+    folder.mkdir(parents=True, exist_ok=True)
+    for name in ("arabica_data_cleaned.csv", "robusta_data_cleaned.csv"):
+        fetch(CQI_URL + name, folder / name)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("dataset", choices=["houses", "telco", "bank", "flowers", "tabular"])
+    parser.add_argument("dataset", choices=["houses", "telco", "bank", "flowers", "tabular", "cqi"])
     args = parser.parse_args()
 
     RAW.mkdir(parents=True, exist_ok=True)
@@ -119,6 +130,8 @@ def main() -> None:
         download_bank()
     if args.dataset == "flowers":
         download_flowers()
+    if args.dataset == "cqi":
+        download_cqi()
 
     print(f"\nDone. Files are in {RAW.resolve().relative_to(Path.cwd().resolve()) if RAW.resolve().is_relative_to(Path.cwd().resolve()) else RAW}/")
 

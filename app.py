@@ -31,9 +31,8 @@ except ImportError:          # the 3D diagram shows an install hint instead
 
 from src.config import PATHS, RANDOM_STATE
 from src.functions import (build_pipeline, compare_models, error_by_group, get_feature_columns,
-                           load_arabica, make_cv, make_preprocessor, plot_learning_curve,
-                           plot_predicted_vs_actual, plot_validation_curve, score_model,
-                           split_once)
+                           load_arabica, make_cv, make_preprocessor, plot_predicted_vs_actual,
+                           plot_validation_curve, score_model, split_once)
 
 st.set_page_config(page_title="Coffee ML Presentation by Rizki F.", layout="wide")
 
@@ -877,17 +876,6 @@ def draw_importance(table):
     ax.axvline(0, color="black", linewidth=1)
     ax.set_xlabel("how much the MAE gets worse when this column is shuffled (cup points)")
     ax.set_title("What drives the predictions (test lots)")
-    fig.tight_layout()
-    return fig
-
-
-def draw_learning_curve(model, X_train, y_train, cv, baseline_mae):
-    fig, ax = plt.subplots(figsize=(8, 5))
-    plot_learning_curve(ax, model, X_train, y_train, cv, "Would more lots help?",
-                        RANDOM_STATE, scoring="mae")
-    ax.axhline(baseline_mae, color="grey", linestyle="--", linewidth=1,
-               label="baseline: always guess the average")
-    ax.legend(loc="center left", bbox_to_anchor=(1.02, 0.5))
     fig.tight_layout()
     return fig
 
