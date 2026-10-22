@@ -34,6 +34,9 @@ PATHS = {
     "gate2_decisions": os.path.join(PROJECT_ROOT, "references", "gate2_decisions.json"),
     "cleaning_plan": os.path.join(PROJECT_ROOT, "references", "cleaning_plan.json"),
     "cleaning_report": os.path.join(PROJECT_ROOT, "references", "cleaning_report.json"),
+    # Literature cards (Scout run 3): the Scout's file in, the approved copy the globe reads out.
+    "literature_cards": os.path.join(PROJECT_ROOT, "references", "literature_cards.json"),
+    "literature_cards_approved": os.path.join(PROJECT_ROOT, "references", "literature_cards.approved.json"),
     # First look: diagrams of the clean table, before any modelling.
     "first_look_figures": os.path.join(PROJECT_ROOT, "references", "figures", "first_look"),
 }
