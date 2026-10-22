@@ -47,3 +47,6 @@ references/literature_raw/**/*.xml
 
 # Streamlit secrets stay local
 .streamlit/secrets.toml
+
+# Office temp files (exist while a deck is open)
+~$*
