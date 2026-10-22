@@ -81,6 +81,24 @@
     @media (max-width: 700px) {
       #refs-btn { position: static; margin: 0.6rem 1rem 0; }
     }
+
+    /* Chain routes checklist: the country card's terminal look (the cc- classes from country_card.js),
+       moved from the top-right corner to just right of its button */
+    .cc-panel.chain-pop { position: absolute; top: var(--chain-top, 0); left: calc(100% + 12px); right: auto; width: min(560px, calc(100vw - 220px)); }
+    .chain-row { outline: none; }
+    .chain-row.cc-open { background: rgba(217, 160, 91, 0.08); }
+    .chain-row.cc-open .cc-title { color: #fff; }
+    .chain-row[aria-checked="true"] .cc-mark { color: #d9a05b; }  /* ticked boxes in the card's amber */
+    .chain-swatch { display: inline-block; width: 14px; height: 3px; margin: 0 6px 0 2px; vertical-align: middle; }
+    .chain-swatch.dashed { background: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 7px) !important; }
+    /* Growing areas get a hollow ring: the point is approximate, not a farm */
+    .chain-region { width: 11px; height: 11px; box-sizing: border-box; border: 2px solid; border-radius: 50%; pointer-events: auto; cursor: pointer; }
+    .dot.ring { background: transparent; border: 2px solid #ddd; box-sizing: border-box; }
+    /* Old figures and pages (before the builder's cut-off year) are drawn in the card's warning red */
+    .chain-dated { color: #e5786d; font-weight: 600; }
+    @media (max-width: 700px) {
+      .cc-panel.chain-pop { position: fixed; top: auto; bottom: 0; left: 0; right: 0; width: auto; }
+    }
   </style>
 </head>
 <body>
@@ -93,7 +111,7 @@
         <button id="refs-close" class="toggle" aria-label="Close references">Close</button>
       </div>
       <!-- Plain text on purpose, so it is easy to edit as facts get sourced -->
-      <p class="refs-notice">Country descriptions, ports, routes and trade figures on this globe come from an earlier draft and are not yet individually sourced. The earlier footer named: International Coffee Organization, USDA Foreign Agricultural Service, Cecafé, VICOFA, Vietnam Customs, Uganda Coffee Development Authority, Alliance for Coffee Excellence and ITC. Which figure comes from which organisation has not been checked yet. Cup of Excellence hosts are based on the Alliance for Coffee Excellence's 2025 and 2026 auction calendars; the earlier history years are not yet sourced.</p>
+      <p class="refs-notice">Country descriptions, ports, routes and trade figures on this globe come from an earlier draft and are not yet individually sourced. The earlier footer named: International Coffee Organization, USDA Foreign Agricultural Service, Cecafé, VICOFA, Vietnam Customs, Uganda Coffee Development Authority, Alliance for Coffee Excellence and ITC. Which figure comes from which organisation has not been checked yet. Cup of Excellence hosts are based on the Alliance for Coffee Excellence's 2025 and 2026 auction calendars; the earlier history years are not yet sourced. The Chain routes stages Farm to port, Import hubs and UNTU' chain are the exception: every one of their routes names its own sources.</p>
       <label for="refs-search">Search sources</label>
       <input id="refs-search" type="text" placeholder="Title, publisher or what it was used for" autocomplete="off">
       <p id="refs-status" aria-live="polite"></p>
@@ -105,7 +123,9 @@
   <div id="stage">
     <div id="toolbar">
       <span class="label">Layers</span>
-      <button id="btn-routes" class="toggle" aria-pressed="false">Shipping routes</button>
+      <!-- Chain routes opens a checklist of route stages; it looks lit while any stage is ticked -->
+      <button id="btn-routes" class="toggle on" aria-haspopup="true" aria-expanded="false" aria-controls="chain-panel">Chain routes</button>
+      <div id="chain-panel" class="cc-panel chain-pop" role="group" aria-label="Chain routes" hidden></div>
       <button id="btn-coe" class="toggle" aria-pressed="false">Cup of Excellence</button>
       <button id="btn-beans" class="toggle" aria-pressed="false">Green beans</button>
     </div>
@@ -377,14 +397,40 @@
     const ROUTE_LIST = ROUTES.map(([f, t, text]) => ({ fromPort: P[f], toPort: P[t], text: text || qual(f, t) }));
 
     // ---------------------------------------------------------------
+    // 3b. CHAIN ROUTES: the other stages of the green-coffee chain.
+    //     Routes, places and sources come from data/chain_routes.json,
+    //     built by src/build_chain_routes.py. Only the look is set here.
+    //     Colours were picked to stay clear of the per-country colours.
+    // ---------------------------------------------------------------
+    const CHAIN_STYLE = {
+      farm_to_port: { color: '#ff3df2', text: '#111', altitude: 0.03 },  // short inland legs: a low, fixed arc
+      import_hubs:  { color: '#304ffe', text: '#fff', altitude: null },  // null = auto height, like shipping routes
+      untu_chain:   { color: '#76ff03', text: '#111', altitude: null, dashed: true }  // dashed: an illustration, not a shipment
+    };
+    const CHAIN_END_ALT = 0.015;  // chain lines start at port-dot height, so the raised coffee countries never hide them
+    const CHAIN_INTRO = {
+      farm_to_port: 'Hollow rings are approximate growing areas, not farms. Click a line for its figure, year and sources.',
+      import_hubs: 'Each line starts at the hub port where most of the coffee enters and ends in the country it is sent on to. The figures are for the whole hub country.',
+      untu_chain: 'Dashed, because this is a concept route for one café, not a measured shipment.'
+    };
+    const KIND_TEXT = { port: 'Port', region: 'Growing area', country: 'Country', destination: 'Destination' };
+    const TAG_COLORS = { 'AGENCIES': '#c88c46', 'TRADE PRESS': '#d6cec4' };
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    // ---------------------------------------------------------------
     // 4. STATE, HELPERS AND INFO PANEL
     // ---------------------------------------------------------------
     const rgba = (type, a) => `rgba(${TYPES[type].color},${a})`;
     const infoEl = document.getElementById('info');
     const legendEl = document.getElementById('legend');
     let hovered = null;
-    let showRoutes = false;
+    let showRoutes = true;  // "Shipping routes" is ticked by default in the Chain routes checklist
     let showCoe = false;
+    // Which chain stages are ticked. showRoutes above always equals chainOn.shipping.
+    const chainOn = { shipping: true, farm_to_port: false, import_hubs: false, untu_chain: false };
+    let chainData = null;   // stays null until data/chain_routes.json has loaded
+    let chainError = null;
+    let CHAIN_ARCS = [];
 
     function centroid(feature) {
       const g = feature.geometry;
@@ -405,6 +451,9 @@
       if (showRoutes) {
         html += '<p><b>Shipping routes:</b> each exporting country has its own line colour, running from its export port to the import ports (blue dots). The lines show main trade flows, not exact sea lanes. Click a line, a port or a blue country for import and export figures. For scale, the world drank roughly 177 million 60-kg bags in 2023/24.</p>';
       }
+      chainStagesOn().forEach(k => {
+        html += `<p><b>${esc(chainData.stages[k].label)}:</b> ${esc(chainData.stages[k].hint)}. ${CHAIN_INTRO[k]}</p>`;
+      });
       return html;
     }
 
@@ -420,6 +469,13 @@
       if (showRoutes) {
         PORT_LIST.filter(p => p.role === 'origin').forEach(p => items.push(dot(p.color, p.country + ' routes')));
         items.push(dot(IMPORT_COLOR, 'Import port and importing country'));
+      }
+      // One entry per ticked chain stage, shown only while that stage is ticked
+      chainStagesOn().forEach(k => {
+        items.push(dot(CHAIN_STYLE[k].color, chainData.stages[k].label + (CHAIN_STYLE[k].dashed ? ' (dashed: illustration)' : '')));
+      });
+      if (chainLayer().rings.length) {
+        items.push('<span><span class="dot ring"></span>Growing area, approximate point</span>');
       }
       legendEl.innerHTML = items.join('');
     }
@@ -478,6 +534,90 @@
         `<p>${r.text}</p>` +
         '<p style="font-size:13px;opacity:0.7">The line shows a main trade flow between two countries, not the exact sea lane.</p>';
     }
+
+    // ---------- chain routes: helpers and cards ----------
+    const nf = new Intl.NumberFormat('en');
+    // Escape text from the data file, so a strange character cannot break the page
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    // '2026-02-12' becomes '12 Feb 2026'
+    const fmtDate = iso => { const [y, m, d] = iso.split('-'); return `${Number(d)} ${MONTHS[Number(m) - 1]} ${y}`; };
+    // The builder marks figures and pages from before its cut-off year as dated
+    const datedText = (text, dated) => dated ? `<span class="chain-dated">${text} · dated</span>` : text;
+
+    // The ticked chain stages (not Shipping routes), once the data has loaded
+    function chainStagesOn() {
+      return chainData ? Object.keys(CHAIN_STYLE).filter(k => chainOn[k]) : [];
+    }
+
+    // Arcs, port dots, names and hollow rings for the ticked chain stages
+    function chainLayer() {
+      const arcs = CHAIN_ARCS.filter(a => chainOn[a.chain.stage]);
+      const points = [], labels = [], rings = [], seen = {};
+      arcs.forEach(a => [a.chain.from, a.chain.to].forEach(p => {
+        if (seen[p.id]) return;  // a place used by two stages is drawn once
+        seen[p.id] = true;
+        const mark = { lat: p.lat, lng: p.lng, name: p.label, color: CHAIN_STYLE[a.chain.stage].color, chainPlace: p };
+        (p.kind === 'region' ? rings : points).push(mark);
+        // Skip a name that the shipping layer already writes at the same port
+        if (!(showRoutes && PORT_LIST.some(q => q.role === 'destination' && q.name === p.label))) labels.push(mark);
+      }));
+      return { arcs, points, labels, rings };
+    }
+
+    // The figure with its unit and year. A route without a figure still shows the year of its source.
+    function chainFigure(r) {
+      if (r.figure) {
+        return `<b>${nf.format(r.figure.value)}</b> ${esc(r.figure.unit)}, ${datedText('<b>' + r.figure.year + '</b>', r.figure.dated)}`;
+      }
+      const s = r.sources[0];
+      return `No figure in the source. Source from ${datedText('<b>' + s.date.slice(0, 4) + '</b>', s.dated)}.`;
+    }
+
+    // The badges at the top of a route card: stage, and ILLUSTRATION or DATED where they apply
+    function chainBadges(r) {
+      const st = CHAIN_STYLE[r.stage];
+      let html = `<span class="tag" style="background:${st.color};color:${st.text}">${esc(chainData.stages[r.stage].label)}</span>`;
+      if (r.illustration) html += badge('ILLUSTRATION', '#ffffff');
+      if ((r.figure && r.figure.dated) || r.sources.some(s => s.dated)) html += badge('DATED', '#e5786d');
+      return html;
+    }
+
+    // One source: title, publisher, date and source tag. links = false for the hover label.
+    function chainSource(s, links) {
+      const title = links && s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener" style="color:#f0c088">${esc(s.title)}</a>` : esc(s.title);
+      return `${title}, ${esc(s.publisher)}, ${datedText(fmtDate(s.date), s.dated)} ` +
+        `<span class="tag" style="background:${TAG_COLORS[s.tag] || '#bdb6ad'};margin:0 0 0 4px;padding:0 6px;font-size:11px">${esc(s.tag)}</span>`;
+    }
+
+    // The hover label of a chain line: everything the card has, without links
+    function chainArcLabel(r) {
+      return `<div style="max-width:340px;line-height:1.45"><b>${esc(r.from.label)} → ${esc(r.to.label)}</b><br>` +
+        `${esc(chainData.stages[r.stage].label)}${r.illustration ? ' · ILLUSTRATION' : ''}<br>${chainFigure(r)}` +
+        (r.note ? `<br><i>${esc(r.note)}</i>` : '') +
+        '<br>Sources: ' + r.sources.map(s => chainSource(s, false)).join('; ') + '<br>Click for details</div>';
+    }
+
+    // The card for a chain line, in the info panel like a shipping route
+    function showChainRoute(r) {
+      infoEl.innerHTML = `<h3>${esc(r.from.label)} → ${esc(r.to.label)}</h3>` + chainBadges(r) +
+        `<p>${chainFigure(r)}</p>` +
+        (r.note ? `<p>${esc(r.note)}</p>` : '') +
+        `<p><b>From:</b> ${esc(r.from.name)}<br><b>To:</b> ${esc(r.to.name)}</p>` +
+        '<p><b>Sources:</b></p><ul>' + r.sources.map(s => `<li>${chainSource(s, true)}</li>`).join('') + '</ul>' +
+        '<p style="font-size:13px;opacity:0.7">The line joins two places. It is not the exact road or sea lane.</p>';
+    }
+
+    // The card for a chain place: what it is, and the chain lines that use it
+    function showChainPlace(p) {
+      const mine = CHAIN_ARCS.filter(a => chainOn[a.chain.stage] && (a.chain.from.id === p.id || a.chain.to.id === p.id));
+      infoEl.innerHTML = `<h3>${esc(p.label)}</h3>` + badge(KIND_TEXT[p.kind] || p.kind, '#d6cec4') +
+        `<p>${esc(p.name)}</p>` +
+        (p.approx ? '<p>Approximate point: the middle of a growing area, not a farm.</p>' : '') +
+        '<p><b>Chain routes on this map:</b></p><ul>' +
+        mine.map(a => `<li>${esc(a.chain.from.label)} → ${esc(a.chain.to.label)} (${esc(chainData.stages[a.chain.stage].label)})</li>`).join('') + '</ul>';
+    }
+
+    const chainPlaceLabel = p => `<b>${esc(p.label)}</b><br>${KIND_TEXT[p.kind] || p.kind}${p.approx ? ', approximate point' : ''}`;
 
     // ---------------------------------------------------------------
     // 5. THE GLOBE
@@ -549,21 +689,26 @@
         showCountry(code);
       })
 
-      // shipping routes: steady thin lines, one colour per exporting country
+      // shipping routes: steady thin lines, one colour per exporting country.
+      // Chain routes (d.chain) use the same lines; their stage colour sits in fromPort.color.
       .arcStartLat(d => d.fromPort.lat)
       .arcStartLng(d => d.fromPort.lng)
       .arcEndLat(d => d.toPort.lat)
       .arcEndLng(d => d.toPort.lng)
       .arcColor(d => d.fromPort.color)
-      .arcStroke(0.25)
+      .arcStroke(0.25)  // the same for every route: the units differ between routes, so no scaling
       .arcAltitudeAutoScale(0.35)
-      .arcDashLength(1)
-      .arcDashGap(0)
+      .arcAltitude(d => d.chain ? CHAIN_STYLE[d.chain.stage].altitude : null)
+      .arcStartAltitude(d => d.chain ? CHAIN_END_ALT : 0)
+      .arcEndAltitude(d => d.chain ? CHAIN_END_ALT : 0)
+      .arcDashLength(d => d.chain && CHAIN_STYLE[d.chain.stage].dashed ? 0.04 : 1)
+      .arcDashGap(d => d.chain && CHAIN_STYLE[d.chain.stage].dashed ? 0.03 : 0)
       .arcDashAnimateTime(0)
-      .arcLabel(d => `<b>${d.fromPort.name} → ${d.toPort.name}</b><br>Click for details`)
+      .arcLabel(d => d.chain ? chainArcLabel(d.chain) : `<b>${d.fromPort.name} → ${d.toPort.name}</b><br>Click for details`)
       .onArcClick(d => {
         world.controls().autoRotate = false;
-        showRoute(d);
+        if (d.chain) showChainRoute(d.chain);
+        else showRoute(d);
       })
 
       // ports (dots and names)
@@ -572,10 +717,28 @@
       .pointColor(d => d.color)
       .pointAltitude(0.015)
       .pointRadius(0.35)
-      .pointLabel(d => `<b>${d.name}, ${d.place}</b><br>${d.role === 'origin' ? 'Export port' : 'Import port'}`)
+      .pointLabel(d => d.chainPlace ? chainPlaceLabel(d.chainPlace)
+        : `<b>${d.name}, ${d.place}</b><br>${d.role === 'origin' ? 'Export port' : 'Import port'}`)
       .onPointClick(d => {
         world.controls().autoRotate = false;
-        showPort(d);
+        if (d.chainPlace) showChainPlace(d.chainPlace);
+        else showPort(d);
+      })
+
+      // growing areas of the chain routes: a hollow ring, because the point is approximate
+      .htmlLat(d => d.lat)
+      .htmlLng(d => d.lng)
+      .htmlAltitude(CHAIN_END_ALT)
+      .htmlElement(d => {
+        const el = document.createElement('div');
+        el.className = 'chain-region';
+        el.style.borderColor = d.color;
+        el.title = d.chainPlace.label;
+        el.addEventListener('click', () => {
+          world.controls().autoRotate = false;
+          showChainPlace(d.chainPlace);
+        });
+        return el;
       })
       .labelLat(d => d.lat)
       .labelLng(d => d.lng)
@@ -609,10 +772,12 @@
     // 6. LAYER BUTTONS
     // ---------------------------------------------------------------
     function applyLayers() {
+      const chain = chainLayer();  // empty until a chain stage is ticked
       world
-        .arcsData(showRoutes ? ROUTE_LIST : [])
-        .pointsData(showRoutes ? PORT_LIST : [])
-        .labelsData(showRoutes ? PORT_LIST.filter(p => p.role === 'destination') : []);
+        .arcsData((showRoutes ? ROUTE_LIST : []).concat(chain.arcs))
+        .pointsData((showRoutes ? PORT_LIST : []).concat(chain.points))
+        .labelsData((showRoutes ? PORT_LIST.filter(p => p.role === 'destination') : []).concat(chain.labels))
+        .htmlElementsData(chain.rings);
       world.polygonsData(world.polygonsData());
       renderLegend();
       infoEl.innerHTML = introText();
@@ -629,8 +794,129 @@
       });
     }
 
-    wireToggle('btn-routes', on => { showRoutes = on; });
     wireToggle('btn-coe', on => { showCoe = on; });
+
+    // ---------------------------------------------------------------
+    // 6b. CHAIN ROUTES CHECKLIST
+    //     The button opens the checklist; it does not switch anything
+    //     itself. ↑/↓ move, Space or Enter tick, Esc or a click outside
+    //     closes. Keys pressed in the checklist stop here, so the
+    //     green-bean card's own ↑/↓ and Esc keys are not triggered.
+    // ---------------------------------------------------------------
+    const chainBtn = document.getElementById('btn-routes');
+    const chainPanel = document.getElementById('chain-panel');
+    let chainFocus = 0;  // the row the keyboard is on
+
+    // The stages to list. If the file failed to load, Shipping routes can still be switched.
+    const chainStages = () => chainData ? chainData.stages : { shipping: { label: 'Shipping routes', hint: '' } };
+
+    // Build the panel once (and again if the data arrives or fails)
+    function renderChainPanel() {
+      let html = '<div class="cc-head">◆ Chain routes</div><div class="cc-rail">';
+      Object.entries(chainStages()).forEach(([k, s]) => {
+        const st = CHAIN_STYLE[k];
+        const swatch = st
+          ? `<span class="chain-swatch${st.dashed ? ' dashed' : ''}" style="background:${st.color};color:${st.color}"></span>`
+          // shipping routes have one colour per exporting country, so their swatch shows those colours
+          : `<span class="chain-swatch" style="background:linear-gradient(90deg,${PORT_LIST.filter(p => p.role === 'origin').map(p => p.color).join(',')})"></span>`;
+        html += `<div class="cc-sec chain-row" role="checkbox" tabindex="-1" data-k="${k}">` +
+          `<span class="cc-mark"></span><span class="cc-title">${swatch}${esc(s.label)}</span>  <span class="cc-dim">${esc(s.hint)}</span></div>`;
+      });
+      html += '</div>';
+      if (chainError) html += `<div class="cc-note cc-bad">Could not load data/chain_routes.json (${esc(chainError)}). Run src/build_chain_routes.py and serve the page locally.</div>`;
+      else if (!chainData) html += '<div class="cc-note">loading the other stages…</div>';
+      html += '<div class="cc-foot">↑/↓ move · Space toggle · Esc close</div>';
+      chainPanel.innerHTML = html;
+      updateChainRows();
+    }
+
+    // Show the ticks and the keyboard row without rebuilding the panel, so focus stays put
+    function updateChainRows() {
+      chainPanel.querySelectorAll('.chain-row').forEach((row, i) => {
+        const on = chainOn[row.dataset.k];
+        row.setAttribute('aria-checked', String(on));
+        row.querySelector('.cc-mark').textContent = on ? '☑' : '☐';
+        row.classList.toggle('cc-open', i === chainFocus);
+      });
+    }
+
+    function focusChainRow() {
+      const rows = chainPanel.querySelectorAll('.chain-row');
+      chainFocus = Math.min(chainFocus, rows.length - 1);
+      updateChainRows();
+      rows[chainFocus].focus();
+    }
+
+    function openChain(open) {
+      chainPanel.hidden = !open;
+      chainBtn.setAttribute('aria-expanded', String(open));
+      if (open) {
+        chainPanel.style.setProperty('--chain-top', chainBtn.offsetTop + 'px');  // level with the button
+        focusChainRow();
+      }
+    }
+
+    function toggleStage(k) {
+      chainOn[k] = !chainOn[k];
+      showRoutes = chainOn.shipping;  // the original layer keeps its own switch
+      chainBtn.classList.toggle('on', Object.values(chainOn).some(Boolean));  // lit while anything is ticked
+      updateChainRows();
+      applyLayers();
+    }
+
+    chainBtn.addEventListener('click', () => openChain(chainPanel.hidden));
+
+    chainPanel.addEventListener('click', e => {
+      const row = e.target.closest('.chain-row');
+      if (!row) return;
+      chainFocus = [...chainPanel.querySelectorAll('.chain-row')].indexOf(row);
+      toggleStage(row.dataset.k);
+      row.focus();
+    });
+
+    chainPanel.addEventListener('keydown', e => {
+      e.stopPropagation();  // keep these keys away from the green-bean card
+      const rows = chainPanel.querySelectorAll('.chain-row');
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        chainFocus = (chainFocus + (e.key === 'ArrowDown' ? 1 : rows.length - 1)) % rows.length;
+        focusChainRow();
+      } else if (e.key === ' ' || e.key === 'Enter') {
+        toggleStage(rows[chainFocus].dataset.k);
+      } else if (e.key === 'Escape') {
+        openChain(false);
+        chainBtn.focus();
+      } else {
+        return;  // any other key (Tab, for example) keeps its normal job
+      }
+      e.preventDefault();  // stop Space scrolling the page and arrows moving it
+    });
+
+    // A press anywhere outside the panel and its button closes the panel
+    document.addEventListener('pointerdown', e => {
+      if (!chainPanel.hidden && !chainPanel.contains(e.target) && !chainBtn.contains(e.target)) openChain(false);
+    });
+
+    renderChainPanel();
+    fetch('data/chain_routes.json')
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);  // e.g. 404 if the build script was never run
+        return r.json();
+      })
+      .then(data => {
+        chainData = data;
+        // Each chain line carries its ends like a shipping route does, coloured by its stage
+        CHAIN_ARCS = data.routes.map(r => ({
+          chain: r,
+          fromPort: Object.assign({}, r.from, { color: CHAIN_STYLE[r.stage].color }),
+          toPort: Object.assign({}, r.to, { color: CHAIN_STYLE[r.stage].color })
+        }));
+        renderChainPanel();
+        applyLayers();
+      })
+      .catch(e => {
+        chainError = e.message;
+        renderChainPanel();
+      });
 
     // Green beans: switches the hover card on and off
     const beansBtn = document.getElementById('btn-beans');
@@ -644,8 +930,7 @@
       world.enablePointerInteraction(false).enablePointerInteraction(true);
     });
 
-    renderLegend();
-    infoEl.innerHTML = introText();
+    applyLayers();  // draws the default view: Shipping routes ticked
   </script>
 
   <!-- A separate script, so the References panel still works if the globe library fails to load -->
