@@ -17,13 +17,11 @@ import json
 import os
 import sys
 
-# Why import from config: the project root and the ledger path are defined once, in src/config.py.
-from config import PROJECT_ROOT, PATHS
+# Why import from config: the paths are defined once, in src/config.py.
+from config import PATHS
 
-# These two paths should move into PATHS in src/config.py. That file has other
-# unfinished edits at the moment, so they stay here until those are committed.
-CURATED = os.path.join(PROJECT_ROOT, "references", "chain_routes.json")
-TARGET = os.path.join(PROJECT_ROOT, "globe", "data", "chain_routes.json")
+CURATED = PATHS["chain_routes_curated"]
+TARGET = PATHS["globe_chain_routes"]
 
 # The ledger has no field for a page's date or for who publishes it, so both are
 # recorded here, once, for the route sources only. Dates are as shown on each page

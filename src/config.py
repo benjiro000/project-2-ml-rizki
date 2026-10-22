@@ -39,4 +39,7 @@ PATHS = {
     "literature_cards_approved": os.path.join(PROJECT_ROOT, "references", "literature_cards.approved.json"),
     # First look: diagrams of the clean table, before any modelling.
     "first_look_figures": os.path.join(PROJECT_ROOT, "references", "figures", "first_look"),
+    # Chain routes layer: the curated routes in, the file the globe reads out.
+    "chain_routes_curated": os.path.join(PROJECT_ROOT, "references", "chain_routes.json"),
+    "globe_chain_routes": os.path.join(PROJECT_ROOT, "globe", "data", "chain_routes.json"),
 }

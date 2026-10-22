@@ -36,7 +36,7 @@ You are one small agent in a team of six. You do one job. These rules come befor
   "title":"<as on the page>",
   "url":"<exact URL from the thread>",
   "publisher_or_author":"<as written, or unknown>",
-  "type":"dataset | paper | documentation | tool | image_set | web_page",
+  "type":"dataset | paper | documentation | tool | image_set | web_page | trade_press",
   "licence":"<as written, or unknown>",
   "licence_url":"<URL or null>",
   "verification":"opened_and_read | summary_only | search_result_only | access_blocked",
