@@ -1,0 +1,457 @@
+{
+ "note": "Curated input for the Chain routes layer. Every route has at least one source id from references/sources.json. Coordinates marked approx are the middle of a growing area, not a farm.",
+ "dated_before": 2023,
+ "stages": {
+  "shipping": {
+   "label": "Shipping routes",
+   "hint": "export port to import port by sea, with trade volumes"
+  },
+  "farm_to_port": {
+   "label": "Farm to port",
+   "hint": "growing area to export port, the inland leg"
+  },
+  "import_hubs": {
+   "label": "Import hubs",
+   "hint": "green coffee re-exported from European hub ports, 2024"
+  }
+ },
+ "routes": [
+  {
+   "id": "br-interior-santos",
+   "stage": "farm_to_port",
+   "from": {
+    "id": "br_interior",
+    "name": "Brazil's interior coffee areas (the sources name no region; this point is a generic, approximate one)",
+    "label": "Brazil's interior coffee areas (approx.)",
+    "kind": "region",
+    "lat": -21.8,
+    "lng": -45.4,
+    "approx": true
+   },
+   "to": {
+    "id": "santos",
+    "name": "Port of Santos",
+    "label": "Port of Santos",
+    "kind": "port",
+    "lat": -23.98,
+    "lng": -46.3,
+    "approx": false
+   },
+   "figure": {
+    "value": 78.7,
+    "unit": "% of Brazil's coffee exports left through Santos",
+    "year": 2025,
+    "dated": false
+   },
+   "note": null,
+   "sources": [
+    {
+     "id": "src_stonex_santos_2026",
+     "title": "Brazil Has the Coffee. Can Santos Move It?",
+     "publisher": "Alexis Rubinstein, Managing Editor - Coffee Network (StoneX)",
+     "url": "https://www.stonex.com/en/insights/brazil-has-the-coffee-can-santos-move-it/",
+     "date": "2026-07-29",
+     "tag": "TRADE PRESS",
+     "dated": false
+    },
+    {
+     "id": "src_datamar_brazil_2026",
+     "title": "From farm to port: Brazilian coffee keeps global lead and powers exports",
+     "publisher": "Gabriel Malheiros, DatamarNews",
+     "url": "https://datamarnews.com/noticias/from-farm-to-port-brazilian-coffee-keeps-global-lead-and-powers-exports/",
+     "date": "2026-04-15",
+     "tag": "TRADE PRESS",
+     "dated": false
+    }
+   ]
+  },
+  {
+   "id": "br-interior-rio",
+   "stage": "farm_to_port",
+   "from": {
+    "id": "br_interior",
+    "name": "Brazil's interior coffee areas (the sources name no region; this point is a generic, approximate one)",
+    "label": "Brazil's interior coffee areas (approx.)",
+    "kind": "region",
+    "lat": -21.8,
+    "lng": -45.4,
+    "approx": true
+   },
+   "to": {
+    "id": "rio_ports",
+    "name": "Rio de Janeiro state ports (Itaguaí and Rio de Janeiro)",
+    "label": "Rio de Janeiro state ports",
+    "kind": "port",
+    "lat": -22.9,
+    "lng": -43.17,
+    "approx": false
+   },
+   "figure": {
+    "value": 17.7,
+    "unit": "% of Brazil's coffee exports left through the two Rio de Janeiro state ports",
+    "year": 2025,
+    "dated": false
+   },
+   "note": null,
+   "sources": [
+    {
+     "id": "src_datamar_brazil_2026",
+     "title": "From farm to port: Brazilian coffee keeps global lead and powers exports",
+     "publisher": "Gabriel Malheiros, DatamarNews",
+     "url": "https://datamarnews.com/noticias/from-farm-to-port-brazilian-coffee-keeps-global-lead-and-powers-exports/",
+     "date": "2026-04-15",
+     "tag": "TRADE PRESS",
+     "dated": false
+    }
+   ]
+  },
+  {
+   "id": "co-coffee-axis-buenaventura",
+   "stage": "farm_to_port",
+   "from": {
+    "id": "co_coffee_area",
+    "name": "Colombian coffee provinces (Antioquia, Caldas, Risaralda, north Valle del Cauca, part of Huila)",
+    "label": "Colombian coffee provinces (approx.)",
+    "kind": "region",
+    "lat": 5.0,
+    "lng": -75.7,
+    "approx": true
+   },
+   "to": {
+    "id": "buenaventura",
+    "name": "Buenaventura (Pacific)",
+    "label": "Buenaventura",
+    "kind": "port",
+    "lat": 3.88,
+    "lng": -77.07,
+    "approx": false
+   },
+   "figure": {
+    "value": 54,
+    "unit": "% of Colombia's coffee exports through Buenaventura at the time of the article (70 % before that year's port disruption)",
+    "year": 2021,
+    "dated": true
+   },
+   "note": "Dated: the source is from September 2021. The three port shares in the source do not add up to 100 %, so read them as rough.",
+   "sources": [
+    {
+     "id": "src_stonex_colombia_ports_2021",
+     "title": "Colombia’s Main Harvest Coffee Exports Brace Further Disruptions On Container Restrictions: Asoexport",
+     "publisher": "Diana Delgado, Latin American correspondent (StoneX), quoting Asoexport",
+     "url": "https://www.stonex.com/en/insights/colombia-s-main-harvest-coffee-exports-brace-further-disruptions-on-container-restrictions-asoexport/",
+     "date": "2021-09-15",
+     "tag": "TRADE PRESS",
+     "dated": true
+    }
+   ]
+  },
+  {
+   "id": "co-coffee-axis-cartagena",
+   "stage": "farm_to_port",
+   "from": {
+    "id": "co_coffee_area",
+    "name": "Colombian coffee provinces (Antioquia, Caldas, Risaralda, north Valle del Cauca, part of Huila)",
+    "label": "Colombian coffee provinces (approx.)",
+    "kind": "region",
+    "lat": 5.0,
+    "lng": -75.7,
+    "approx": true
+   },
+   "to": {
+    "id": "cartagena",
+    "name": "Cartagena (Caribbean)",
+    "label": "Cartagena",
+    "kind": "port",
+    "lat": 10.4,
+    "lng": -75.53,
+    "approx": false
+   },
+   "figure": {
+    "value": 41,
+    "unit": "% of Colombia's coffee exports through Cartagena at the time of the article",
+    "year": 2021,
+    "dated": true
+   },
+   "note": "Dated: the source is from September 2021. Exporters from Nariño, Cauca and Huila had shifted to the Caribbean ports. The port shares in the source do not add up to 100 %, so read them as rough.",
+   "sources": [
+    {
+     "id": "src_stonex_colombia_ports_2021",
+     "title": "Colombia’s Main Harvest Coffee Exports Brace Further Disruptions On Container Restrictions: Asoexport",
+     "publisher": "Diana Delgado, Latin American correspondent (StoneX), quoting Asoexport",
+     "url": "https://www.stonex.com/en/insights/colombia-s-main-harvest-coffee-exports-brace-further-disruptions-on-container-restrictions-asoexport/",
+     "date": "2021-09-15",
+     "tag": "TRADE PRESS",
+     "dated": true
+    }
+   ]
+  },
+  {
+   "id": "co-coffee-axis-santamarta",
+   "stage": "farm_to_port",
+   "from": {
+    "id": "co_coffee_area",
+    "name": "Colombian coffee provinces (Antioquia, Caldas, Risaralda, north Valle del Cauca, part of Huila)",
+    "label": "Colombian coffee provinces (approx.)",
+    "kind": "region",
+    "lat": 5.0,
+    "lng": -75.7,
+    "approx": true
+   },
+   "to": {
+    "id": "santa_marta",
+    "name": "Santa Marta (Caribbean)",
+    "label": "Santa Marta",
+    "kind": "port",
+    "lat": 11.24,
+    "lng": -74.21,
+    "approx": false
+   },
+   "figure": {
+    "value": 13,
+    "unit": "% of Colombia's coffee exports through Santa Marta at the time of the article",
+    "year": 2021,
+    "dated": true
+   },
+   "note": "Dated: the source is from September 2021. The port shares in the source do not add up to 100 %, so read them as rough.",
+   "sources": [
+    {
+     "id": "src_stonex_colombia_ports_2021",
+     "title": "Colombia’s Main Harvest Coffee Exports Brace Further Disruptions On Container Restrictions: Asoexport",
+     "publisher": "Diana Delgado, Latin American correspondent (StoneX), quoting Asoexport",
+     "url": "https://www.stonex.com/en/insights/colombia-s-main-harvest-coffee-exports-brace-further-disruptions-on-container-restrictions-asoexport/",
+     "date": "2021-09-15",
+     "tag": "TRADE PRESS",
+     "dated": true
+    }
+   ]
+  },
+  {
+   "id": "id-gayo-belawan",
+   "stage": "farm_to_port",
+   "from": {
+    "id": "gayo",
+    "name": "Gayo highlands, Aceh",
+    "label": "Gayo highlands, Aceh (approx.)",
+    "kind": "region",
+    "lat": 4.6,
+    "lng": 96.85,
+    "approx": true
+   },
+   "to": {
+    "id": "belawan",
+    "name": "Belawan (Medan)",
+    "label": "Belawan",
+    "kind": "port",
+    "lat": 3.78,
+    "lng": 98.69,
+    "approx": false
+   },
+   "figure": null,
+   "note": "The source names Belawan as the export port for Sumatran arabica. No volume given.",
+   "sources": [
+    {
+     "id": "src_gcr_indonesia_coffee",
+     "title": "Indonesian Coffee economy",
+     "publisher": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
+     "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
+     "date": null,
+     "tag": "TRADE PRESS",
+     "dated": false
+    }
+   ]
+  },
+  {
+   "id": "id-lampung-panjang",
+   "stage": "farm_to_port",
+   "from": {
+    "id": "lampung",
+    "name": "Lampung (mostly robusta)",
+    "label": "Lampung (approx.)",
+    "kind": "region",
+    "lat": -4.9,
+    "lng": 104.9,
+    "approx": true
+   },
+   "to": {
+    "id": "panjang",
+    "name": "Panjang (Lampung)",
+    "label": "Panjang",
+    "kind": "port",
+    "lat": -5.47,
+    "lng": 105.32,
+    "approx": false
+   },
+   "figure": null,
+   "note": "The source calls Panjang an export outlet of mostly robusta. No volume given.",
+   "sources": [
+    {
+     "id": "src_gcr_indonesia_coffee",
+     "title": "Indonesian Coffee economy",
+     "publisher": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
+     "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
+     "date": null,
+     "tag": "TRADE PRESS",
+     "dated": false
+    }
+   ]
+  },
+  {
+   "id": "id-toraja-makassar",
+   "stage": "farm_to_port",
+   "from": {
+    "id": "toraja",
+    "name": "Toraja area, South Sulawesi",
+    "label": "Toraja area, South Sulawesi (approx.)",
+    "kind": "region",
+    "lat": -3.05,
+    "lng": 119.85,
+    "approx": true
+   },
+   "to": {
+    "id": "makassar",
+    "name": "Makassar",
+    "label": "Makassar",
+    "kind": "port",
+    "lat": -5.13,
+    "lng": 119.41,
+    "approx": false
+   },
+   "figure": null,
+   "note": "The source says high-quality arabica is exported from Makassar. No volume given.",
+   "sources": [
+    {
+     "id": "src_gcr_indonesia_coffee",
+     "title": "Indonesian Coffee economy",
+     "publisher": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
+     "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
+     "date": null,
+     "tag": "TRADE PRESS",
+     "dated": false
+    }
+   ]
+  },
+  {
+   "id": "de-hamburg-poland",
+   "stage": "import_hubs",
+   "from": {
+    "id": "hamburg",
+    "name": "Hamburg (Germany's main entry port)",
+    "label": "Hamburg",
+    "kind": "port",
+    "lat": 53.54,
+    "lng": 9.97,
+    "approx": false
+   },
+   "to": {
+    "id": "poland",
+    "name": "Poland",
+    "label": "Poland",
+    "kind": "country",
+    "lat": 52.0,
+    "lng": 19.4,
+    "approx": false
+   },
+   "figure": {
+    "value": 80000,
+    "unit": "tonnes of green coffee re-exported from Germany to Poland",
+    "year": 2024,
+    "estimate": true,
+    "dated": false
+   },
+   "note": null,
+   "sources": [
+    {
+     "id": "src_cbi_eu_coffee_trade",
+     "title": "What is the demand for coffee on the European market?",
+     "publisher": "CBI (Centre for the Promotion of Imports from developing countries)",
+     "url": "https://www.cbi.eu/market-information/coffee/what-demand",
+     "date": "2026-02-12",
+     "tag": "AGENCIES",
+     "dated": false
+    }
+   ]
+  },
+  {
+   "id": "be-antwerp-france",
+   "stage": "import_hubs",
+   "from": {
+    "id": "antwerp",
+    "name": "Antwerp (large coffee storage)",
+    "label": "Antwerp",
+    "kind": "port",
+    "lat": 51.27,
+    "lng": 4.36,
+    "approx": false
+   },
+   "to": {
+    "id": "france",
+    "name": "France",
+    "label": "France",
+    "kind": "country",
+    "lat": 46.6,
+    "lng": 2.4,
+    "approx": false
+   },
+   "figure": {
+    "value": 72000,
+    "unit": "tonnes of green coffee re-exported from Belgium to France",
+    "year": 2024,
+    "estimate": true,
+    "dated": false
+   },
+   "note": null,
+   "sources": [
+    {
+     "id": "src_cbi_eu_coffee_trade",
+     "title": "What is the demand for coffee on the European market?",
+     "publisher": "CBI (Centre for the Promotion of Imports from developing countries)",
+     "url": "https://www.cbi.eu/market-information/coffee/what-demand",
+     "date": "2026-02-12",
+     "tag": "AGENCIES",
+     "dated": false
+    }
+   ]
+  },
+  {
+   "id": "nl-rotterdam-germany",
+   "stage": "import_hubs",
+   "from": {
+    "id": "rotterdam",
+    "name": "Rotterdam (the Netherlands' main entry port)",
+    "label": "Rotterdam",
+    "kind": "port",
+    "lat": 51.95,
+    "lng": 4.14,
+    "approx": false
+   },
+   "to": {
+    "id": "germany",
+    "name": "Germany",
+    "label": "Germany",
+    "kind": "country",
+    "lat": 51.2,
+    "lng": 10.4,
+    "approx": false
+   },
+   "figure": {
+    "value": 59000,
+    "unit": "tonnes of green coffee re-exported from the Netherlands to Germany",
+    "year": 2024,
+    "estimate": true,
+    "dated": false
+   },
+   "note": null,
+   "sources": [
+    {
+     "id": "src_cbi_nl_coffee_market",
+     "title": "The Dutch market potential for coffee",
+     "publisher": "CBI (Centre for the Promotion of Imports from developing countries)",
+     "url": "https://www.cbi.eu/market-information/coffee/netherlands/market-potential",
+     "date": "2026-02-11",
+     "tag": "AGENCIES",
+     "dated": false
+    }
+   ]
+  }
+ ]
+}
