@@ -115,7 +115,7 @@ PART_SCORES = ["Aroma", "Flavor", "Aftertaste", "Acidity", "Body", "Balance", "C
 
 PROJECT_TITLE = "From Green Bean to Cup Score"
 PRESENTER = "Rizki"
-DEMO_TITLE = "Demo: Green Coffee Cup Point Calculator"
+DEMO_TITLE = "GCCS Predictor"
 
 # Raw columns whose names contain one of these words are hidden on the Raw datasets tab
 # (names, contacts, addresses). They never reach the clean table either.
@@ -1080,7 +1080,7 @@ PAGES = [
     "5 · Final model",
     "6 · Where it goes wrong",
     "7 · What drives it",
-    "8 · Demo",
+    "8 · GCCS Predictor",
     "9 · Coffee globe",
     "10 · Limits and conclusions",
     "11 · Thank you",
@@ -1264,13 +1264,10 @@ elif page == P_METRIC:
     st.write("**Which mistake costs more:** specialty coffee starts at about 80 points and most "
              "scores cluster just above it, so a miss of 1 to 2 points can move many coffees "
              "across that line.")
-    base_mean, base_std, final_mean, final_std = cv_scores()
-    col1, col2 = st.columns(2)
-    col1.metric("Baseline MAE (always guess the average)", f"{base_mean:.2f} ± {base_std:.2f}")
-    col2.metric("Huber MAE (cross-validated)", f"{final_mean:.2f} ± {final_std:.2f}")
-    st.caption("Cross-validated on the training lots only, 5 folds, mean ± spread.")
+    st.caption("The baseline always guesses the average cup score. Its MAE and the Huber MAE are "
+               "on the next slides.")
     code_box([BASELINE_CODE, FINAL_MODEL_CODE], model_title="1. The baseline and the cross-validation",
-             label="Show the code behind these numbers")
+             label="Show the code for the baseline and the cross-validation")
 
     tab_heat, tab_line, tab_class = st.tabs(
         ["Correlation heatmap", "Regression Evaluation", "Classification Evaluation"])
@@ -1437,6 +1434,12 @@ elif page == P_METRIC:
 
 elif page == P_MODELS:
     st.title("What I tried")
+    ranked = COMPARISON.sort_values("MAE validation")          # best (lowest MAE) first
+    for column, (name, row) in zip(st.columns(len(ranked)), ranked.iterrows()):
+        column.metric(name, f"{row['MAE validation']:.3f}")
+    st.caption("Validation MAE in cup points (lower is better), the mean over the same 5 "
+               "cross-validation folds. Tuned on the training lots: random forest 1.597 (best of 48 "
+               "settings), gradient boosting 1.633.")
     st.write("Same 5 cross-validation folds for every model. The bar is the validation MAE with "
              "its spread, the black dot is the training MAE.")
     show_plot(draw_model_comparison(COMPARISON))
