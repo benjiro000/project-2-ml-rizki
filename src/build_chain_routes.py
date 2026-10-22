@@ -27,15 +27,15 @@ TARGET = os.path.join(PROJECT_ROOT, "globe", "data", "chain_routes.json")
 
 # The ledger has no field for a page's date or for who publishes it, so both are
 # recorded here, once, for the route sources only. Dates are as shown on each page
-# (checked 22 Oct 2026). AGENCIES = a public body. TRADE PRESS = a news or trade
-# article (the ledger type "trade_press").
+# (checked 22 Oct 2026); None means the card shows no date for that source.
+# AGENCIES = a public body. TRADE PRESS = a news or trade article (the ledger type "trade_press").
 SOURCE_INFO = {
     "src_cbi_eu_coffee_trade":        {"date": "2026-02-12", "tag": "AGENCIES"},
     "src_cbi_nl_coffee_market":       {"date": "2026-02-11", "tag": "AGENCIES"},
     "src_stonex_santos_2026":         {"date": "2026-07-29", "tag": "TRADE PRESS"},
     "src_datamar_brazil_2026":        {"date": "2026-04-15", "tag": "TRADE PRESS"},
     "src_stonex_colombia_ports_2021": {"date": "2021-09-15", "tag": "TRADE PRESS"},
-    "src_gcr_indonesia_coffee":       {"date": "2011-08-05", "tag": "TRADE PRESS"},
+    "src_gcr_indonesia_coffee":       {"date": None, "tag": "TRADE PRESS"},  # Rizki, 22 Oct 2026: show no date
 }
 
 # Why a cut-off year: a figure or page from before this year is drawn as dated on the card.
@@ -114,6 +114,9 @@ for r in curated["routes"]:
             found.append(f"route {rid}: source '{sid}' tag {SOURCE_INFO[sid]['tag']} does not match ledger type {ledger[sid]['type']}")
     if "figure" in r and not r["figure"].get("year"):
         found.append(f"route {rid}: the figure has no year")
+    # Why only true or false: the card shows an ESTIMATE badge when it is true, so a typo must not slip through.
+    if "figure" in r and r["figure"].get("estimate", False) not in (True, False):
+        found.append(f"route {rid}: estimate must be true or false, not {r['figure']['estimate']!r}")
 
     if found:
         problems.extend(found)
@@ -124,10 +127,10 @@ for r in curated["routes"]:
         s, info = ledger[sid], SOURCE_INFO[sid]
         sources.append({"id": sid, "title": s["title"], "publisher": s["publisher_or_author"],
                         "url": s["url"], "date": info["date"], "tag": info["tag"],
-                        "dated": int(info["date"][:4]) < DATED_BEFORE})
+                        "dated": bool(info["date"]) and int(info["date"][:4]) < DATED_BEFORE})
     figure = None
     if "figure" in r:
-        figure = dict(r["figure"], dated=r["figure"]["year"] < DATED_BEFORE)
+        figure = dict(r["figure"], dated=r["figure"]["year"] < DATED_BEFORE)  # "estimate" is passed through as given
 
     routes.append({"id": rid, "stage": r["stage"],
                    "from": place_out(r["from"], places[r["from"]]),

@@ -124,7 +124,7 @@
     <div id="toolbar">
       <span class="label">Layers</span>
       <!-- Chain routes opens a checklist of route stages; it looks lit while any stage is ticked -->
-      <button id="btn-routes" class="toggle on" aria-haspopup="true" aria-expanded="false" aria-controls="chain-panel">Chain routes</button>
+      <button id="btn-routes" class="toggle" aria-haspopup="true" aria-expanded="false" aria-controls="chain-panel">Chain routes</button>
       <div id="chain-panel" class="cc-panel chain-pop" role="group" aria-label="Chain routes" hidden></div>
       <button id="btn-coe" class="toggle" aria-pressed="false">Cup of Excellence</button>
       <button id="btn-beans" class="toggle" aria-pressed="false">Green beans</button>
@@ -424,10 +424,10 @@
     const infoEl = document.getElementById('info');
     const legendEl = document.getElementById('legend');
     let hovered = null;
-    let showRoutes = true;  // "Shipping routes" is ticked by default in the Chain routes checklist
+    let showRoutes = false;  // nothing is ticked when the page loads, like the old Shipping routes button
     let showCoe = false;
     // Which chain stages are ticked. showRoutes above always equals chainOn.shipping.
-    const chainOn = { shipping: true, farm_to_port: false, import_hubs: false, untu_chain: false };
+    const chainOn = { shipping: false, farm_to_port: false, import_hubs: false, untu_chain: false };
     let chainData = null;   // stays null until data/chain_routes.json has loaded
     let chainError = null;
     let CHAIN_ARCS = [];
@@ -564,13 +564,15 @@
       return { arcs, points, labels, rings };
     }
 
-    // The figure with its unit and year. A route without a figure still shows the year of its source.
+    // The figure with its unit and year, and an ESTIMATE badge when the data file says so.
+    // A route without a figure shows the year of its source, if the source has a date.
     function chainFigure(r) {
       if (r.figure) {
-        return `<b>${nf.format(r.figure.value)}</b> ${esc(r.figure.unit)}, ${datedText('<b>' + r.figure.year + '</b>', r.figure.dated)}`;
+        return `<b>${nf.format(r.figure.value)}</b> ${esc(r.figure.unit)}, ${datedText('<b>' + r.figure.year + '</b>', r.figure.dated)}` +
+          (r.figure.estimate === true ? ' ' + badge('ESTIMATE', '#e6c15a') : '');
       }
-      const s = r.sources[0];
-      return `No figure in the source. Source from ${datedText('<b>' + s.date.slice(0, 4) + '</b>', s.dated)}.`;
+      const s = r.sources.find(x => x.date);
+      return s ? `No figure in the source. Source from ${datedText('<b>' + s.date.slice(0, 4) + '</b>', s.dated)}.` : 'No figure in the source.';
     }
 
     // The badges at the top of a route card: stage, and ILLUSTRATION or DATED where they apply
@@ -582,10 +584,10 @@
       return html;
     }
 
-    // One source: title, publisher, date and source tag. links = false for the hover label.
+    // One source: title, publisher, date (if it has one) and source tag. links = false for the hover label.
     function chainSource(s, links) {
       const title = links && s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener" style="color:#f0c088">${esc(s.title)}</a>` : esc(s.title);
-      return `${title}, ${esc(s.publisher)}, ${datedText(fmtDate(s.date), s.dated)} ` +
+      return `${title}, ${esc(s.publisher)}${s.date ? ', ' + datedText(fmtDate(s.date), s.dated) : ''} ` +
         `<span class="tag" style="background:${TAG_COLORS[s.tag] || '#bdb6ad'};margin:0 0 0 4px;padding:0 6px;font-size:11px">${esc(s.tag)}</span>`;
     }
 
@@ -930,7 +932,7 @@
       world.enablePointerInteraction(false).enablePointerInteraction(true);
     });
 
-    applyLayers();  // draws the default view: Shipping routes ticked
+    applyLayers();  // draws the default view: nothing ticked
   </script>
 
   <!-- A separate script, so the References panel still works if the globe library fails to load -->

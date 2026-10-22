@@ -264,9 +264,9 @@
      "title": "Indonesian Coffee economy",
      "publisher": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
      "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
-     "date": "2011-08-05",
+     "date": null,
      "tag": "TRADE PRESS",
-     "dated": true
+     "dated": false
     }
    ]
   },
@@ -300,9 +300,9 @@
      "title": "Indonesian Coffee economy",
      "publisher": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
      "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
-     "date": "2011-08-05",
+     "date": null,
      "tag": "TRADE PRESS",
-     "dated": true
+     "dated": false
     }
    ]
   },
@@ -336,9 +336,9 @@
      "title": "Indonesian Coffee economy",
      "publisher": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
      "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
-     "date": "2011-08-05",
+     "date": null,
      "tag": "TRADE PRESS",
-     "dated": true
+     "dated": false
     }
    ]
   },
@@ -365,11 +365,12 @@
    },
    "figure": {
     "value": 80000,
-    "unit": "tonnes of green coffee re-exported from Germany to Poland (Germany's total re-exports: 205,000 t)",
+    "unit": "tonnes of green coffee re-exported from Germany to Poland",
     "year": 2024,
+    "estimate": true,
     "dated": false
    },
-   "note": "The re-export figure is for Germany as a whole. Hamburg is where most of the coffee enters.",
+   "note": null,
    "illustration": false,
    "sources": [
     {
@@ -408,9 +409,10 @@
     "value": 72000,
     "unit": "tonnes of green coffee re-exported from Belgium to France",
     "year": 2024,
+    "estimate": true,
     "dated": false
    },
-   "note": "The source gives two different totals for Belgium's re-exports (157,000 and 184,000 t), so only the flow to France is shown. The figure is for Belgium as a whole.",
+   "note": null,
    "illustration": false,
    "sources": [
     {
@@ -447,11 +449,12 @@
    },
    "figure": {
     "value": 59000,
-    "unit": "tonnes of green coffee re-exported from the Netherlands to Germany (about two-thirds of 90,000 t)",
+    "unit": "tonnes of green coffee re-exported from the Netherlands to Germany",
     "year": 2024,
+    "estimate": true,
     "dated": false
    },
-   "note": "The re-export figure is for the Netherlands as a whole.",
+   "note": null,
    "illustration": false,
    "sources": [
     {
@@ -495,9 +498,9 @@
      "title": "Indonesian Coffee economy",
      "publisher": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
      "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
-     "date": "2011-08-05",
+     "date": null,
      "tag": "TRADE PRESS",
-     "dated": true
+     "dated": false
     }
    ]
   },
