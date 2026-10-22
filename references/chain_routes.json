@@ -1,0 +1,47 @@
+{
+ "note": "Curated input for the Chain routes layer. Every route has at least one source id from references/sources.json. Coordinates marked approx are the middle of a growing area, not a farm.",
+ "stages": {
+  "shipping": {"label": "Shipping routes", "hint": "export port to import port by sea, with trade volumes"},
+  "farm_to_port": {"label": "Farm to port", "hint": "growing area to export port, the inland leg"},
+  "import_hubs": {"label": "Import hubs", "hint": "green coffee re-exported from European hub ports, 2024"},
+  "untu_chain": {"label": "UNTU' chain", "hint": "Gayo to Belawan to Rotterdam to Amsterdam (illustration)"}
+ },
+ "places": {
+  "br_interior": {"name": "Brazil's interior coffee areas (the sources name no region; this point is a generic, approximate one)", "kind": "region", "lat": -21.8, "lng": -45.4, "approx": true},
+  "santos": {"name": "Port of Santos", "kind": "port", "lat": -23.98, "lng": -46.3},
+  "rio_ports": {"name": "Rio de Janeiro state ports (Itaguaí and Rio de Janeiro)", "kind": "port", "lat": -22.9, "lng": -43.17},
+  "co_coffee_area": {"name": "Colombian coffee provinces (Antioquia, Caldas, Risaralda, north Valle del Cauca, part of Huila)", "kind": "region", "lat": 5.0, "lng": -75.7, "approx": true},
+  "buenaventura": {"name": "Buenaventura (Pacific)", "kind": "port", "lat": 3.88, "lng": -77.07},
+  "cartagena": {"name": "Cartagena (Caribbean)", "kind": "port", "lat": 10.4, "lng": -75.53},
+  "santa_marta": {"name": "Santa Marta (Caribbean)", "kind": "port", "lat": 11.24, "lng": -74.21},
+  "gayo": {"name": "Gayo highlands, Aceh", "kind": "region", "lat": 4.6, "lng": 96.85, "approx": true},
+  "belawan": {"name": "Belawan (Medan)", "kind": "port", "lat": 3.78, "lng": 98.69},
+  "lampung": {"name": "Lampung (mostly robusta)", "kind": "region", "lat": -4.9, "lng": 104.9, "approx": true},
+  "panjang": {"name": "Panjang (Lampung)", "kind": "port", "lat": -5.47, "lng": 105.32},
+  "toraja": {"name": "Toraja area, South Sulawesi", "kind": "region", "lat": -3.05, "lng": 119.85, "approx": true},
+  "makassar": {"name": "Makassar", "kind": "port", "lat": -5.13, "lng": 119.41},
+  "hamburg": {"name": "Hamburg (Germany's main entry port)", "kind": "port", "lat": 53.54, "lng": 9.97},
+  "poland": {"name": "Poland", "kind": "country", "lat": 52.0, "lng": 19.4},
+  "antwerp": {"name": "Antwerp (large coffee storage)", "kind": "port", "lat": 51.27, "lng": 4.36},
+  "france": {"name": "France", "kind": "country", "lat": 46.6, "lng": 2.4},
+  "rotterdam": {"name": "Rotterdam (the Netherlands' main entry port)", "kind": "port", "lat": 51.95, "lng": 4.14},
+  "germany": {"name": "Germany", "kind": "country", "lat": 51.2, "lng": 10.4},
+  "untu_amsterdam": {"name": "UNTU' Cuisines & Coffee, Amsterdam", "kind": "destination", "lat": 52.37, "lng": 4.9}
+ },
+ "routes": [
+  {"id": "br-interior-santos", "stage": "farm_to_port", "from": "br_interior", "to": "santos", "figure": {"value": 78.7, "unit": "% of Brazil's coffee exports left through Santos", "year": 2025}, "source_ids": ["src_stonex_santos_2026", "src_datamar_brazil_2026"]},
+  {"id": "br-interior-rio", "stage": "farm_to_port", "from": "br_interior", "to": "rio_ports", "figure": {"value": 17.7, "unit": "% of Brazil's coffee exports left through the two Rio de Janeiro state ports", "year": 2025}, "source_ids": ["src_datamar_brazil_2026"]},
+  {"id": "co-coffee-axis-buenaventura", "stage": "farm_to_port", "from": "co_coffee_area", "to": "buenaventura", "figure": {"value": 54, "unit": "% of Colombia's coffee exports through Buenaventura at the time of the article (70 % before that year's port disruption)", "year": 2021}, "note": "Dated: the source is from September 2021. The three port shares in the source do not add up to 100 %, so read them as rough.", "source_ids": ["src_stonex_colombia_ports_2021"]},
+  {"id": "co-coffee-axis-cartagena", "stage": "farm_to_port", "from": "co_coffee_area", "to": "cartagena", "figure": {"value": 41, "unit": "% of Colombia's coffee exports through Cartagena at the time of the article", "year": 2021}, "note": "Dated: the source is from September 2021. Exporters from Nariño, Cauca and Huila had shifted to the Caribbean ports. The port shares in the source do not add up to 100 %, so read them as rough.", "source_ids": ["src_stonex_colombia_ports_2021"]},
+  {"id": "co-coffee-axis-santamarta", "stage": "farm_to_port", "from": "co_coffee_area", "to": "santa_marta", "figure": {"value": 13, "unit": "% of Colombia's coffee exports through Santa Marta at the time of the article", "year": 2021}, "note": "Dated: the source is from September 2021. The port shares in the source do not add up to 100 %, so read them as rough.", "source_ids": ["src_stonex_colombia_ports_2021"]},
+  {"id": "id-gayo-belawan", "stage": "farm_to_port", "from": "gayo", "to": "belawan", "note": "The source names Belawan as the export port for Sumatran arabica. No volume given.", "source_ids": ["src_gcr_indonesia_coffee"]},
+  {"id": "id-lampung-panjang", "stage": "farm_to_port", "from": "lampung", "to": "panjang", "note": "The source calls Panjang an export outlet of mostly robusta. No volume given.", "source_ids": ["src_gcr_indonesia_coffee"]},
+  {"id": "id-toraja-makassar", "stage": "farm_to_port", "from": "toraja", "to": "makassar", "note": "The source says high-quality arabica is exported from Makassar. No volume given.", "source_ids": ["src_gcr_indonesia_coffee"]},
+  {"id": "de-hamburg-poland", "stage": "import_hubs", "from": "hamburg", "to": "poland", "figure": {"value": 80000, "unit": "tonnes of green coffee re-exported from Germany to Poland (Germany's total re-exports: 205,000 t)", "year": 2024}, "note": "The re-export figure is for Germany as a whole. Hamburg is where most of the coffee enters.", "source_ids": ["src_cbi_eu_coffee_trade"]},
+  {"id": "be-antwerp-france", "stage": "import_hubs", "from": "antwerp", "to": "france", "figure": {"value": 72000, "unit": "tonnes of green coffee re-exported from Belgium to France", "year": 2024}, "note": "The source gives two different totals for Belgium's re-exports (157,000 and 184,000 t), so only the flow to France is shown. The figure is for Belgium as a whole.", "source_ids": ["src_cbi_eu_coffee_trade"]},
+  {"id": "nl-rotterdam-germany", "stage": "import_hubs", "from": "rotterdam", "to": "germany", "figure": {"value": 59000, "unit": "tonnes of green coffee re-exported from the Netherlands to Germany (about two-thirds of 90,000 t)", "year": 2024}, "note": "The re-export figure is for the Netherlands as a whole.", "source_ids": ["src_cbi_nl_coffee_market"]},
+  {"id": "untu-1-gayo-belawan", "stage": "untu_chain", "from": "gayo", "to": "belawan", "illustration": true, "note": "Step 1 of an illustrated chain for UNTU' Cuisines & Coffee. Gayo as the origin and Belawan as its export port are from the source; that UNTU' buys this coffee is an illustration. Not a real shipment.", "source_ids": ["src_gcr_indonesia_coffee"]},
+  {"id": "untu-2-belawan-rotterdam", "stage": "untu_chain", "from": "belawan", "to": "rotterdam", "illustration": true, "note": "Step 2: by sea. Rotterdam is the main entry point for green coffee into the Netherlands (source). The sailing itself is an illustration, not a real shipment.", "source_ids": ["src_cbi_nl_coffee_market"]},
+  {"id": "untu-3-rotterdam-amsterdam", "stage": "untu_chain", "from": "rotterdam", "to": "untu_amsterdam", "illustration": true, "note": "Step 3: the last leg to the café. A concept route, not a measured flow. The source does not name Amsterdam as a green coffee entry port.", "source_ids": ["src_cbi_nl_coffee_market"]}
+ ]
+}
