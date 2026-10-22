@@ -3,7 +3,8 @@
 Why this file exists: references/sources.json (the ledger) is the single
 master and keeps every source. The panel should only show the sources
 behind the globe's content, not the ones about how we built the project.
-This script reads the ledger, leaves out the ids in HIDE, and writes
+This script reads the ledger, leaves out the ids in HIDE and every source
+we could not open (verification access_blocked), and writes
 globe/data/sources.json. It never changes the ledger.
 
 Run it after every change to the ledger.
@@ -34,6 +35,13 @@ HIDE = [
 # Why watch these two types: new documentation or web pages may also be about
 # the build. The script does not hide them by itself; it asks a human to decide.
 BUILD_TYPES = ["documentation", "web_page"]
+
+# Rizki's decision of 22 Oct 2026: sources we could not open stay in the ledger as the
+# record of what was tried, but are not shown. One the globe cites stays visible.
+BLOCKED = "access_blocked"
+# The globe's data files that cite sources by id (the card's facts and the chain routes)
+CITING_FILES = [os.path.join(os.path.dirname(PATHS["globe_sources"]), "country_facts.json"),
+                PATHS["globe_chain_routes"]]
 
 
 # ---------- the terminal look (rail, diamonds), same as build_country_facts.py ----------
@@ -71,6 +79,15 @@ if unknown:
 # Keep every entry whose id is not in HIDE, in ledger order, unchanged
 shown = [s for s in ledger if s["source_id"] not in HIDE]
 say_step("Hidden", f"{len(ledger) - len(shown)} sources about how we built the project")
+
+# Why check the globe's files first: a figure on the globe must never lose its source.
+cited_text = "".join(open(f, encoding="utf-8").read() for f in CITING_FILES if os.path.exists(f))
+blocked = [s["source_id"] for s in shown if s["verification"] == BLOCKED]
+kept = [i for i in blocked if f'"{i}"' in cited_text]
+if kept:
+    say_step("Access blocked but cited on the globe, kept visible", ", ".join(kept), ok=False)
+shown = [s for s in shown if s["verification"] != BLOCKED or s["source_id"] in kept]
+say_step("Access blocked", f"{len(blocked) - len(kept)} sources we could not open (kept in the ledger)")
 
 # Build-type entries that are still shown: list them for a human to decide
 to_decide = [s["source_id"] for s in shown if s["type"] in BUILD_TYPES]
