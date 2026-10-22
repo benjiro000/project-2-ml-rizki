@@ -13,10 +13,6 @@
   "import_hubs": {
    "label": "Import hubs",
    "hint": "green coffee re-exported from European hub ports, 2024"
-  },
-  "untu_chain": {
-   "label": "UNTU' chain",
-   "hint": "Gayo to Belawan to Rotterdam to Amsterdam (illustration)"
   }
  },
  "routes": [
@@ -48,7 +44,6 @@
     "dated": false
    },
    "note": null,
-   "illustration": false,
    "sources": [
     {
      "id": "src_stonex_santos_2026",
@@ -98,7 +93,6 @@
     "dated": false
    },
    "note": null,
-   "illustration": false,
    "sources": [
     {
      "id": "src_datamar_brazil_2026",
@@ -139,7 +133,6 @@
     "dated": true
    },
    "note": "Dated: the source is from September 2021. The three port shares in the source do not add up to 100 %, so read them as rough.",
-   "illustration": false,
    "sources": [
     {
      "id": "src_stonex_colombia_ports_2021",
@@ -180,7 +173,6 @@
     "dated": true
    },
    "note": "Dated: the source is from September 2021. Exporters from Nariño, Cauca and Huila had shifted to the Caribbean ports. The port shares in the source do not add up to 100 %, so read them as rough.",
-   "illustration": false,
    "sources": [
     {
      "id": "src_stonex_colombia_ports_2021",
@@ -221,7 +213,6 @@
     "dated": true
    },
    "note": "Dated: the source is from September 2021. The port shares in the source do not add up to 100 %, so read them as rough.",
-   "illustration": false,
    "sources": [
     {
      "id": "src_stonex_colombia_ports_2021",
@@ -257,7 +248,6 @@
    },
    "figure": null,
    "note": "The source names Belawan as the export port for Sumatran arabica. No volume given.",
-   "illustration": false,
    "sources": [
     {
      "id": "src_gcr_indonesia_coffee",
@@ -293,7 +283,6 @@
    },
    "figure": null,
    "note": "The source calls Panjang an export outlet of mostly robusta. No volume given.",
-   "illustration": false,
    "sources": [
     {
      "id": "src_gcr_indonesia_coffee",
@@ -329,7 +318,6 @@
    },
    "figure": null,
    "note": "The source says high-quality arabica is exported from Makassar. No volume given.",
-   "illustration": false,
    "sources": [
     {
      "id": "src_gcr_indonesia_coffee",
@@ -371,7 +359,6 @@
     "dated": false
    },
    "note": null,
-   "illustration": false,
    "sources": [
     {
      "id": "src_cbi_eu_coffee_trade",
@@ -413,7 +400,6 @@
     "dated": false
    },
    "note": null,
-   "illustration": false,
    "sources": [
     {
      "id": "src_cbi_eu_coffee_trade",
@@ -455,115 +441,6 @@
     "dated": false
    },
    "note": null,
-   "illustration": false,
-   "sources": [
-    {
-     "id": "src_cbi_nl_coffee_market",
-     "title": "The Dutch market potential for coffee",
-     "publisher": "CBI (Centre for the Promotion of Imports from developing countries)",
-     "url": "https://www.cbi.eu/market-information/coffee/netherlands/market-potential",
-     "date": "2026-02-11",
-     "tag": "AGENCIES",
-     "dated": false
-    }
-   ]
-  },
-  {
-   "id": "untu-1-gayo-belawan",
-   "stage": "untu_chain",
-   "from": {
-    "id": "gayo",
-    "name": "Gayo highlands, Aceh",
-    "label": "Gayo highlands, Aceh (approx.)",
-    "kind": "region",
-    "lat": 4.6,
-    "lng": 96.85,
-    "approx": true
-   },
-   "to": {
-    "id": "belawan",
-    "name": "Belawan (Medan)",
-    "label": "Belawan",
-    "kind": "port",
-    "lat": 3.78,
-    "lng": 98.69,
-    "approx": false
-   },
-   "figure": null,
-   "note": "Step 1 of an illustrated chain for UNTU' Cuisines & Coffee. Gayo as the origin and Belawan as its export port are from the source; that UNTU' buys this coffee is an illustration. Not a real shipment.",
-   "illustration": true,
-   "sources": [
-    {
-     "id": "src_gcr_indonesia_coffee",
-     "title": "Indonesian Coffee economy",
-     "publisher": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
-     "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
-     "date": null,
-     "tag": "TRADE PRESS",
-     "dated": false
-    }
-   ]
-  },
-  {
-   "id": "untu-2-belawan-rotterdam",
-   "stage": "untu_chain",
-   "from": {
-    "id": "belawan",
-    "name": "Belawan (Medan)",
-    "label": "Belawan",
-    "kind": "port",
-    "lat": 3.78,
-    "lng": 98.69,
-    "approx": false
-   },
-   "to": {
-    "id": "rotterdam",
-    "name": "Rotterdam (the Netherlands' main entry port)",
-    "label": "Rotterdam",
-    "kind": "port",
-    "lat": 51.95,
-    "lng": 4.14,
-    "approx": false
-   },
-   "figure": null,
-   "note": "Step 2: by sea. Rotterdam is the main entry point for green coffee into the Netherlands (source). The sailing itself is an illustration, not a real shipment.",
-   "illustration": true,
-   "sources": [
-    {
-     "id": "src_cbi_nl_coffee_market",
-     "title": "The Dutch market potential for coffee",
-     "publisher": "CBI (Centre for the Promotion of Imports from developing countries)",
-     "url": "https://www.cbi.eu/market-information/coffee/netherlands/market-potential",
-     "date": "2026-02-11",
-     "tag": "AGENCIES",
-     "dated": false
-    }
-   ]
-  },
-  {
-   "id": "untu-3-rotterdam-amsterdam",
-   "stage": "untu_chain",
-   "from": {
-    "id": "rotterdam",
-    "name": "Rotterdam (the Netherlands' main entry port)",
-    "label": "Rotterdam",
-    "kind": "port",
-    "lat": 51.95,
-    "lng": 4.14,
-    "approx": false
-   },
-   "to": {
-    "id": "untu_amsterdam",
-    "name": "UNTU' Cuisines & Coffee, Amsterdam",
-    "label": "UNTU' Cuisines & Coffee, Amsterdam",
-    "kind": "destination",
-    "lat": 52.37,
-    "lng": 4.9,
-    "approx": false
-   },
-   "figure": null,
-   "note": "Step 3: the last leg to the café. A concept route, not a measured flow. The source does not name Amsterdam as a green coffee entry port.",
-   "illustration": true,
    "sources": [
     {
      "id": "src_cbi_nl_coffee_market",

@@ -133,8 +133,7 @@ for r in curated["routes"]:
     routes.append({"id": rid, "stage": r["stage"],
                    "from": place_out(r["from"], places[r["from"]]),
                    "to": place_out(r["to"], places[r["to"]]),
-                   "figure": figure, "note": r.get("note"),
-                   "illustration": bool(r.get("illustration")), "sources": sources})
+                   "figure": figure, "note": r.get("note"), "sources": sources})
 
 # Why stop instead of writing the good routes: a half-built file would hide the problem.
 if problems:

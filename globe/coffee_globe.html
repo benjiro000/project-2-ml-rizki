@@ -90,7 +90,6 @@
     .chain-row.cc-open .cc-title { color: #fff; }
     .chain-row[aria-checked="true"] .cc-mark { color: #d9a05b; }  /* ticked boxes in the card's amber */
     .chain-swatch { display: inline-block; width: 14px; height: 3px; margin: 0 6px 0 2px; vertical-align: middle; }
-    .chain-swatch.dashed { background: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 7px) !important; }
     /* Growing areas get a hollow ring: the point is approximate, not a farm */
     .chain-region { width: 11px; height: 11px; box-sizing: border-box; border: 2px solid; border-radius: 50%; pointer-events: auto; cursor: pointer; }
     .dot.ring { background: transparent; border: 2px solid #ddd; box-sizing: border-box; }
@@ -111,7 +110,7 @@
         <button id="refs-close" class="toggle" aria-label="Close references">Close</button>
       </div>
       <!-- Plain text on purpose, so it is easy to edit as facts get sourced -->
-      <p class="refs-notice">Country descriptions, ports, routes and trade figures on this globe come from an earlier draft and are not yet individually sourced. The earlier footer named: International Coffee Organization, USDA Foreign Agricultural Service, Cecafé, VICOFA, Vietnam Customs, Uganda Coffee Development Authority, Alliance for Coffee Excellence and ITC. Which figure comes from which organisation has not been checked yet. Cup of Excellence hosts are based on the Alliance for Coffee Excellence's 2025 and 2026 auction calendars; the earlier history years are not yet sourced. The Chain routes stages Farm to port, Import hubs and UNTU' chain are the exception: every one of their routes names its own sources.</p>
+      <p class="refs-notice">Country descriptions, ports, routes and trade figures on this globe come from an earlier draft and are not yet individually sourced. The earlier footer named: International Coffee Organization, USDA Foreign Agricultural Service, Cecafé, VICOFA, Vietnam Customs, Uganda Coffee Development Authority, Alliance for Coffee Excellence and ITC. Which figure comes from which organisation has not been checked yet. Cup of Excellence hosts are based on the Alliance for Coffee Excellence's 2025 and 2026 auction calendars; the earlier history years are not yet sourced. The Chain routes stages Farm to port and Import hubs are the exception: every one of their routes names its own sources.</p>
       <label for="refs-search">Search sources</label>
       <input id="refs-search" type="text" placeholder="Title, publisher or what it was used for" autocomplete="off">
       <p id="refs-status" aria-live="polite"></p>
@@ -404,16 +403,14 @@
     // ---------------------------------------------------------------
     const CHAIN_STYLE = {
       farm_to_port: { color: '#ff3df2', text: '#111', altitude: 0.03 },  // short inland legs: a low, fixed arc
-      import_hubs:  { color: '#304ffe', text: '#fff', altitude: null },  // null = auto height, like shipping routes
-      untu_chain:   { color: '#76ff03', text: '#111', altitude: null, dashed: true }  // dashed: an illustration, not a shipment
+      import_hubs:  { color: '#304ffe', text: '#fff', altitude: null }   // null = auto height, like shipping routes
     };
     const CHAIN_END_ALT = 0.015;  // chain lines start at port-dot height, so the raised coffee countries never hide them
     const CHAIN_INTRO = {
       farm_to_port: 'Hollow rings are approximate growing areas, not farms. Click a line for its figure, year and sources.',
-      import_hubs: 'Each line starts at the hub port where most of the coffee enters and ends in the country it is sent on to. The figures are for the whole hub country.',
-      untu_chain: 'Dashed, because this is a concept route for one café, not a measured shipment.'
+      import_hubs: 'Each line starts at the hub port where most of the coffee enters and ends in the country it is sent on to. The figures are for the whole hub country.'
     };
-    const KIND_TEXT = { port: 'Port', region: 'Growing area', country: 'Country', destination: 'Destination' };
+    const KIND_TEXT = { port: 'Port', region: 'Growing area', country: 'Country' };
     const TAG_COLORS = { 'AGENCIES': '#c88c46', 'TRADE PRESS': '#d6cec4' };
     const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -427,7 +424,7 @@
     let showRoutes = false;  // nothing is ticked when the page loads, like the old Shipping routes button
     let showCoe = false;
     // Which chain stages are ticked. showRoutes above always equals chainOn.shipping.
-    const chainOn = { shipping: false, farm_to_port: false, import_hubs: false, untu_chain: false };
+    const chainOn = { shipping: false, farm_to_port: false, import_hubs: false };
     let chainData = null;   // stays null until data/chain_routes.json has loaded
     let chainError = null;
     let CHAIN_ARCS = [];
@@ -472,9 +469,10 @@
       }
       // One entry per ticked chain stage, shown only while that stage is ticked
       chainStagesOn().forEach(k => {
-        items.push(dot(CHAIN_STYLE[k].color, chainData.stages[k].label + (CHAIN_STYLE[k].dashed ? ' (dashed: illustration)' : '')));
+        items.push(dot(CHAIN_STYLE[k].color, chainData.stages[k].label));
       });
-      if (chainLayer().rings.length) {
+      // Only Farm to port has growing areas, so the ring entry shows only while it is ticked
+      if (chainData && chainOn.farm_to_port) {
         items.push('<span><span class="dot ring"></span>Growing area, approximate point</span>');
       }
       legendEl.innerHTML = items.join('');
@@ -575,11 +573,10 @@
       return s ? `No figure in the source. Source from ${datedText('<b>' + s.date.slice(0, 4) + '</b>', s.dated)}.` : 'No figure in the source.';
     }
 
-    // The badges at the top of a route card: stage, and ILLUSTRATION or DATED where they apply
+    // The badges at the top of a route card: stage, and DATED where it applies
     function chainBadges(r) {
       const st = CHAIN_STYLE[r.stage];
       let html = `<span class="tag" style="background:${st.color};color:${st.text}">${esc(chainData.stages[r.stage].label)}</span>`;
-      if (r.illustration) html += badge('ILLUSTRATION', '#ffffff');
       if ((r.figure && r.figure.dated) || r.sources.some(s => s.dated)) html += badge('DATED', '#e5786d');
       return html;
     }
@@ -594,7 +591,7 @@
     // The hover label of a chain line: everything the card has, without links
     function chainArcLabel(r) {
       return `<div style="max-width:340px;line-height:1.45"><b>${esc(r.from.label)} → ${esc(r.to.label)}</b><br>` +
-        `${esc(chainData.stages[r.stage].label)}${r.illustration ? ' · ILLUSTRATION' : ''}<br>${chainFigure(r)}` +
+        `${esc(chainData.stages[r.stage].label)}<br>${chainFigure(r)}` +
         (r.note ? `<br><i>${esc(r.note)}</i>` : '') +
         '<br>Sources: ' + r.sources.map(s => chainSource(s, false)).join('; ') + '<br>Click for details</div>';
     }
@@ -703,8 +700,8 @@
       .arcAltitude(d => d.chain ? CHAIN_STYLE[d.chain.stage].altitude : null)
       .arcStartAltitude(d => d.chain ? CHAIN_END_ALT : 0)
       .arcEndAltitude(d => d.chain ? CHAIN_END_ALT : 0)
-      .arcDashLength(d => d.chain && CHAIN_STYLE[d.chain.stage].dashed ? 0.04 : 1)
-      .arcDashGap(d => d.chain && CHAIN_STYLE[d.chain.stage].dashed ? 0.03 : 0)
+      .arcDashLength(1)
+      .arcDashGap(0)
       .arcDashAnimateTime(0)
       .arcLabel(d => d.chain ? chainArcLabel(d.chain) : `<b>${d.fromPort.name} → ${d.toPort.name}</b><br>Click for details`)
       .onArcClick(d => {
@@ -818,7 +815,7 @@
       Object.entries(chainStages()).forEach(([k, s]) => {
         const st = CHAIN_STYLE[k];
         const swatch = st
-          ? `<span class="chain-swatch${st.dashed ? ' dashed' : ''}" style="background:${st.color};color:${st.color}"></span>`
+          ? `<span class="chain-swatch" style="background:${st.color}"></span>`
           // shipping routes have one colour per exporting country, so their swatch shows those colours
           : `<span class="chain-swatch" style="background:linear-gradient(90deg,${PORT_LIST.filter(p => p.role === 'origin').map(p => p.color).join(',')})"></span>`;
         html += `<div class="cc-sec chain-row" role="checkbox" tabindex="-1" data-k="${k}">` +
