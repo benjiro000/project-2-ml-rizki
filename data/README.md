@@ -1,3 +1,17 @@
+# This project uses the coffee data (CQI)
+
+This repo uses the Coffee Quality Institute (CQI) green-coffee reviews, not one of the four course datasets below.
+
+    python download_data.py cqi
+
+The files land in `data/raw/ds_cqi_jldbc_2018/` (gitignored): `arabica_data_cleaned.csv` (1,311 rows) and `robusta_data_cleaned.csv` (28 rows). Then `python src/run_cleaning.py` writes the cleaned table to `data/clean/`.
+
+**Source and licence.** Scraped from the CQI website in January 2018 by GitHub user jldbc: [coffee-quality-database](https://github.com/jldbc/coffee-quality-database). The repository is MIT-licensed. The licence of the underlying CQI data is unclear, so check it before any commercial use.
+
+The rest of this page is the course's original dataset brief, kept for reference.
+
+---
+
 # The datasets
 
 Three tabular options forming a difficulty ladder, plus an image option. All are licence-clear and all are downloaded by the script at the repo root. Pick one on launch day and stay with it.
