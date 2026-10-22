@@ -29,3 +29,6 @@ ipykernel>=6.0
 # Image option only (flower photos). Not part of Anaconda:
 #   python -c "import tensorflow as tf; print(tf.__version__)"
 # tensorflow>=2.16
+
+# Presentation app: run it with  streamlit run app.py
+streamlit>=1.58.0

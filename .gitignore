@@ -44,3 +44,6 @@ references/literature_raw/**/*.pdf
 .humanlayer/tasks/
 # Full paper text (XML) stays local too, like the PDFs.
 references/literature_raw/**/*.xml
+
+# Streamlit secrets stay local
+.streamlit/secrets.toml
