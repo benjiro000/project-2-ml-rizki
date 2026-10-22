@@ -724,5 +724,71 @@
     "licence_url": "https://github.com/py-pdf/pypdf/blob/main/LICENSE",
     "verification": "opened_and_read",
     "used_for": "Python library (version 6.21.1, installed in a temporary virtual environment) used to extract text from the paper PDFs and supplementary PDFs in Scout run 3. Licence copied from the License-Expression line of the installed package metadata on 19 Oct 2026."
+  },
+  {
+    "source_id": "src_cbi_eu_coffee_trade",
+    "title": "What is the demand for coffee on the European market?",
+    "url": "https://www.cbi.eu/market-information/coffee/what-demand",
+    "publisher_or_author": "CBI (Centre for the Promotion of Imports from developing countries)",
+    "type": "web_page",
+    "licence": "For utilisation of the CBI market information tools by the CBI target group on a non-commercial basis, the condition applies that CBI is referred to as the source of the information. All other use is prohibited, unless explicitly approved in writing by CBI.",
+    "licence_url": "https://www.cbi.eu/disclaimer/",
+    "verification": "opened_and_read",
+    "used_for": "Chain routes layer, Import hubs: Germany imported 1,160,000 t of green coffee in 2024 and most of it enters through the Port of Hamburg; Germany re-exported 205,000 t in 2024, 80,000 t of it to Poland; Antwerp is one of Europe's main ports due to its large storage capacity; Belgium re-exported 72,000 t to France. The page also gives Belgium's 2024 re-exports as both 157,000 t and 184,000 t, and Germany's unaltered green-coffee re-exports as 179,000 t. The URL given in the brief (https://www.cbi.eu/market-information/coffee/trade-statistics/) redirects to this page. The page says 'Last updated: 12 February 2026' and shows the publisher only as CBI. HTML read with curl on 22 Oct 2026; disclaimer page read the same day."
+  },
+  {
+    "source_id": "src_cbi_nl_coffee_market",
+    "title": "The Dutch market potential for coffee",
+    "url": "https://www.cbi.eu/market-information/coffee/netherlands/market-potential",
+    "publisher_or_author": "CBI (Centre for the Promotion of Imports from developing countries)",
+    "type": "web_page",
+    "licence": "For utilisation of the CBI market information tools by the CBI target group on a non-commercial basis, the condition applies that CBI is referred to as the source of the information. All other use is prohibited, unless explicitly approved in writing by CBI.",
+    "licence_url": "https://www.cbi.eu/disclaimer/",
+    "verification": "opened_and_read",
+    "used_for": "Chain routes layer, Import hubs and the UNTU' illustration: the Netherlands re-exported 90,000 t of green coffee in 2024, about two-thirds of it (59,000 t) to Germany; the Port of Rotterdam is the main entry point for green coffee into the Netherlands. CBI's European demand page (src_cbi_eu_coffee_trade) gives 75,000 t for the same Dutch re-exports. The page says 'Last updated: 11 February 2026'. HTML read with curl on 22 Oct 2026."
+  },
+  {
+    "source_id": "src_stonex_santos_2026",
+    "title": "Brazil Has the Coffee. Can Santos Move It?",
+    "url": "https://www.stonex.com/en/insights/brazil-has-the-coffee-can-santos-move-it/",
+    "publisher_or_author": "Alexis Rubinstein, Managing Editor - Coffee Network (StoneX)",
+    "type": "trade_press",
+    "licence": "© 2026 StoneX Group Inc. All Rights Reserved.",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Chain routes layer, Farm to port: Santos accounted for 78.7% of Brazil's coffee exports in 2025. The page is dated 29 Jul 2026. curl got a bot check (HTTP 403) on 22 Oct 2026, so the page was read through an automatic summary the same day."
+  },
+  {
+    "source_id": "src_datamar_brazil_2026",
+    "title": "From farm to port: Brazilian coffee keeps global lead and powers exports",
+    "url": "https://datamarnews.com/noticias/from-farm-to-port-brazilian-coffee-keeps-global-lead-and-powers-exports/",
+    "publisher_or_author": "Gabriel Malheiros, DatamarNews",
+    "type": "trade_press",
+    "licence": "© Copyright - 2026 - All rights reserved - Please, read our user terms",
+    "licence_url": null,
+    "verification": "opened_and_read",
+    "used_for": "Chain routes layer, Farm to port: the Port of Santos handled about 78% of Brazil's coffee shipments in 2025 (more than 31 million bags); the Rio de Janeiro state ports, Itaguaí and the Port of Rio de Janeiro, together handled about 17.7%; Brazil exported more than 40 million 60-kg bags in 2025 (Cecafé figure quoted by the article); the coffee is 'grown in Brazil's interior' (no region named). Posted 15 Apr 2026. HTML read with curl on 22 Oct 2026."
+  },
+  {
+    "source_id": "src_stonex_colombia_ports_2021",
+    "title": "Colombia’s Main Harvest Coffee Exports Brace Further Disruptions On Container Restrictions: Asoexport",
+    "url": "https://www.stonex.com/en/insights/colombia-s-main-harvest-coffee-exports-brace-further-disruptions-on-container-restrictions-asoexport/",
+    "publisher_or_author": "Diana Delgado, Latin American correspondent (StoneX), quoting Asoexport",
+    "type": "trade_press",
+    "licence": "© 2026 StoneX Group Inc. All Rights Reserved.",
+    "licence_url": null,
+    "verification": "summary_only",
+    "used_for": "Chain routes layer, Farm to port (dated): Buenaventura used to handle 70% of Colombia's coffee exports before the 2021 container disruption and 54% at the time; Cartagena 41% (35% before) and Santa Marta 13% (5% before) as of the first week of September 2021; output is picked in Antioquia, Caldas, Risaralda, north Valle del Cauca and some areas of Huila; exporters from Nariño, Cauca and Huila turned to the Caribbean ports. The page is dated 15 Sep 2021. curl got a bot check (HTTP 403) on 22 Oct 2026, so the page was read through an automatic summary the same day."
+  },
+  {
+    "source_id": "src_gcr_indonesia_coffee",
+    "title": "Indonesian Coffee economy",
+    "url": "https://www.gcrmag.com/indonesian-coffee-economy/",
+    "publisher_or_author": "Bustanul Arifin (named in the article; the page metadata says 'Staff Writer'), Global Coffee Report, Prime Creative Media",
+    "type": "trade_press",
+    "licence": "© 2026 All Rights Reserved. All content published on this site is the property of Prime Creative Media. Unauthorised reproduction is prohibited",
+    "licence_url": "https://www.primecreative.com.au/terms-conditions/",
+    "verification": "opened_and_read",
+    "used_for": "Chain routes layer, Farm to port and the UNTU' illustration: arabica is grown in Aceh, North Sumatra, South Sulawesi, Bali and Flores, robusta in Lampung, South Sumatra and Central and East Java; Gayo arabica beans are exported from Belawan (Medan); the port of Panjang is an export outlet of mostly robusta; high-quality arabica from Tana Toraja is exported from Makassar. The page is dated August 5, 2011, so these are old descriptions, not current figures. HTML read with curl on 22 Oct 2026."
   }
 ]
